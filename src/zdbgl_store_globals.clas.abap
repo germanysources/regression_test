@@ -107,7 +107,8 @@ protected section.
       !PROGRAM type PROGRAM
       !KEY_TESTCASE type ZDBGL_KEY_TESTCASES .
   methods GET_LEN_DB_FRAGMENT
-    RETURNING VALUE(len) TYPE i.
+    returning
+      value(LEN) type I .
 private section.
 ENDCLASS.
 

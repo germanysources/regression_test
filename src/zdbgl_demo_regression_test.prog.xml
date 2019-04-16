@@ -3,28 +3,19 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <PROGDIR>
-    <NAME>ZDBGL_SCRIPT_STORE_GLOBALS</NAME>
+    <NAME>ZDBGL_DEMO_REGRESSION_TEST</NAME>
     <STATE>A</STATE>
     <VARCL>X</VARCL>
-    <DBAPL>S</DBAPL>
-    <SUBC>S</SUBC>
-    <APPL>X</APPL>
+    <SUBC>1</SUBC>
     <RLOAD>E</RLOAD>
     <FIXPT>X</FIXPT>
-    <LDBNAME>D$S</LDBNAME>
     <UCCHECK>X</UCCHECK>
    </PROGDIR>
    <TPOOL>
     <item>
-     <ID>I</ID>
-     <KEY>TCA</KEY>
-     <ENTRY>Schlüssel Testfall</ENTRY>
-     <LENGTH>28</LENGTH>
-    </item>
-    <item>
      <ID>R</ID>
-     <ENTRY>Debugger Skript: Default Template</ENTRY>
-     <LENGTH>33</LENGTH>
+     <ENTRY>Demo Regressionstest</ENTRY>
+     <LENGTH>20</LENGTH>
     </item>
    </TPOOL>
    <I18N_TPOOL>
@@ -32,15 +23,9 @@
      <LANGUAGE>E</LANGUAGE>
      <TEXTPOOL>
       <item>
-       <ID>I</ID>
-       <KEY>TCA</KEY>
-       <ENTRY>Key testcase</ENTRY>
-       <LENGTH>28</LENGTH>
-      </item>
-      <item>
        <ID>R</ID>
-       <ENTRY>Debugger Script: default template</ENTRY>
-       <LENGTH>33</LENGTH>
+       <ENTRY>Demo regression test</ENTRY>
+       <LENGTH>70</LENGTH>
       </item>
      </TEXTPOOL>
     </item>
