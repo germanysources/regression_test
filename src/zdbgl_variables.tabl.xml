@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_TABL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD02V>
+    <TABNAME>ZDBGL_VARIABLES</TABNAME>
+    <DDLANGUAGE>D</DDLANGUAGE>
+    <TABCLASS>TRANSP</TABCLASS>
+    <CLIDEP>X</CLIDEP>
+    <DDTEXT>Debugging Legacy Code Variablen</DDTEXT>
+    <CONTFLAG>A</CONTFLAG>
+    <EXCLASS>4</EXCLASS>
+   </DD02V>
+   <DD09L>
+    <TABNAME>ZDBGL_VARIABLES</TABNAME>
+    <AS4LOCAL>A</AS4LOCAL>
+    <TABKAT>1</TABKAT>
+    <TABART>APPL0</TABART>
+    <PUFFERUNG>P</PUFFERUNG>
+    <BUFALLOW>X</BUFALLOW>
+   </DD09L>
+   <DD03P_TABLE>
+    <DD03P>
+     <TABNAME>ZDBGL_VARIABLES</TABNAME>
+     <FIELDNAME>MANDT</FIELDNAME>
+     <POSITION>0001</POSITION>
+     <KEYFLAG>X</KEYFLAG>
+     <ROLLNAME>MANDT</ROLLNAME>
+     <ADMINFIELD>0</ADMINFIELD>
+     <NOTNULL>X</NOTNULL>
+     <COMPTYPE>E</COMPTYPE>
+    </DD03P>
+    <DD03P>
+     <TABNAME>ZDBGL_VARIABLES</TABNAME>
+     <FIELDNAME>ABAP_PROGRAM</FIELDNAME>
+     <POSITION>0002</POSITION>
+     <KEYFLAG>X</KEYFLAG>
+     <ROLLNAME>PROGNAME</ROLLNAME>
+     <ADMINFIELD>0</ADMINFIELD>
+     <NOTNULL>X</NOTNULL>
+     <COMPTYPE>E</COMPTYPE>
+    </DD03P>
+    <DD03P>
+     <TABNAME>ZDBGL_VARIABLES</TABNAME>
+     <FIELDNAME>KEY_TESTCASE</FIELDNAME>
+     <POSITION>0003</POSITION>
+     <KEYFLAG>X</KEYFLAG>
+     <ROLLNAME>ZDBGL_KEY_TESTCASES</ROLLNAME>
+     <ADMINFIELD>0</ADMINFIELD>
+     <NOTNULL>X</NOTNULL>
+     <COMPTYPE>E</COMPTYPE>
+    </DD03P>
+    <DD03P>
+     <TABNAME>ZDBGL_VARIABLES</TABNAME>
+     <FIELDNAME>KEY_DATA</FIELDNAME>
+     <DDLANGUAGE>D</DDLANGUAGE>
+     <POSITION>0004</POSITION>
+     <KEYFLAG>X</KEYFLAG>
+     <ADMINFIELD>0</ADMINFIELD>
+     <INTTYPE>X</INTTYPE>
+     <INTLEN>000002</INTLEN>
+     <NOTNULL>X</NOTNULL>
+     <DATATYPE>INT2</DATATYPE>
+     <LENG>000005</LENG>
+     <MASK>  INT2</MASK>
+     <DDTEXT>Schluessel fuer fortlaufende Daten</DDTEXT>
+    </DD03P>
+    <DD03P>
+     <TABNAME>ZDBGL_VARIABLES</TABNAME>
+     <FIELDNAME>GLOBALS</FIELDNAME>
+     <DDLANGUAGE>D</DDLANGUAGE>
+     <POSITION>0005</POSITION>
+     <ADMINFIELD>0</ADMINFIELD>
+     <INTTYPE>g</INTTYPE>
+     <INTLEN>000008</INTLEN>
+     <DATATYPE>SSTR</DATATYPE>
+     <LENG>001200</LENG>
+     <MASK>  SSTR</MASK>
+    </DD03P>
+   </DD03P_TABLE>
+   <LONGTEXTS>
+    <item>
+     <DOKIL>
+      <ID>TB</ID>
+      <OBJECT>ZDBGL_VARIABLES</OBJECT>
+      <LANGU>D</LANGU>
+      <TYP>E</TYP>
+      <VERSION>0001</VERSION>
+      <MASTERLANG>X</MASTERLANG>
+      <TXTLINES>00007</TXTLINES>
+      <DOKSTATE>R</DOKSTATE>
+     </DOKIL>
+     <HEAD>
+      <TDOBJECT>DOKU</TDOBJECT>
+      <TDNAME>ZDBGL_VARIABLES</TDNAME>
+      <TDID>TB</TDID>
+      <TDSPRAS>D</TDSPRAS>
+      <TDFORM>S_DOCU_SHOW</TDFORM>
+      <TDSTYLE>S_DOCUS1</TDSTYLE>
+      <TDVERSION>00001</TDVERSION>
+      <TDLINESIZE>072</TDLINESIZE>
+     </HEAD>
+     <LINES>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;USE&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Zeichnet die globalen Variablen bei einem Break-Point auf.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Jedes Testfall bekommt dabei einen eindeutigen Schlüssel im Feld key_tes</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>=</TDFORMAT>
+       <TDLINE>tcase. Die globalen Variablen werden im JSON Format aufgezeichnet.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Das Feld globals ist unter Umständen nicht lang genug. Daher wird das 3.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>=</TDFORMAT>
+       <TDLINE> Schlüsselfeld key_data fortlaufend gefüllt.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Die Aufzeichnung im JSON Format wurde gewählt, damit die globalen</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>=</TDFORMAT>
+       <TDLINE> Variablen besser zu lesen sind.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;MAINTENANCE&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+      </TLINE>
+     </LINES>
+    </item>
+   </LONGTEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
