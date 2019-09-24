@@ -42,18 +42,21 @@ protected section.
     returning
       value(FRAGMENT) type STRING
     raising
-      CX_TPDA .
+      CX_TPDA
+      ZCX_DBGL_TYPE_NOT_SUPPORTED .
   methods HANDLE_OBJECT
     importing
       !NAME type STRING
       !DESCR type ref to CL_TPDA_SCRIPT_DATA_DESCR
     raising
-      CX_TPDA .
+      CX_TPDA
+      ZCX_DBGL_TYPE_NOT_SUPPORTED .
   methods HANDLE_OBJREF
     importing
       !NAME type STRING
     raising
-      CX_TPDA .
+      CX_TPDA
+      ZCX_DBGL_TYPE_NOT_SUPPORTED .
   methods HANDLE_STRING
     importing
       !IS_OBJECT type ABAP_BOOL
@@ -86,7 +89,8 @@ protected section.
       !NAME type STRING
       !DESCR type ref to CL_TPDA_SCRIPT_DATA_DESCR
     raising
-      CX_TPDA .
+      CX_TPDA
+      ZCX_DBGL_TYPE_NOT_SUPPORTED .
   methods HANDLE
     raising
       CX_TPDA .
@@ -97,11 +101,11 @@ protected section.
     returning
       value(FRAGMENT) type STRING
     raising
-      CX_TPDA .
+      CX_TPDA
+      ZCX_DBGL_TYPE_NOT_SUPPORTED .
   methods CONCAT_JSON_FRAGMENTS
     exporting
       !DB_FRAGMENTS type _DB_FRAGMENTS .
-  methods GET_VARIABLE .
   methods LOG_STORAGE
     importing
       !PROGRAM type PROGRAM
@@ -181,18 +185,18 @@ CLASS ZDBGL_STORE_GLOBALS IMPLEMENTATION.
   endmethod.
 
 
-  method GET_VARIABLE.
-  endmethod.
-
-
   METHOD handle.
     DATA: fragment TYPE string.
     FIELD-SYMBOLS: <variable> TYPE tpda_scr_globals.
 
     LOOP AT globals ASSIGNING <variable>.
 
-      APPEND _handle( name = <variable>-name
-        is_object = abap_true ) TO json_fragments.
+      TRY.
+          APPEND _handle( name = <variable>-name
+            is_object = abap_true ) TO json_fragments.
+          ##NO_HANDLER
+        CATCH zcx_dbgl_type_not_supported.
+      ENDTRY.
 
     ENDLOOP.
 
@@ -201,21 +205,27 @@ CLASS ZDBGL_STORE_GLOBALS IMPLEMENTATION.
 
   method HANDLE_DATAREF.
 
-    " not supported yet
+    RAISE EXCEPTION TYPE zcx_dbgl_type_not_supported
+      EXPORTING
+        type = 'DATAREF'.
 
   endmethod.
 
 
   method HANDLE_OBJECT.
 
-    " not supported yet
+    RAISE EXCEPTION TYPE zcx_dbgl_type_not_supported
+      EXPORTING
+        type = 'OBJECT'.
 
   endmethod.
 
 
   method HANDLE_OBJREF.
 
-    " not supported yet
+    RAISE EXCEPTION TYPE zcx_dbgl_type_not_supported
+      EXPORTING
+        type = 'OBJECTREF'.
 
   endmethod.
 

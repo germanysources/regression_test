@@ -28,7 +28,10 @@ DATA: var_i TYPE i VALUE 5,
       " Table with a simple type
       table_simple_type TYPE STANDARD TABLE OF i,
       " Table with a complex structured type
-      table_com_type LIKE STANDARD TABLE OF table_struc_type.
+      table_com_type LIKE STANDARD TABLE OF table_struc_type,
+      " Object-Reference
+      object_ref TYPE REF TO zdbgl_store_globals,
+      data_ref TYPE REF TO data.
 
 * Setup of global Variables
 FORM gl_setup.
@@ -48,6 +51,7 @@ FORM gl_setup.
   APPEND: table_struc_type TO table_com_type,
     table_struc_type TO table_com_type.
 
+  " load script "ZDBGL_SCRIPT_STORE_GLOBALS", execute with test-case "B"
   BREAK-POINT.
 
 ENDFORM.
