@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZDBGL_COPY_TO_TDC</CLSNAME>
+    <VERSION>1</VERSION>
+    <LANGU>E</LANGU>
+    <DESCRIPT>Copy values from table zdbgl_variables to testdatacontainer</DESCRIPT>
+    <STATE>1</STATE>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+    <WITH_UNIT_TESTS>X</WITH_UNIT_TESTS>
+   </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZDBGL_COPY_TO_TDC</CLSNAME>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>read the testdatacontainer in the constructor</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZDBGL_COPY_TO_TDC</CLSNAME>
+     <CMPNAME>COPY_ALL_PARAMETER</CMPNAME>
+     <LANGU>D</LANGU>
+     <DESCRIPT>copy the values for all parameters of the testdatacontainer</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZDBGL_COPY_TO_TDC</CLSNAME>
+     <CMPNAME>COPY_ALL_PARAMETER</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>copy the values for all parameters of the testdatacontainer</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

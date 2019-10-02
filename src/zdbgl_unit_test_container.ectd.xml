@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_ECTD" serializer_version="v1.0.0">
+ <VERSIONS>
+  <VERSION>
+   <ECTD VERSION="1.5">
+    <ATTRIBUTES>
+     <ETOBJ_GNDT>
+      <VERSION>00000001</VERSION>
+      <TWB_TITLE>Container for unit-tests</TWB_TITLE>
+      <SOFTCOMP/>
+      <TWB_DEP_RF/>
+      <TWB_DEP_RT/>
+      <TWB_STATUS>X</TWB_STATUS>
+      <TWB_RELE>N</TWB_RELE>
+      <FUSER></FUSER>
+      <FDATE></FDATE>
+      <LUSER></LUSER>
+      <LDATE></LDATE>
+      <LTIME></LTIME>
+      <REL_BAS_F/>
+      <REL_BAS_T/>
+      <SERVICE/>
+      <PVNR/>
+      <BACKUP/>
+     </ETOBJ_GNDT>
+     <ETOBJNOVER>
+      <NAME>ZDBGL_UNIT_TEST_CONTAINER</NAME>
+      <TYPE>ECTD</TYPE>
+      <TWB_RESP></TWB_RESP>
+      <TWB_DISTL>B</TWB_DISTL>
+      <TWB_EUBOBJ/>
+      <TWB_EUTYPE/>
+      <DEVCLASS></DEVCLASS>
+      <MASTERLANG>E</MASTERLANG>
+      <TADIR_RESP></TADIR_RESP>
+      <FRANGE>--</FRANGE>
+      <BCSET_MODE/>
+      <API_MODE>X</API_MODE>
+      <COL_TSTOBJDATA/>
+      <NO_TRANSLATION/>
+     </ETOBJNOVER>
+     <ETOBJ_DOC>
+      <SEARCH_1/>
+      <SEARCH_2/>
+      <SEARCH_3/>
+      <SEARCH_4/>
+      <SEARCH_5/>
+      <SEARCH_6/>
+      <SEARCH_7/>
+      <SEARCH_8/>
+      <SEARCH_9/>
+      <SEARCH_10/>
+      <S_DOC_ID/>
+      <S_OBJ_ID/>
+      <S_DOC_TITL/>
+     </ETOBJ_DOC>
+     <ETOBJ_CNST>
+      <TWB_DEP_S/>
+      <TWB_DEPV_S/>
+      <TWB_DEP_L/>
+      <TWB_DEPV_L/>
+      <TWB_USE_A/>
+      <TWB_USE_P/>
+      <TWB_USE_H>X</TWB_USE_H>
+      <TWB_USE_E/>
+      <REUSE/>
+      <TWB_DEP_C/>
+      <TWB_DEP_VC/>
+      <TWB_DEP_F/>
+      <TWB_DEP_VF/>
+      <TWB_DEP_P/>
+      <TWB_DEP_VP/>
+      <TWB_DEP_DB/>
+      <TWB_DEPVDB/>
+      <TWB_WKREQ>0.0</TWB_WKREQ>
+      <TWB_WKUNIT>MIN</TWB_WKUNIT>
+      <TWB_PRIO>3</TWB_PRIO>
+     </ETOBJ_CNST>
+     <ETSC_TSYS>
+      <SYSTEMDATA>EC_DEMO</SYSTEMDATA>
+      <TESTSYSTEM/>
+     </ETSC_TSYS>
+     <ETSYS_COMP_TABTYPE/>
+     <ETSYS_REL_TABTYPE/>
+     <ETBF_OBJ_TABTYPE/>
+     <ETBF_VER_TABTYPE/>
+    </ATTRIBUTES>
+    <PARAMETERS>
+     <ETPAR_GUIX>
+      <item>
+       <PNAME>VAR_STRING</PNAME>
+       <PTYP>V</PTYP>
+       <PINDEX>0004</PINDEX>
+       <PREF_NAME>STRING</PREF_NAME>
+       <PDATLEN>0000</PDATLEN>
+       <PINTTYP>g</PINTTYP>
+       <PINTLEN>000000</PINTLEN>
+       <PDECIMALS>000000</PDECIMALS>
+       <SORT_LNR>0001</SORT_LNR>
+       <PREF_NAME2>STRING</PREF_NAME2>
+       <TAB_INDEX>0</TAB_INDEX>
+      </item>
+      <item>
+       <PNAME>VAR_CHARACTER</PNAME>
+       <PTYP>V</PTYP>
+       <PDESC>Character Field Length = 10</PDESC>
+       <PINDEX>0003</PINDEX>
+       <PREF_TYPE>DTEL</PREF_TYPE>
+       <PREF_NAME>CHAR10</PREF_NAME>
+       <PDOM>CHAR10</PDOM>
+       <PDATTYP>CHAR</PDATTYP>
+       <PDATLEN>0010</PDATLEN>
+       <PINTTYP>C</PINTTYP>
+       <PINTLEN>000010</PINTLEN>
+       <PDECIMALS>000000</PDECIMALS>
+       <SORT_LNR>0002</SORT_LNR>
+       <PREF_NAME2>CHAR10</PREF_NAME2>
+       <TAB_INDEX>0</TAB_INDEX>
+      </item>
+      <item>
+       <PNAME>TABLE_STRUC_TYPE</PNAME>
+       <PTYP>V</PTYP>
+       <PDESC>Flight</PDESC>
+       <PINDEX>0002</PINDEX>
+       <XMLREF_TYP>D</XMLREF_TYP>
+       <PSTRUC_TYP>T</PSTRUC_TYP>
+       <PREF_NAME>SFLIGHT[]</PREF_NAME>
+       <PDATLEN>0000</PDATLEN>
+       <PINTLEN>000000</PINTLEN>
+       <PDECIMALS>000000</PDECIMALS>
+       <SORT_LNR>0003</SORT_LNR>
+       <PREF_NAME2>SFLIGHT[]</PREF_NAME2>
+       <VALUE>&lt;INITIAL&gt;</VALUE>
+       <VAL_TYPE>T</VAL_TYPE>
+       <TAB_INDEX>0</TAB_INDEX>
+       <DEEP_STRU>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xml.sap.com/2003/05/eCATT/ddic" version="1.0">
+         <xsd:complexType name="_SFLIGHT">
+          <xsd:annotation>
+           <xsd:documentation>I=t=O==C=S=K==D=SFLIGHT=A==L==doc=Table from Structure</xsd:documentation>
+          </xsd:annotation>
+          <xsd:sequence>
+           <xsd:element name="item" type="SFLIGHT" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="SFLIGHT">
+          <annotation>
+           <documentation>I==O==C=S=K==D=SFLIGHT=A=u=L=000000=doc=Flight</documentation>
+          </annotation>
+          <sequence>
+           <element name="MANDT" minOccurs="0">
+            <annotation>
+             <documentation>I==O==C==K=X=D=S_MANDT=A=C=L=000003=doc=Client</documentation>
+            </annotation>
+            <simpleType>
+             <restriction base="string">
+              <maxLength value="3"/>
+             </restriction>
+            </simpleType>
+           </element>
+           <element name="CARRID" minOccurs="0">
+            <annotation>
+             <documentation>I==O==C==K=X=D=S_CARR_ID=A=C=L=000003=doc=Airline Code</documentation>
+            </annotation>
+            <simpleType>
+             <restriction base="string">
+              <maxLength value="3"/>
+             </restriction>
+            </simpleType>
+           </element>
+           <element name="CONNID" minOccurs="0">
+            <annotation>
+             <documentation>I==O==C==K=X=D=S_CONN_ID=A=N=L=000004=doc=Flight Connection</documentation>
+            </annotation>
+            <simpleType>
+             <restriction base="string">
+              <pattern value="\d+"/>
+              <maxLength value="4"/>
+             </restriction>
+            </simpleType>
+           </element>
+           <element name="FLDATE" minOccurs="0">
+            <annotation>
+             <documentation>I==O==C==K=X=D=S_DATE=A=D=L=000008=doc=Flight date</documentation>
+            </annotation>
+            <simpleType>
+             <restriction base="string">
+              <pattern value="....-..-.."/>
+             </restriction>
+            </simpleType>
+           </element>
+           <element name="PRICE" minOccurs="0">
+            <annotation>
+             <documentation>I==O==C==K==D=S_PRICE=A=P=L=000015=doc=Airfare</documentation>
+            </annotation>
+            <simpleType>
+             <restriction base="decimal">
+              <totalDigits value="15"/>
+              <fractionDigits value="2"/>
+             </restriction>
+            </simpleType>
+           </element>
+           <element name="CURRENCY" minOccurs="0">
+            <annotation>
+             <documentation>I==O==C==K==D=S_CURRCODE=A=C=L=000005=doc=Local currency of</documentation>
+            </annotation>
+            <simpleType>
+             <restriction base="string">
+              <maxLength value="5"/>
+             </restriction>
+            </simpleType>
+           </element>
+           <element name="PLANETYPE" minOccurs="0">
+            <annotation>
+             <documentation>I==O==C==K==D=S_PLANETYE=A=C=L=000010=doc=Aircraft Type</documentation>
+            </annotation>
+            <simpleType>
+             <restriction base="string">
+              <maxLength value="10"/>
+             </restriction>
+            </simpleType>
+           </element>
+           <element name="SEATSMAX" minOccurs="0" type="int">
+            <annotation>
+             <documentation>I==O==C==K==D=S_SEATSMAX=A=I=L=000010=doc=Maximum capacity i</documentation>
+            </annotation>
+           </element>
+           <element name="SEATSOCC" minOccurs="0" type="int">
+            <annotation>
+             <documentation>I==O==C==K==D=S_SEATSOCC=A=I=L=000010=doc=Occupied seats in</documentation>
+            </annotation>
+           </element>
+           <element name="PAYMENTSUM" minOccurs="0">
+            <annotation>
+             <documentation>I==O==C==K==D=S_SUM=A=P=L=000017=doc=Total of current bookin</documentation>
+            </annotation>
+            <simpleType>
+             <restriction base="decimal">
+              <totalDigits value="17"/>
+              <fractionDigits value="2"/>
+             </restriction>
+            </simpleType>
+           </element>
+           <element name="SEATSMAX_B" minOccurs="0" type="int">
+            <annotation>
+             <documentation>I==O==C==K==D=S_SMAX_B=A=I=L=000010=doc=Maximum capacity in</documentation>
+            </annotation>
+           </element>
+           <element name="SEATSOCC_B" minOccurs="0" type="int">
+            <annotation>
+             <documentation>I==O==C==K==D=S_SOCC_B=A=I=L=000010=doc=Occupied seats in bu</documentation>
+            </annotation>
+           </element>
+           <element name="SEATSMAX_F" minOccurs="0" type="int">
+            <annotation>
+             <documentation>I==O==C==K==D=S_SMAX_F=A=I=L=000010=doc=Maximum capacity in</documentation>
+            </annotation>
+           </element>
+           <element name="SEATSOCC_F" minOccurs="0" type="int">
+            <annotation>
+             <documentation>I==O==C==K==D=S_SOCC_F=A=I=L=000010=doc=Occupied seats in fi</documentation>
+            </annotation>
+           </element>
+          </sequence>
+         </xsd:complexType>
+        </xsd:schema>
+       </DEEP_STRU>
+       <DEEP_DATA>
+        <ddic:_SFLIGHT xmlns:ddic="http://xml.sap.com/2003/05/eCATT/ddic" empty="true">
+         <item>
+          <MANDT/>
+          <CARRID/>
+          <CONNID/>
+          <FLDATE/>
+          <PRICE/>
+          <CURRENCY/>
+          <PLANETYPE/>
+          <SEATSMAX/>
+          <SEATSOCC/>
+          <PAYMENTSUM/>
+          <SEATSMAX_B/>
+          <SEATSOCC_B/>
+          <SEATSMAX_F/>
+          <SEATSOCC_F/>
+         </item>
+        </ddic:_SFLIGHT>
+       </DEEP_DATA>
+      </item>
+      <item>
+       <PNAME>TABLE_SIMPLE_TYPE</PNAME>
+       <PTYP>V</PTYP>
+       <PDESC>Natürliche Zahl</PDESC>
+       <PINDEX>0001</PINDEX>
+       <XMLREF_TYP>D</XMLREF_TYP>
+       <PSTRUC_TYP>T</PSTRUC_TYP>
+       <PREF_NAME>INT4[]</PREF_NAME>
+       <PDATLEN>0000</PDATLEN>
+       <PINTLEN>000000</PINTLEN>
+       <PDECIMALS>000000</PDECIMALS>
+       <SORT_LNR>0004</SORT_LNR>
+       <PREF_NAME2>INT4[]</PREF_NAME2>
+       <VALUE>&lt;INITIAL&gt;</VALUE>
+       <VAL_TYPE>T</VAL_TYPE>
+       <TAB_INDEX>0</TAB_INDEX>
+       <DEEP_STRU>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xml.sap.com/2003/05/eCATT/ddic" version="1.0">
+         <xsd:complexType name="_INT4">
+          <xsd:annotation>
+           <xsd:documentation>I=t=O==C=S=K==D=INT4=A==L==doc=Tabelle aus Struktur</xsd:documentation>
+          </xsd:annotation>
+          <xsd:sequence>
+           <xsd:element name="item" type="INT4" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+         </xsd:complexType>
+         <xsd:simpleType name="INT4">
+          <annotation>
+           <documentation>I==O==C==K=T=D=INT4=A=I=L=000010=doc=Natürliche Zahl</documentation>
+          </annotation>
+          <restriction base="int"/>
+          <complexType>
+           <sequence>
+            <element name="TABLE_LINE">
+             <xsd:annotation>
+              <xsd:documentation>I==O==C==K==D=INT4=A=I=L=000010=doc=Natürliche Zahl</xsd:documentation>
+             </xsd:annotation>
+            </element>
+           </sequence>
+          </complexType>
+         </xsd:simpleType>
+        </xsd:schema>
+       </DEEP_STRU>
+       <DEEP_DATA>
+        <ddic:_INT4 xmlns:ddic="http://xml.sap.com/2003/05/eCATT/ddic" empty="true">
+         <item>
+          <TABLE_LINE/>
+         </item>
+        </ddic:_INT4>
+       </DEEP_DATA>
+      </item>
+     </ETPAR_GUIX>
+     <ETPAR_VARI>
+      <item>
+       <VAR_NAME>COPY_TO_TDC</VAR_NAME>
+       <VINDEX>0001</VINDEX>
+       <SORTLNR>000002</SORTLNR>
+       <PAR_VALUES>
+        <item>
+         <PNAME>VAR_STRING</PNAME>
+         <PTYP>V</PTYP>
+         <PINDEX>0004</PINDEX>
+         <VALUE>a sample string</VALUE>
+        </item>
+        <item>
+         <PNAME>VAR_CHARACTER</PNAME>
+         <PTYP>V</PTYP>
+         <PINDEX>0003</PINDEX>
+         <VALUE>CHARACT</VALUE>
+        </item>
+        <item>
+         <PNAME>TABLE_STRUC_TYPE</PNAME>
+         <PTYP>V</PTYP>
+         <PINDEX>0002</PINDEX>
+         <VALUE>&lt;VALUE&gt;</VALUE>
+         <VAL_TYPE>X</VAL_TYPE>
+         <DEEP_DATA>
+          <_SFLIGHT>
+           <item>
+            <CARRID>LH</CARRID>
+            <CONNID>0300</CONNID>
+            <FLDATE>0000-00-00</FLDATE>
+            <PRICE>0.00</PRICE>
+            <SEATSMAX>0</SEATSMAX>
+            <SEATSOCC>0</SEATSOCC>
+            <PAYMENTSUM>0.00</PAYMENTSUM>
+            <SEATSMAX_B>0</SEATSMAX_B>
+            <SEATSOCC_B>0</SEATSOCC_B>
+            <SEATSMAX_F>0</SEATSMAX_F>
+            <SEATSOCC_F>0</SEATSOCC_F>
+           </item>
+           <item>
+            <CARRID>LH</CARRID>
+            <CONNID>0350</CONNID>
+            <FLDATE>0000-00-00</FLDATE>
+            <PRICE>0.00</PRICE>
+            <SEATSMAX>0</SEATSMAX>
+            <SEATSOCC>0</SEATSOCC>
+            <PAYMENTSUM>0.00</PAYMENTSUM>
+            <SEATSMAX_B>0</SEATSMAX_B>
+            <SEATSOCC_B>0</SEATSOCC_B>
+            <SEATSMAX_F>0</SEATSMAX_F>
+            <SEATSOCC_F>0</SEATSOCC_F>
+           </item>
+          </_SFLIGHT>
+         </DEEP_DATA>
+        </item>
+        <item>
+         <PNAME>TABLE_SIMPLE_TYPE</PNAME>
+         <PTYP>V</PTYP>
+         <PINDEX>0001</PINDEX>
+         <VALUE>&lt;VALUE&gt;</VALUE>
+         <VAL_TYPE>X</VAL_TYPE>
+         <DEEP_DATA>
+          <_INT4>
+           <item>
+            <TABLE_LINE>1</TABLE_LINE>
+           </item>
+           <item>
+            <TABLE_LINE>2</TABLE_LINE>
+           </item>
+          </_INT4>
+         </DEEP_DATA>
+        </item>
+       </PAR_VALUES>
+      </item>
+     </ETPAR_VARI>
+    </PARAMETERS>
+    <VARIANT_MODE>
+     <ETVAR_EXT>
+      <VAR_EXT_PATH></VAR_EXT_PATH>
+     </ETVAR_EXT>
+    </VARIANT_MODE>
+   </ECTD>
+  </VERSION>
+ </VERSIONS>
+</abapGit>

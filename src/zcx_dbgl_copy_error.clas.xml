@@ -3,10 +3,11 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <VSEOCLASS>
-    <CLSNAME>ZDBGL_GET_GLOBALS</CLSNAME>
+    <CLSNAME>ZCX_DBGL_COPY_ERROR</CLSNAME>
     <VERSION>1</VERSION>
     <LANGU>E</LANGU>
-    <DESCRIPT>Get global variables</DESCRIPT>
+    <DESCRIPT>Exceptions copy json-values to TDC</DESCRIPT>
+    <CATEGORY>40</CATEGORY>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>
@@ -14,10 +15,16 @@
    </VSEOCLASS>
    <DESCRIPTIONS>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_GET_GLOBALS</CLSNAME>
-     <CMPNAME>FACTORY</CMPNAME>
+     <CLSNAME>ZCX_DBGL_COPY_ERROR</CLSNAME>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
      <LANGU>E</LANGU>
-     <DESCRIPT>create instance</DESCRIPT>
+     <DESCRIPT>CONSTRUCTOR</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCX_DBGL_COPY_ERROR</CLSNAME>
+     <CMPNAME>WRAP_FAILURE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>wrapper for exceptions</DESCRIPT>
     </SEOCOMPOTX>
    </DESCRIPTIONS>
   </asx:values>

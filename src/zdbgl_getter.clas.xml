@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZDBGL_GETTER</CLSNAME>
+    <VERSION>1</VERSION>
+    <LANGU>E</LANGU>
+    <DESCRIPT>read global variables from a testcase.</DESCRIPT>
+    <STATE>1</STATE>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+    <WITH_UNIT_TESTS>X</WITH_UNIT_TESTS>
+   </VSEOCLASS>
+   <LINES>
+    <TLINE>
+     <TDFORMAT>U1</TDFORMAT>
+     <TDLINE>&amp;FUNCTIONALITY&amp;</TDLINE>
+    </TLINE>
+    <TLINE>
+     <TDFORMAT>AS</TDFORMAT>
+     <TDLINE>Globale Variablen eines Testfalles lesen (Tabelle zdbgl_variables).</TDLINE>
+    </TLINE>
+    <TLINE>
+     <TDFORMAT>AS</TDFORMAT>
+     <TDLINE>In der Tabelle zdbgl_variables sind die Werte hexadezimal gespeichert.</TDLINE>
+    </TLINE>
+    <TLINE>
+     <TDFORMAT>AS</TDFORMAT>
+     <TDLINE>Diese Klasse konvertiert die hexadezimalen Werte in ABAP Typen (mit Hilf</TDLINE>
+    </TLINE>
+    <TLINE>
+     <TDFORMAT>=</TDFORMAT>
+     <TDLINE>e der Klasse cl_abap_conv_in_ce).</TDLINE>
+    </TLINE>
+    <TLINE>
+     <TDFORMAT>U1</TDFORMAT>
+     <TDLINE>&amp;RELATIONS&amp;</TDLINE>
+    </TLINE>
+    <TLINE>
+     <TDFORMAT>AS</TDFORMAT>
+    </TLINE>
+    <TLINE>
+     <TDFORMAT>U1</TDFORMAT>
+     <TDLINE>&amp;EXAMPLE&amp;</TDLINE>
+    </TLINE>
+    <TLINE>
+     <TDFORMAT>AS</TDFORMAT>
+    </TLINE>
+    <TLINE>
+     <TDFORMAT>U1</TDFORMAT>
+     <TDLINE>&amp;HINTS&amp;</TDLINE>
+    </TLINE>
+    <TLINE>
+     <TDFORMAT>AS</TDFORMAT>
+    </TLINE>
+    <TLINE>
+     <TDFORMAT>U1</TDFORMAT>
+     <TDLINE>&amp;FURTHER_SOURCES_OF_INF&amp;</TDLINE>
+    </TLINE>
+    <TLINE>
+     <TDFORMAT>AS</TDFORMAT>
+    </TLINE>
+   </LINES>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZDBGL_GETTER</CLSNAME>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>read variables from the testcase</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZDBGL_GETTER</CLSNAME>
+     <CMPNAME>CONVERT_STRUCTUR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>convert structur from hexadecimal to ABAP values</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZDBGL_GETTER</CLSNAME>
+     <CMPNAME>GET_HEX_VALUE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>read hexadecimal value for scalar value</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZDBGL_GETTER</CLSNAME>
+     <CMPNAME>GET_HEX_VALUE_TABLE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>read hexadecimal value for internal table</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZDBGL_GETTER</CLSNAME>
+     <CMPNAME>GET_SIMPLE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>read value for variable</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZDBGL_GETTER</CLSNAME>
+     <CMPNAME>GET_STRUCTUR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>read value for a structure</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZDBGL_GETTER</CLSNAME>
+     <CMPNAME>GET_TABLE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>read value for a table</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZDBGL_GETTER</CLSNAME>
+     <CMPNAME>IS_UTF16</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>is system-codepage UTF-16</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
