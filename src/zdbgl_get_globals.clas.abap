@@ -34,7 +34,6 @@ CLASS ZDBGL_GET_GLOBALS IMPLEMENTATION.
       INTO CORRESPONDING FIELDS OF TABLE @full_record
       WHERE abap_program = @program AND key_testcase = @key_testcase.
     IF sy-subrc <> 0.
-      " todo exception not found
       RAISE EXCEPTION TYPE zcx_dbgl_testcase
         EXPORTING
           textid = zcx_dbgl_testcase=>testcase_not_found

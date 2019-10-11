@@ -35,9 +35,16 @@ DATA: var_i TYPE i VALUE 5,
 
 * Setup of global Variables
 FORM gl_setup.
+  DATA: l_var_i TYPE i VALUE 70,
+        BEGIN OF l_struct,
+          key TYPE i,
+          ch(10),
+        END OF l_struct.
 
   struct-key = 2.
   struct-ch = 'chara'.
+  l_struct-key = 3.
+  l_struct-ch = 'local'.
   table_struc_type = VALUE #(
   ( carrid = 'LH' connid = '300' )
   ( carrid = 'LH' connid = '350' ) ).
@@ -51,7 +58,9 @@ FORM gl_setup.
   APPEND: table_struc_type TO table_com_type,
     table_struc_type TO table_com_type.
 
+  " Steps at this breakpoint:
   " load script "ZDBGL_SCRIPT_STORE_GLOBALS", execute with test-case "B"
+  " load script "ZDBGL_SCRIPT_STORE_LOCALS", execute with test-case "B"
   BREAK-POINT.
 
 ENDFORM.
@@ -60,25 +69,38 @@ CLASS test_globals DEFINITION FOR TESTING DURATION SHORT
   RISK LEVEL HARMLESS INHERITING FROM cl_aunit_assert.
 
   PRIVATE SECTION.
-  DATA: cut TYPE REF TO zdbgl_get_globals.
+  CLASS-DATA: cut_globals TYPE REF TO zdbgl_get_globals,
+    cut_locals TYPE REF TO zdbgl_get_locals.
 
-  METHODS setup
+  CLASS-METHODS class_setup
     RAISING cx_static_check.
 
-  METHODS act_variables FOR TESTING
+  METHODS act_global_variables FOR TESTING
+    RAISING cx_static_check.
+
+  METHODS act_local_variables FOR TESTING
     RAISING cx_static_check.
 
 ENDCLASS.
 
 CLASS test_globals IMPLEMENTATION.
 
-  METHOD setup.
+  METHOD class_setup.
+    DATA source_position TYPE zdbgl_get_locals=>_source_position.
+
+    source_position-abap_program = sy-repid.
+    source_position-line = 64.
+
     PERFORM gl_setup.
-    cut = zdbgl_get_globals=>factory( EXPORTING program = sy-repid
+
+    cut_globals = zdbgl_get_globals=>factory( EXPORTING program = sy-repid
       key_testcase = 'B' ).
+    cut_locals = zdbgl_get_locals=>factory( EXPORTING source_position = source_position
+      key_testcase = 'B' ).
+
   ENDMETHOD.
 
-  METHOD act_variables.
+  METHOD act_global_variables.
     DATA: act_var_i TYPE i,
           act_string TYPE string,
           act_character LIKE var_character,
@@ -88,22 +110,22 @@ CLASS test_globals IMPLEMENTATION.
           act_table_struc_type LIKE table_struc_type,
           act_hashed_table LIKE hashed_table.
 
-    cut->get_simple( EXPORTING name = 'VAR_STRING'
+    cut_globals->get_simple( EXPORTING name = 'VAR_STRING'
       IMPORTING value = act_string ).
-    cut->get_simple( EXPORTING name = 'VAR_I'
+    cut_globals->get_simple( EXPORTING name = 'VAR_I'
       IMPORTING value = act_var_i ).
-    cut->get_simple( EXPORTING name = 'VAR_CHARACTER'
+    cut_globals->get_simple( EXPORTING name = 'VAR_CHARACTER'
       IMPORTING value = act_character ).
-    cut->get_structur( EXPORTING name = 'STRUCT'
+    cut_globals->get_structur( EXPORTING name = 'STRUCT'
       IMPORTING value = act_struct ).
     " Complex structur is not supported
-    "cut->get_structur( EXPORTING name = 'COM_STRUCT'
+    "cut_globals->get_structur( EXPORTING name = 'COM_STRUCT'
     "  IMPORTING value = act_com_struct ).
-    cut->get_table( EXPORTING name = 'TABLE_SIMPLE_TYPE'
+    cut_globals->get_table( EXPORTING name = 'TABLE_SIMPLE_TYPE'
       IMPORTING value = act_table_simple_type ).
-    cut->get_table( EXPORTING name = 'TABLE_STRUC_TYPE'
+    cut_globals->get_table( EXPORTING name = 'TABLE_STRUC_TYPE'
       IMPORTING value = act_table_struc_type ).
-    cut->get_table( EXPORTING name = 'HASHED_TABLE'
+    cut_globals->get_table( EXPORTING name = 'HASHED_TABLE'
       IMPORTING value = act_hashed_table ).
 
     assert_equals( exp = var_i act = act_var_i
@@ -122,6 +144,27 @@ CLASS test_globals IMPLEMENTATION.
       msg = 'Variable table_struc_type table with structured type' ).
     assert_equals( exp = hashed_table act = act_hashed_table
       msg = 'Variable hashed_table of type hashed_table' ).
+
+  ENDMETHOD.
+
+  METHOD act_local_variables.
+    DATA: act_var_i TYPE i,
+          act_struct LIKE struct,
+          exp_var_i TYPE i VALUE 70,
+          exp_struct LIKE struct.
+
+    exp_struct-key = 3.
+    exp_struct-ch = 'local'.
+
+    cut_globals->get_simple( EXPORTING name = 'L_VAR_I'
+      IMPORTING value = act_var_i ).
+    cut_globals->get_structur( EXPORTING name = 'L_STRUCT'
+      IMPORTING value = act_struct ).
+
+    assert_equals( exp = exp_var_i act = act_var_i
+      msg = 'Variable l_var_i of type integer' ).
+    assert_equals( exp = exp_struct act = act_struct
+      msg = 'Variable l_struct a flat structur' ).
 
   ENDMETHOD.
 
