@@ -20,6 +20,7 @@ public section.
   methods SAVE
     importing
       !TRANSPORT_ORDER type E070-TRKORR OPTIONAL
+      execute_commit TYPE abap_bool DEFAULT abap_true
     raising
       ZCX_DBGL_COPY_ERROR .
 protected section.
@@ -141,7 +142,7 @@ CLASS ZDBGL_COPY_TO_TDC IMPLEMENTATION.
 
     TRY.
         tdc->commit_changes( i_tr_order = transport_order
-          i_release_lock = abap_true ).
+          i_release_lock = abap_true i_commit_mode = execute_commit ).
 
       CATCH cx_ecatt_tdc_access INTO DATA(ecatt_failure).
         zcx_dbgl_copy_error=>wrap_failure( ecatt_failure ).
