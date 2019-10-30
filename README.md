@@ -28,16 +28,17 @@ Now you can modify the procedure.
 ### After the modification ###
 Hopefully you changed the legacy code, so that it now can be covered by unit tests. While writing unit 
 tests, you can use the recorded data with the clas ```zdbgl_get_globals```.
-Example:
+
+#### Example: ####
 The example can be found in program ```zdbgl_demo_regression_test```.
 We recorded the internal table "demo_itab" before the modification.
-The first step to record is before the procedure "to_verify" is executed.
-The second step tp record is after the procedure "to_verify" is executed. 
+In the first step we recording the globals before the procedure "to_verify" is executed.
+The second step includes the recording after the procedure "to_verify" is executed. 
 The two testcases have the key "BEFORE" and "AFTER".
 Now we can modify the procedure "to_verify" and verify, that the
 modification doesn't change any behaviour.
 
-Therefore we write the unit test and make use of the records. The records can be used with clas ```zdbgl_get_globals```:
+Therefore we write the unit test and make use of the records. The records can be used with class ```zdbgl_get_globals```:
 ```ABAP
 CLASS regression_test DEFINITION FOR TESTING
   DURATION SHORT RISK LEVEL HARMLESS.
@@ -99,13 +100,13 @@ The temporary storage has same disadvantages:
 2. hexadecimal values aren't human-friendly.
 3. The tables aren't connected to the transport-system. With the next system-copy, they get lost.
 
-Test data containers (Transaction ```secatt```) don't come with these disadvantages. The idea was to copy to contents from the tables ```zdbgl_variables``` and ```zdbgl_locals``` to test data containers.
-With the debugger API we don't have access to the technical type of the variables. Because of this reason the test data container needs to be created with the necessary variables, before we can copy the contents from the tables ```zdbgl_variables``` and ```zdbgl_locals``` to the test data container. 
+Test data containers (Transaction ```secatt```) don't come with these disadvantages. The idea was to copy the contents from the tables ```zdbgl_variables``` and ```zdbgl_locals``` to test data containers.
+With the debugger API we don't have access to the technical type of the variables. Because of this reason the test data container needs to be created with the necessary variables, before we can copy the contents from the tables ```zdbgl_variables``` and ```zdbgl_locals``` to it. 
 As shown in the picture below, API access should be permitted for the test data container.
 ![Permit api access](img/tdc_permit_api_access.png)
 
 The rule for copying is in version 0.0.0 name equivalence.
-The copy-API is located in class ```zdbgl_copy_to_tdc```. The report ```zdbgl_copy_globals_to_tdc copies global variables from table ```zdbgl_variables``` to the test data container (report ```zdbgl_copy_locals_to_tdc``` is for local variables).
+The copy-API is located in class ```zdbgl_copy_to_tdc```. The report ```zdbgl_copy_globals_to_tdc``` copies global variables from table ```zdbgl_variables``` to the test data container (report ```zdbgl_copy_locals_to_tdc``` is for local variables).
 
 ## Restrictions ##
 In version 0.0.0 these types are supported:
