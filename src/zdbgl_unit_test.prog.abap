@@ -89,6 +89,7 @@ CLASS test_globals IMPLEMENTATION.
     DATA source_position TYPE zdbgl_get_locals=>_source_position.
 
     source_position-abap_program = sy-repid.
+    source_position-include = sy-repid.
     source_position-line = 64.
 
     PERFORM gl_setup.
@@ -156,9 +157,9 @@ CLASS test_globals IMPLEMENTATION.
     exp_struct-key = 3.
     exp_struct-ch = 'local'.
 
-    cut_globals->get_simple( EXPORTING name = 'L_VAR_I'
+    cut_locals->get_simple( EXPORTING name = 'L_VAR_I'
       IMPORTING value = act_var_i ).
-    cut_globals->get_structur( EXPORTING name = 'L_STRUCT'
+    cut_locals->get_structur( EXPORTING name = 'L_STRUCT'
       IMPORTING value = act_struct ).
 
     assert_equals( exp = exp_var_i act = act_var_i
