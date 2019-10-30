@@ -1,22 +1,21 @@
 # Regression tests in ABAP #
 
 ## Idea ##
-Regression tests are usable for comparing the results of a program before and after a modification.
-Results in ABAP legacy code (programs, functionpools) are often stored in global variables.
-This repository contains a debugger script, which records the global variables while reaching a breakpoint
+Regression tests are usable for comparing the results of a program before and after a modification. Often we compare huge structures or internal tables in regression tests.
+This repository contains debugger scripts, which record global and local variables while reaching a breakpoint
 in the ABAP debugger.
 
 ## How to use it ##
-### Regression test of a procedure ###
+### Regression test of a procedure (Recording globals) ###
 #### Before the modification ####
 Set a breakpoint before the procedure is executed. Set a breakpoint after the procedure is finished.
 Record the global variables at both breakpoints.
 Recording is done with executing the debugger script ```zdbgl_script_store_globals```.
 Go to "Script" Tab in the debugger and load the script ```zdbgl_script_store_globals``` from the database.
-"@todo image
+![Load Debugger Script](img/load_script.png)
 
 The script will prompt you to enter an Key for the testcase. For each record you should choose an unique id.
-"@todo image
+![Enter key testcase](img/script_prompt_testcase.png)
 
 ### Storage ###
 The global variables are stored in the table ```zdbgl_variables```. The column "globals" 
@@ -88,10 +87,30 @@ CLASS regression_test IMPLEMENTATION.
   ENDMETHOD.
 ``` 
 
+### Recording locals ###
+Local variables are recorded with the debugger script ```zdbgl_script_store_locals```.
+It works the same way as recording globals.
+The API for locals is located in the class ```zdbgl_get_locals``` and the values are stored in table ```zdbgl_locals```.
+
+## Copy to test data container ##
+The recorded values are temporary stored in base64-encoding (tables ```zdbgl_variables``` and ```zdbgl_locals```). 
+The temporary storage has same disadvantages:
+1. If the system encoding is changed, the records are unuseable.
+2. hexadecimal values aren't human-friendly.
+3. The tables aren't connected to the transport-system. With the next system-copy, they get lost.
+
+Test data containers (Transaction ```secatt```) don't come with these disadvantages. The idea was to copy to contents from the tables ```zdbgl_variables``` and ```zdbgl_locals``` to test data containers.
+With the debugger API we don't have access to the technical type of the variables. Because of this reason the test data container needs to be created with the necessary variables, before we can copy the contents from the tables ```zdbgl_variables``` and ```zdbgl_locals``` to the test data container. 
+As shown in the picture below, API access should be permitted for the test data container.
+![Permit api access](img/tdc_permit_api_access.png)
+
+The rule for copying is in version 0.0.0 name equivalence.
+The copy-API is located in class ```zdbgl_copy_to_tdc```. The report ```zdbgl_copy_globals_to_tdc copies global variables from table ```zdbgl_variables``` to the test data container (report ```zdbgl_copy_locals_to_tdc``` is for local variables).
+
 ## Restrictions ##
-In version 1.0.0 these types are supported:
+In version 0.0.0 these types are supported:
 * simple types (like characters, strings, integer)
-* flat structures (complex structures containing components with tables or structures are not supported)
+* flat structures (complex structures containing components with strings, tables or structures are not supported)
 * tables with a flat structure or a simple type as the table line type
 
 These types are not supported:
@@ -99,10 +118,10 @@ These types are not supported:
 * complex structures
 * tables with complex structures as the table line type or with tables as the table line type
 
-The hexadecimal values are stored. If the system encoding is changed, the records in table ```zdbgl_variables``` must be deleted. The only ca be reused in the same system encoding.
 
 ## Installation ##
 Installation is done with [abapGit](https://github.com/larshp/abapgit). ABAP 7.40 or higher is needed.
 
 ## Logs ##
-Exceptions are logged in the checkpointgroup "zdbgl_store_globals" (see transaction saab).
+Exceptions are logged in the checkpoint-groups "zdbgl_store_globals" and "zdbgl_store_locals" (see transaction `saab`).
+Before logging the checkpoint-groups should be activated.
