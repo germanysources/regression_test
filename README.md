@@ -40,6 +40,34 @@ modification doesn't change any behaviour.
 
 Therefore we write the unit test and make use of the records. The records can be used with class ```zdbgl_get_globals```:
 ```ABAP
+REPORT ZDBGL_DEMO_REGRESSION_TEST.
+DATA: demo_itab TYPE STANDARD TABLE OF sflight.
+
+START-OF-SELECTION.
+  FIELD-SYMBOLS: <line> TYPE sflight.
+
+  APPEND INITIAL LINE TO demo_itab ASSIGNING <line>.
+  <line>-carrid = 'LH'.
+  <line>-connid = '3445'.
+  <line>-price = 500.
+  BREAK-POINT.
+  PERFORM to_verify.
+  BREAK-POINT.
+
+
+" subprogram should be verified.
+" It changes the global variable demo_itab.
+" Imagine this would be legacy code and you must changed this.
+FORM to_verify.
+  FIELD-SYMBOLS: <line> TYPE sflight.
+
+  APPEND INITIAL LINE TO demo_itab ASSIGNING <line>.
+  <line>-carrid = 'LH'.
+  <line>-connid = '3444'.
+  <line>-price = 400.
+
+ENDFORM.
+
 CLASS regression_test DEFINITION FOR TESTING
   DURATION SHORT RISK LEVEL HARMLESS.
 
@@ -105,13 +133,13 @@ With the debugger API we don't have access to the technical type of the variable
 As shown in the picture below, API access should be permitted for the test data container.
 ![Permit api access](img/tdc_permit_api_access.png)
 
-The rule for copying is in version 0.0.0 name equivalence.
+The rule for copying is name equivalence.
 The copy-API is located in class ```zdbgl_copy_to_tdc```. The report ```zdbgl_copy_globals_to_tdc``` copies global variables from table ```zdbgl_variables``` to the test data container (report ```zdbgl_copy_locals_to_tdc``` is for local variables).
 
 ## Restrictions ##
-In version 0.0.0 these types are supported:
+These types are currently supported:
 * simple types (like characters, strings, integer)
-* flat structures (complex structures containing components with strings, tables or structures are not supported)
+* flat structures (complex structures containing components with tables or structures are not supported)
 * tables with a flat structure or a simple type as the table line type
 
 These types are not supported:
