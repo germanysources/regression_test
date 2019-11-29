@@ -10,6 +10,7 @@ REPORT ZDBGL_UNIT_TEST.
 DATA: var_i TYPE i VALUE 5,
       var_string TYPE string VALUE 'a sample string',
       var_character(10) VALUE 'CHARACT',
+      fldate TYPE d VALUE '20191115',
       " flat structure,
       BEGIN OF struct,
         key TYPE i,
@@ -106,6 +107,7 @@ CLASS test_globals IMPLEMENTATION.
           act_string TYPE string,
           act_character LIKE var_character,
           act_struct LIKE struct,
+          act_fldate TYPE d,
           "act_com_struct LIKE com_struct,
           act_table_simple_type LIKE table_simple_type,
           act_table_struc_type LIKE table_struc_type,
@@ -117,6 +119,8 @@ CLASS test_globals IMPLEMENTATION.
       IMPORTING value = act_var_i ).
     cut_globals->get_simple( EXPORTING name = 'VAR_CHARACTER'
       IMPORTING value = act_character ).
+    cut_globals->get_simple( EXPORTING name = 'FLDATE'
+      IMPORTING value = act_fldate ).
     cut_globals->get_structur( EXPORTING name = 'STRUCT'
       IMPORTING value = act_struct ).
     " Complex structur is not supported
@@ -135,6 +139,8 @@ CLASS test_globals IMPLEMENTATION.
       msg = 'Variable var_string of type string' ).
     assert_equals( exp = var_character act = act_character
       msg = 'Variable var_character of type character' ).
+    assert_equals( exp = fldate act = act_fldate
+      msg = 'Variable fldate with same name as component internal table' ).
     assert_equals( exp = struct act = act_struct
       msg = 'Variable struct a flat structur' ).
     "assert_equals( exp = com_struct act = act_com_struct

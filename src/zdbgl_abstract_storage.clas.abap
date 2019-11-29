@@ -62,7 +62,8 @@ protected section.
     returning
       value(FRAGMENT) type STRING
     raising
-      CX_TPDA .
+      CX_TPDA
+      zcx_dbgl_type_not_supported.
   methods HANDLE_DATAREF
     importing
       !NAME type STRING
@@ -127,8 +128,26 @@ CLASS ZDBGL_ABSTRACT_STORAGE IMPLEMENTATION.
 
 
   method HANDLE_STRUCT.
-    data_serialize_hex_format cl_tpda_script_structdescr.
-    serialize_hex_format.
+
+    DATA(struct_descr) = CAST cl_tpda_script_structdescr( descr ).
+    struct_descr->components( IMPORTING p_components_it = DATA(components) ).
+
+    IF is_object = abap_true.
+      fragment = quote && name && quote && colon.
+    ENDIF.
+    fragment = fragment && '{'.
+    LOOP AT components REFERENCE INTO DATA(component).
+
+      DATA(tabix) = sy-tabix.
+      fragment = fragment && quote && component->*-compname && quote && colon &&
+        _handle( name = |{ name }-{ component->*-compname }| is_object = abap_false ).
+      IF tabix < lines( components ).
+        fragment = fragment && comma.
+      ENDIF.
+
+    ENDLOOP.
+    fragment = fragment && '}'.
+
   endmethod.
 
 
