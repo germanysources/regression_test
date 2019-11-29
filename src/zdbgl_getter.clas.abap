@@ -21,7 +21,8 @@ public section.
     exporting
       !VALUE type ANY
     raising
-      ZCX_DBGL_TESTCASE .
+      ZCX_DBGL_TESTCASE
+      ZCX_DBGL_TYPE_NOT_SUPPORTED.
   methods GET_TABLE
     importing
       !NAME type STRING
@@ -40,13 +41,6 @@ private section.
   data JSON_XTEXT type XSTRING .
   data ABAP_CONVERSION type ref to CL_ABAP_CONV_IN_CE .
 
-  methods GET_HEX_VALUE_TABLE
-    importing
-      !NAME type STRING
-    exporting
-      !VALUES type XSTRING_TAB
-    raising
-      ZCX_DBGL_TESTCASE .
   methods GET_HEX_VALUE
     importing
       !NAME type STRING
@@ -54,14 +48,15 @@ private section.
       value(VALUE) type STRING
     raising
       ZCX_DBGL_TESTCASE .
-  methods IS_UTF16
-    returning
-      value(UNICODE) type SAP_BOOL .
-  methods CONVERT_STRUCTUR
+  methods _GET_SIMPLE
     importing
-      !HEX_VALUE type XSTRING
+      !BASE64_VALUE type STRING
     exporting
-      !DATA type ANY .
+      !VALUE type SIMPLE .
+  methods LINE_HAS_SIMPLE_TYPE
+    IMPORTING
+      line TYPE any
+    RETURNING VALUE(is_simple) TYPE sap_bool.
 ENDCLASS.
 
 
@@ -79,31 +74,15 @@ CLASS ZDBGL_GETTER IMPLEMENTATION.
   endmethod.
 
 
-  METHOD CONVERT_STRUCTUR.
-    DATA: struct_descr TYPE REF TO cl_abap_view_offlen.
-
-    IF is_utf16( ) = abap_true.
-      struct_descr = cl_abap_view_offlen=>create_unicode16_view(
-        data ).
-    ELSE.
-      struct_descr = cl_abap_view_offlen=>create_legacy_view(
-        data ).
-    ENDIF.
-
-    abap_conversion->convert_struc( EXPORTING input = hex_value view = struct_descr
-      IMPORTING data = data ).
-
-  ENDMETHOD.
-
-
 METHOD GET_HEX_VALUE.
   DATA: node       TYPE REF TO if_sxml_node,
-        attributes TYPE if_sxml_attribute=>attributes,
+        node_open_element TYPE REF TO if_sxml_open_element,
         node_found TYPE sap_bool,
-        reader TYPE REF TO if_sxml_reader.
-  FIELD-SYMBOLS: <attribute> TYPE REF TO if_sxml_attribute.
+        reader TYPE REF TO if_sxml_reader,
+        attribute TYPE REF TO if_sxml_attribute,
+        object_level TYPE i.
 
-  " create reader in every method, loop through nodes is statefull
+  " create reader in every call, loop through nodes is statefull
   reader = cl_sxml_string_reader=>create( json_xtext ).
   DO.
     node = reader->read_next_node( ).
@@ -112,17 +91,119 @@ METHOD GET_HEX_VALUE.
     ENDIF.
 
     IF node->type = if_sxml_node=>co_nt_element_open.
-      attributes = CAST if_sxml_open_element( node )->get_attributes( ).
-      LOOP AT attributes ASSIGNING <attribute>.
-        IF <attribute>->qname-name = 'name'
-          AND <attribute>->get_value( ) = name.
+
+      node_open_element = CAST if_sxml_open_element( node ).
+      LOOP AT node_open_element->get_attributes( ) INTO attribute.
+        IF attribute->qname-name = 'name' AND attribute->get_value( ) = name
+          AND node_open_element->if_sxml_named~qname-name = 'str'
+          AND object_level = 1.
           node_found = abap_true.
         ENDIF.
       ENDLOOP.
+
+      IF node_open_element->if_sxml_named~qname-name = 'object'.
+        ADD 1 TO object_level.
+      ENDIF.
+
     ELSEIF node->type = if_sxml_node=>co_nt_value
       AND node_found = abap_true.
+
       value = CAST if_sxml_value_node( node )->get_value( ).
       RETURN.
+
+    ELSEIF node->type = if_sxml_node=>co_nt_element_close.
+
+      IF CAST if_sxml_close_element( node )->if_sxml_named~qname-name = 'object'.
+        object_level = object_level - 1.
+      ENDIF.
+
+    ENDIF.
+
+  ENDDO.
+
+  RAISE EXCEPTION TYPE zcx_dbgl_testcase
+    EXPORTING
+      textid   = zcx_dbgl_testcase=>variable_not_found
+      program  = program
+      variable = name.
+
+ENDMETHOD.
+
+
+  method GET_SIMPLE.
+
+    _get_simple( EXPORTING base64_value = get_hex_value( name )
+      IMPORTING value = value ).
+
+  endmethod.
+
+
+METHOD get_structur.
+  DATA: node                       TYPE REF TO if_sxml_node,
+        node_open_element          TYPE REF TO if_sxml_open_element,
+        node_for_structure_pending TYPE sap_bool,
+        reader                     TYPE REF TO if_sxml_reader,
+        attribute                  TYPE REF TO if_sxml_attribute,
+        object_level               TYPE i.
+  FIELD-SYMBOLS: <component> TYPE any.
+
+  " create reader in every call, loop through nodes is statefull
+  reader = cl_sxml_string_reader=>create( json_xtext ).
+  DO.
+    node = reader->read_next_node( ).
+    IF node IS INITIAL.
+      EXIT.
+    ENDIF.
+
+    IF node->type = if_sxml_node=>co_nt_element_open.
+
+      node_open_element = CAST if_sxml_open_element( node ).
+
+      IF ( node_open_element->if_sxml_named~qname-name = 'array'
+        OR node_open_element->if_sxml_named~qname-name = 'object' )
+        AND node_for_structure_pending = abap_true.
+
+        RAISE EXCEPTION TYPE zcx_dbgl_type_not_supported
+          EXPORTING
+            type = |deep structure with name { name }|.
+
+      ENDIF.
+
+      LOOP AT node_open_element->get_attributes( ) INTO attribute.
+
+        IF attribute->qname-name = 'name'.
+          IF node_open_element->if_sxml_named~qname-name = 'object'
+          AND attribute->get_value( ) = name AND object_level = 1.
+            node_for_structure_pending = abap_true.
+          ELSEIF node_open_element->if_sxml_named~qname-name = 'str'
+          AND node_for_structure_pending = abap_true.
+            ASSIGN COMPONENT attribute->get_value( ) OF STRUCTURE value
+              TO <component>.
+          ENDIF.
+        ENDIF.
+
+      ENDLOOP.
+
+      IF node_open_element->if_sxml_named~qname-name = 'object'.
+        ADD 1 TO object_level.
+      ENDIF.
+
+    ELSEIF node->type = if_sxml_node=>co_nt_value
+      AND node_for_structure_pending = abap_true.
+
+      _get_simple( EXPORTING base64_value = CAST if_sxml_value_node( node )->get_value( )
+        IMPORTING value = <component> ).
+
+    ELSEIF node->type = if_sxml_node=>co_nt_element_close.
+
+      IF CAST if_sxml_close_element( node )->if_sxml_named~qname-name = 'object'.
+        IF node_for_structure_pending = abap_true.
+          " object finished
+          RETURN.
+        ENDIF.
+        object_level = object_level - 1.
+      ENDIF.
+
     ENDIF.
 
   ENDDO.
@@ -137,134 +218,75 @@ METHOD GET_HEX_VALUE.
 ENDMETHOD.
 
 
-  METHOD GET_HEX_VALUE_TABLE.
-" @todo linked list for complex table types
-    DATA: node         TYPE REF TO if_sxml_node,
-          attributes   TYPE if_sxml_attribute=>attributes,
-          node_found   TYPE sap_bool,
-          base64_value TYPE string,
-          reader       TYPE REF TO if_sxml_reader.
-    FIELD-SYMBOLS: <attribute> TYPE REF TO if_sxml_attribute.
+METHOD get_table.
+  DATA: node                   TYPE REF TO if_sxml_node,
+        node_for_table_pending TYPE sap_bool,
+        reader                 TYPE REF TO if_sxml_reader,
+        line                   TYPE REF TO data,
+        node_open_element      TYPE REF TO if_sxml_open_element,
+        object_element_name    TYPE string,
+        attribute              TYPE REF TO if_sxml_attribute,
+        object_level           TYPE i.
+  FIELD-SYMBOLS: <line>         TYPE any,
+                 <line_element> TYPE any.
 
-    " create reader in every method, loop through nodes is statefull
-    reader = cl_sxml_string_reader=>create( json_xtext ).
-    DO.
-      node = reader->read_next_node( ).
-      IF node IS INITIAL.
-        EXIT.
-      ENDIF.
+  CREATE DATA line LIKE LINE OF value.
+  ASSIGN line->* TO <line>.
 
-      IF node->type = if_sxml_node=>co_nt_element_open.
-        attributes = CAST if_sxml_open_element( node )->get_attributes( ).
-        LOOP AT attributes ASSIGNING <attribute>.
-          IF <attribute>->qname-name = 'name'
-            AND <attribute>->get_value( ) = name.
-            node_found = abap_true.
-          ELSEIF <attribute>->qname-name = 'name'.
-            node_found = abap_false.
-          ENDIF.
-        ENDLOOP.
-      ELSEIF node->type = if_sxml_node=>co_nt_value
-        AND node_found = abap_true.
-        base64_value = CAST if_sxml_value_node( node )->get_value( ).
-        APPEND cl_http_utility=>decode_x_base64( base64_value ) TO values.
-      ENDIF.
-
-    ENDDO.
-
-    IF values IS INITIAL.
-      " value for variable <name> not found
-      RAISE EXCEPTION TYPE zcx_dbgl_testcase
-        EXPORTING
-          textid   = zcx_dbgl_testcase=>variable_not_found
-          program  = program
-          variable = name.
+  " create reader in every call, loop through nodes is statefull
+  reader = cl_sxml_string_reader=>create( json_xtext ).
+  DO.
+    node = reader->read_next_node( ).
+    IF node IS INITIAL.
+      EXIT.
     ENDIF.
 
-  ENDMETHOD.
+    IF node->type = if_sxml_node=>co_nt_element_open.
+
+      node_open_element = CAST if_sxml_open_element( node ).
+      attribute_handler.
+      prepare_table_line.
+
+    ELSEIF node->type = if_sxml_node=>co_nt_value
+      AND node_for_table_pending = abap_true.
+
+      _get_simple( EXPORTING base64_value = CAST if_sxml_value_node( node )->get_value( )
+        IMPORTING value = <line_element> ).
+
+    ELSEIF node->type = if_sxml_node=>co_nt_element_close.
+
+      close_element_handler.
+
+    ENDIF.
+
+  ENDDO.
+
+  RAISE EXCEPTION TYPE zcx_dbgl_testcase
+    EXPORTING
+      textid   = zcx_dbgl_testcase=>variable_not_found
+      program  = program
+      variable = name.
+
+ENDMETHOD.
 
 
-  method GET_SIMPLE.
+  method LINE_HAS_SIMPLE_TYPE.
+
+    IF cl_abap_typedescr=>describe_by_data( line )->kind =
+      cl_abap_typedescr=>kind_elem.
+      is_simple = abap_true.
+    ENDIF.
+
+  endmethod.
+
+
+  method _GET_SIMPLE.
     DATA: hex_value TYPE xstring.
 
-    hex_value = cl_http_utility=>decode_x_base64( get_hex_value( name ) ).
+    hex_value = cl_http_utility=>decode_x_base64( base64_value ).
 
     abap_conversion->convert( EXPORTING input = hex_value
       IMPORTING data = value ).
-
-  endmethod.
-
-
-  method GET_STRUCTUR.
-    DATA: hex_value TYPE xstring.
-
-    hex_value = cl_http_utility=>decode_x_base64( get_hex_value( name ) ).
-
-    convert_structur( EXPORTING hex_value = hex_value
-      IMPORTING data = value ).
-
-  endmethod.
-
-
-  method GET_TABLE.
-    DATA: hex_values TYPE xstring_tab,
-          tabletype TYPE REF TO cl_abap_tabledescr,
-          linetype TYPE REF TO cl_abap_typedescr,
-          line TYPE REF TO data.
-    FIELD-SYMBOLS: <hval> TYPE xstring,
-                   <line> TYPE any.
-
-    CLEAR value.
-
-    " get line type
-    tabletype = cast cl_abap_tabledescr(
-      cl_abap_typedescr=>describe_by_data( value ) ).
-    linetype = tabletype->get_table_line_type( ).
-
-    get_hex_value_table( EXPORTING name = name
-      IMPORTING values = hex_values ).
-
-    LOOP AT hex_values ASSIGNING <hval>.
-      " create data reference and set value
-      CREATE DATA line LIKE LINE OF value.
-      ASSIGN line->* TO <line>.
-      CASE linetype->kind.
-        WHEN linetype->kind_elem.
-          " a simple type
-          abap_conversion->convert( EXPORTING input = <hval>
-            IMPORTING data = <line> ).
-          INSERT <line> INTO TABLE value.
-        WHEN linetype->kind_struct.
-          " a structur
-          convert_structur( EXPORTING hex_value = <hval>
-            IMPORTING data = <line> ).
-          INSERT <line> INTO TABLE value.
-        WHEN OTHERS.
-          " not supported
-          RAISE EXCEPTION TYPE zcx_dbgl_testcase
-            EXPORTING
-              textid = zcx_dbgl_testcase=>table_line_type_not_supported
-              linetype = linetype->kind.
-      ENDCASE.
-    ENDLOOP.
-
-  endmethod.
-
-
-  method IS_UTF16.
-    DATA: codepage TYPE cpcodepage.
-
-    CALL FUNCTION 'SCP_CODEPAGE_FOR_LANGUAGE'
-      EXPORTING
-        language = sy-langu
-      IMPORTING
-        codepage = codepage.
-
-    IF codepage(1) = '1'.
-      unicode = abap_false.
-    ELSE.
-      unicode = abap_true.
-    ENDIF.
 
   endmethod.
 ENDCLASS.
