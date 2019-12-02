@@ -4,7 +4,7 @@
 Regression tests are usable for comparing the results of a algorithm before and after a source-code modification.
 Unit-tests are one way to execute regression tests.
 A single unit-test-method can be splitted in the above sections:
-```
+```ABAP
 CLASS unit_test DEFINITION DEFINITION FOR TESTING
   DURATION SHORT RISK LEVEL HARMLESS.
 
@@ -30,8 +30,8 @@ ENDCLASS.
 
 ```
 In legacy codes the ```given``` and the ```then``` sections contain assignments of huge structures or huge internal tables.
-Adding unit-tests for legacy code can be consuming, because we must determine the values for the input parameters and the expected results.
-The debugger-scripts in this repository can help you to determine the values for input parameters and expected results more quickly, because they record values of global and local variables and store them permanent in the database. 
+Adding unit-tests for legacy code can be time consuming, because we must determine values for huge structures and for huge internal tables.
+The debugger-scripts in this repository can help you to determine these values more quickly, because they record values of global and local variables and store them permanent in the database.
 
 ## How to use it ##
 ### Regression test of a procedure ###
@@ -66,14 +66,14 @@ The rule for copying is name equivalence.
 The copy-API is located in class ```zdbgl_copy_to_tdc```. The report ```zdbgl_copy_globals_to_tdc``` copies global variables from table ```zdbgl_variables``` to the test data container (report ```zdbgl_copy_locals_to_tdc``` is for local variables).
 
 ### Writing unit-tests ###
-With the API in class ```cl_apl_ecatt_tdc_api``` we can access the recorded values, which we copied in the step below to the test data container. The recorded values before the procedure is executed
+With the API in class ```cl_apl_ecatt_tdc_api``` we can access the recorded values, which we copied in the step above to the test data container. The recorded values before the procedure is executed
 can be used in the ```given``` section, the recorded values after the procedure is executed as expected results.
 
 ### Modification ###
 Now we can modify the source-code and use the unit-tests from the last step as regression tests.
 
 ## Example ##
-The example can be found in program ```zdbgl_demo_regression_test```.
+The example can be found in the program ```zdbgl_demo_regression_test```.
 
 The procedure ```to_verify```, which can be found in its original form in the following listing is the procedure under regression test.
 ```ABAP
@@ -101,7 +101,7 @@ In the first step we record the globals (```demo_itab``` is a global variable) b
 the debugger-script ```zdbgl_script_store_globals``` from this repository.
 The record before the procedure is executed get's the key "BEFORE" and the record after the procedure is executed get's the key "AFTER".
 
-In the second step we copy the recorded values to the test data container "ZDBGL_SAMPLE" with report ```zdbgl_copy_globals_to_tdc``` as it can be seen in the pictures below.
+In the second step we copy the recorded values to the test data container "ZDBGL_SAMPLE" with the report ```zdbgl_copy_globals_to_tdc``` as it can be seen in the pictures below.
 ![copy records to test data container](img/copy_globals_before.png)
 ![copy records to test data container](img/copy_globals_after.png)
 ![values test data container](img/tdc_with_values.png)
