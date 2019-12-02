@@ -6,7 +6,7 @@
     <ATTRIBUTES>
      <ETOBJ_GNDT>
       <VERSION>00000001</VERSION>
-      <TWB_TITLE>Container for unit-tests</TWB_TITLE>
+      <TWB_TITLE>Sample regression test</TWB_TITLE>
       <SOFTCOMP/>
       <TWB_DEP_RF/>
       <TWB_DEP_RT/>
@@ -24,7 +24,7 @@
       <BACKUP/>
      </ETOBJ_GNDT>
      <ETOBJNOVER>
-      <NAME>ZDBGL_UNIT_TEST_CONTAINER</NAME>
+      <NAME>ZDBGL_SAMPLE</NAME>
       <TYPE>ECTD</TYPE>
       <TWB_RESP></TWB_RESP>
       <TWB_DISTL>B</TWB_DISTL>
@@ -77,7 +77,7 @@
       <TWB_PRIO>3</TWB_PRIO>
      </ETOBJ_CNST>
      <ETSC_TSYS>
-      <SYSTEMDATA>EC_DEMO</SYSTEMDATA>
+      <SYSTEMDATA/>
       <TESTSYSTEM/>
      </ETSC_TSYS>
      <ETSYS_COMP_TABTYPE/>
@@ -88,47 +88,17 @@
     <PARAMETERS>
      <ETPAR_GUIX>
       <item>
-       <PNAME>VAR_STRING</PNAME>
-       <PTYP>V</PTYP>
-       <PINDEX>0004</PINDEX>
-       <PREF_NAME>STRING</PREF_NAME>
-       <PDATLEN>0000</PDATLEN>
-       <PINTTYP>g</PINTTYP>
-       <PINTLEN>000000</PINTLEN>
-       <PDECIMALS>000000</PDECIMALS>
-       <SORT_LNR>0001</SORT_LNR>
-       <PREF_NAME2>STRING</PREF_NAME2>
-       <TAB_INDEX>0</TAB_INDEX>
-      </item>
-      <item>
-       <PNAME>VAR_CHARACTER</PNAME>
-       <PTYP>V</PTYP>
-       <PDESC>Character Field Length = 10</PDESC>
-       <PINDEX>0003</PINDEX>
-       <PREF_TYPE>DTEL</PREF_TYPE>
-       <PREF_NAME>CHAR10</PREF_NAME>
-       <PDOM>CHAR10</PDOM>
-       <PDATTYP>CHAR</PDATTYP>
-       <PDATLEN>0010</PDATLEN>
-       <PINTTYP>C</PINTTYP>
-       <PINTLEN>000010</PINTLEN>
-       <PDECIMALS>000000</PDECIMALS>
-       <SORT_LNR>0002</SORT_LNR>
-       <PREF_NAME2>CHAR10</PREF_NAME2>
-       <TAB_INDEX>0</TAB_INDEX>
-      </item>
-      <item>
-       <PNAME>TABLE_STRUC_TYPE</PNAME>
+       <PNAME>DEMO_ITAB</PNAME>
        <PTYP>V</PTYP>
        <PDESC>Flight</PDESC>
-       <PINDEX>0002</PINDEX>
+       <PINDEX>0001</PINDEX>
        <XMLREF_TYP>D</XMLREF_TYP>
        <PSTRUC_TYP>T</PSTRUC_TYP>
        <PREF_NAME>SFLIGHT[]</PREF_NAME>
        <PDATLEN>0000</PDATLEN>
        <PINTLEN>000000</PINTLEN>
        <PDECIMALS>000000</PDECIMALS>
-       <SORT_LNR>0003</SORT_LNR>
+       <SORT_LNR>0001</SORT_LNR>
        <PREF_NAME2>SFLIGHT[]</PREF_NAME2>
        <VALUE>&lt;INITIAL&gt;</VALUE>
        <VAL_TYPE>T</VAL_TYPE>
@@ -286,101 +256,26 @@
         </ddic:_SFLIGHT>
        </DEEP_DATA>
       </item>
-      <item>
-       <PNAME>TABLE_SIMPLE_TYPE</PNAME>
-       <PTYP>V</PTYP>
-       <PINDEX>0001</PINDEX>
-       <XMLREF_TYP>D</XMLREF_TYP>
-       <PSTRUC_TYP>T</PSTRUC_TYP>
-       <PREF_NAME>INT4[]</PREF_NAME>
-       <PDATLEN>0000</PDATLEN>
-       <PINTLEN>000000</PINTLEN>
-       <PDECIMALS>000000</PDECIMALS>
-       <SORT_LNR>0004</SORT_LNR>
-       <PREF_NAME2>INT4[]</PREF_NAME2>
-       <VALUE>&lt;INITIAL&gt;</VALUE>
-       <VAL_TYPE>T</VAL_TYPE>
-       <TAB_INDEX>0</TAB_INDEX>
-       <DEEP_STRU>
-        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xml.sap.com/2003/05/eCATT/ddic" version="1.0">
-         <xsd:complexType name="_INT4">
-          <xsd:annotation>
-           <xsd:documentation>I=t=O==C=S=K==D=INT4=A==L==doc=Tabelle aus Struktur</xsd:documentation>
-          </xsd:annotation>
-          <xsd:sequence>
-           <xsd:element name="item" type="INT4" minOccurs="0" maxOccurs="unbounded"/>
-          </xsd:sequence>
-         </xsd:complexType>
-         <xsd:simpleType name="INT4">
-          <annotation>
-           <documentation>I==O==C==K=T=D=INT4=A=I=L=000010=doc=Natürliche Zahl</documentation>
-          </annotation>
-          <restriction base="int"/>
-          <complexType>
-           <sequence>
-            <element name="TABLE_LINE">
-             <xsd:annotation>
-              <xsd:documentation>I==O==C==K==D=INT4=A=I=L=000010=doc=Natürliche Zahl</xsd:documentation>
-             </xsd:annotation>
-            </element>
-           </sequence>
-          </complexType>
-         </xsd:simpleType>
-        </xsd:schema>
-       </DEEP_STRU>
-       <DEEP_DATA>
-        <ddic:_INT4 xmlns:ddic="http://xml.sap.com/2003/05/eCATT/ddic" empty="true">
-         <item>
-          <TABLE_LINE/>
-         </item>
-        </ddic:_INT4>
-       </DEEP_DATA>
-      </item>
      </ETPAR_GUIX>
      <ETPAR_VARI>
       <item>
-       <VAR_NAME>COPY_TO_TDC</VAR_NAME>
-       <VINDEX>0001</VINDEX>
+       <VAR_NAME>BEFORE</VAR_NAME>
+       <VINDEX>0002</VINDEX>
        <SORTLNR>000002</SORTLNR>
        <PAR_VALUES>
         <item>
-         <PNAME>VAR_STRING</PNAME>
+         <PNAME>DEMO_ITAB</PNAME>
          <PTYP>V</PTYP>
-         <PINDEX>0004</PINDEX>
-         <VALUE>a sample string</VALUE>
-        </item>
-        <item>
-         <PNAME>VAR_CHARACTER</PNAME>
-         <PTYP>V</PTYP>
-         <PINDEX>0003</PINDEX>
-         <VALUE>CHARACT</VALUE>
-        </item>
-        <item>
-         <PNAME>TABLE_STRUC_TYPE</PNAME>
-         <PTYP>V</PTYP>
-         <PINDEX>0002</PINDEX>
+         <PINDEX>0001</PINDEX>
          <VALUE>&lt;VALUE&gt;</VALUE>
          <VAL_TYPE>X</VAL_TYPE>
          <DEEP_DATA>
           <_SFLIGHT>
            <item>
             <CARRID>LH</CARRID>
-            <CONNID>0300</CONNID>
+            <CONNID>3445</CONNID>
             <FLDATE>0000-00-00</FLDATE>
-            <PRICE>0.00</PRICE>
-            <SEATSMAX>0</SEATSMAX>
-            <SEATSOCC>0</SEATSOCC>
-            <PAYMENTSUM>0.00</PAYMENTSUM>
-            <SEATSMAX_B>0</SEATSMAX_B>
-            <SEATSOCC_B>0</SEATSOCC_B>
-            <SEATSMAX_F>0</SEATSMAX_F>
-            <SEATSOCC_F>0</SEATSOCC_F>
-           </item>
-           <item>
-            <CARRID>LH</CARRID>
-            <CONNID>0350</CONNID>
-            <FLDATE>0000-00-00</FLDATE>
-            <PRICE>0.00</PRICE>
+            <PRICE>500.00</PRICE>
             <SEATSMAX>0</SEATSMAX>
             <SEATSOCC>0</SEATSOCC>
             <PAYMENTSUM>0.00</PAYMENTSUM>
@@ -392,21 +287,48 @@
           </_SFLIGHT>
          </DEEP_DATA>
         </item>
+       </PAR_VALUES>
+      </item>
+      <item>
+       <VAR_NAME>AFTER</VAR_NAME>
+       <VINDEX>0001</VINDEX>
+       <SORTLNR>000003</SORTLNR>
+       <PAR_VALUES>
         <item>
-         <PNAME>TABLE_SIMPLE_TYPE</PNAME>
+         <PNAME>DEMO_ITAB</PNAME>
          <PTYP>V</PTYP>
          <PINDEX>0001</PINDEX>
          <VALUE>&lt;VALUE&gt;</VALUE>
          <VAL_TYPE>X</VAL_TYPE>
          <DEEP_DATA>
-          <_INT4>
+          <_SFLIGHT>
            <item>
-            <TABLE_LINE>1</TABLE_LINE>
+            <CARRID>LH</CARRID>
+            <CONNID>3445</CONNID>
+            <FLDATE>0000-00-00</FLDATE>
+            <PRICE>500.00</PRICE>
+            <SEATSMAX>0</SEATSMAX>
+            <SEATSOCC>0</SEATSOCC>
+            <PAYMENTSUM>0.00</PAYMENTSUM>
+            <SEATSMAX_B>0</SEATSMAX_B>
+            <SEATSOCC_B>0</SEATSOCC_B>
+            <SEATSMAX_F>0</SEATSMAX_F>
+            <SEATSOCC_F>0</SEATSOCC_F>
            </item>
            <item>
-            <TABLE_LINE>2</TABLE_LINE>
+            <CARRID>LH</CARRID>
+            <CONNID>3444</CONNID>
+            <FLDATE>0000-00-00</FLDATE>
+            <PRICE>400.00</PRICE>
+            <SEATSMAX>0</SEATSMAX>
+            <SEATSOCC>0</SEATSOCC>
+            <PAYMENTSUM>0.00</PAYMENTSUM>
+            <SEATSMAX_B>0</SEATSMAX_B>
+            <SEATSOCC_B>0</SEATSOCC_B>
+            <SEATSMAX_F>0</SEATSMAX_F>
+            <SEATSOCC_F>0</SEATSOCC_F>
            </item>
-          </_INT4>
+          </_SFLIGHT>
          </DEEP_DATA>
         </item>
        </PAR_VALUES>
