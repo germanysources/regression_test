@@ -193,8 +193,8 @@ CLASS ZDBGL_COPY_TO_TDC IMPLEMENTATION.
             program = program.
         tdc_copier->copy_all_parameter_skip_un( variant = tdc_variant_key-variant_name
           recorded_variables = json_parser ).
-        " todo transport-order
-        tdc_copier->save( execute_commit = abap_false ).
+        tdc_copier->save( transport_order = tdc_variant_key-transport_request
+          execute_commit = abap_false ).
 
         ##CATCH_ALL
       CATCH cx_root INTO exception.
