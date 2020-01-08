@@ -2,7 +2,7 @@ class ZDBGL_STORE_GLOBALS definition
   public
   inheriting from ZDBGL_ABSTRACT_STORAGE
   final
-  create private .
+  create public .
 
 public section.
 
@@ -13,6 +13,15 @@ public section.
       !FORCE type SAP_BOOL
     raising
       CX_STATIC_CHECK .
+  methods CONSTRUCTOR
+    importing
+      !PROGRAM type PROGNAME
+      !IN_UNIT_TEST type SAP_BOOL optional
+    raising
+      CX_TPDA .
+
+  methods HANDLE
+    redefinition .
 protected section.
 
   data GLOBALS type TPDA_SCR_GLOBALS_IT .
@@ -21,15 +30,6 @@ private section.
   types:
     _db_fragments TYPE STANDARD TABLE OF zdbgl_variables .
 
-  methods CONSTRUCTOR
-    importing
-      !PROGRAM type PROGNAME
-      !IN_UNIT_TEST type SAP_BOOL optional
-    raising
-      CX_TPDA .
-  methods HANDLE
-    raising
-      CX_TPDA .
   methods CONCAT_JSON_FRAGMENTS_SSTRINGS
     exporting
       !DB_FRAGMENTS type _DB_FRAGMENTS .

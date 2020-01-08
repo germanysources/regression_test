@@ -63,6 +63,12 @@
     <SEOCOMPOTX>
      <CLSNAME>ZDBGL_STORE_GLOBALS</CLSNAME>
      <CMPNAME>CONCAT_JSON_FRAGMENTS_SSTRINGS</CMPNAME>
+     <LANGU>D</LANGU>
+     <DESCRIPT>concatenate json fragments to short strings</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZDBGL_STORE_GLOBALS</CLSNAME>
+     <CMPNAME>CONCAT_JSON_FRAGMENTS_SSTRINGS</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>concatenate json fragments to short strings</DESCRIPT>
     </SEOCOMPOTX>
@@ -81,20 +87,14 @@
     <SEOCOMPOTX>
      <CLSNAME>ZDBGL_STORE_GLOBALS</CLSNAME>
      <CMPNAME>GET_LENGTH_DB_FRAGMENT</CMPNAME>
-     <LANGU>E</LANGU>
+     <LANGU>D</LANGU>
      <DESCRIPT>length fragment globals in table zdbgl_variables</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CLSNAME>ZDBGL_STORE_GLOBALS</CLSNAME>
-     <CMPNAME>HANDLE</CMPNAME>
-     <LANGU>D</LANGU>
-     <DESCRIPT>Werte globale Variablen parsen</DESCRIPT>
-    </SEOCOMPOTX>
-    <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_STORE_GLOBALS</CLSNAME>
-     <CMPNAME>HANDLE</CMPNAME>
+     <CMPNAME>GET_LENGTH_DB_FRAGMENT</CMPNAME>
      <LANGU>E</LANGU>
-     <DESCRIPT>parse values global variable</DESCRIPT>
+     <DESCRIPT>length fragment globals in table zdbgl_variables</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CLSNAME>ZDBGL_STORE_GLOBALS</CLSNAME>

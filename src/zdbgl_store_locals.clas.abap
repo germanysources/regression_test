@@ -16,6 +16,7 @@ public section.
       force TYPE abap_bool
     RAISING
       cx_static_check.
+  methods handle redefinition.
 protected section.
 private section.
 
@@ -24,9 +25,6 @@ private section.
 
   data LOCALS type TPDA_SCR_LOCALS_IT .
 
-  methods HANDLE
-    raising
-      CX_TPDA .
   methods GET_LENGTH_DB_FRAGMENT
     returning
       value(LENGTH) type I .
