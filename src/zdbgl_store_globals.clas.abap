@@ -15,13 +15,11 @@ public section.
       CX_STATIC_CHECK .
 protected section.
 
-  types:
-    _fragments TYPE STANDARD TABLE OF string .
+  data GLOBALS type TPDA_SCR_GLOBALS_IT .
+private section.
+
   types:
     _db_fragments TYPE STANDARD TABLE OF zdbgl_variables .
-
-  data GLOBALS type TPDA_SCR_GLOBALS_IT .
-  data JSON_FRAGMENTS type _FRAGMENTS .
 
   methods CONSTRUCTOR
     importing
@@ -32,17 +30,16 @@ protected section.
   methods HANDLE
     raising
       CX_TPDA .
-  methods CONCAT_JSON_FRAGMENTS
+  methods CONCAT_JSON_FRAGMENTS_SSTRINGS
     exporting
       !DB_FRAGMENTS type _DB_FRAGMENTS .
   methods LOG_STORAGE
     importing
       !PROGRAM type PROGRAM
       !KEY_TESTCASE type ZDBGL_KEY_TESTCASES .
-  methods GET_LEN_DB_FRAGMENT
+  methods GET_LENGTH_DB_FRAGMENT
     returning
-      value(LEN) type I .
-private section.
+      value(LENGTH) type I .
 ENDCLASS.
 
 
@@ -50,25 +47,14 @@ ENDCLASS.
 CLASS ZDBGL_STORE_GLOBALS IMPLEMENTATION.
 
 
-  METHOD concat_json_fragments.
-    DATA: len            TYPE i VALUE 1200,
+  METHOD CONCAT_JSON_FRAGMENTS_SSTRINGS.
+    DATA: len            TYPE i,
           offset         TYPE i,
           json_as_string TYPE string.
     FIELD-SYMBOLS: <db_frag> TYPE zdbgl_variables.
 
-    len = get_len_db_fragment( ).
-    json_as_string = '{'.
-    LOOP AT json_fragments ASSIGNING FIELD-SYMBOL(<frag>).
-
-      IF sy-tabix = 1.
-        json_as_string = json_as_string && <frag>.
-      ELSE.
-        json_as_string = json_as_string && comma
-          && <frag>.
-      ENDIF.
-
-    ENDLOOP.
-    json_as_string = json_as_string && '}'.
+    len = get_length_db_fragment( ).
+    json_as_string  = concat_json_fragments_string( ).
 
     WHILE offset < strlen( json_as_string ).
       APPEND INITIAL LINE TO db_fragments ASSIGNING <db_frag>.
@@ -97,7 +83,7 @@ CLASS ZDBGL_STORE_GLOBALS IMPLEMENTATION.
   endmethod.
 
 
-  method GET_LEN_DB_FRAGMENT.
+  method GET_LENGTH_DB_FRAGMENT.
     DATA: field_desc TYPE STANDARD TABLE OF dfies.
 
     CALL FUNCTION 'DDIF_FIELDINFO_GET'
@@ -109,7 +95,7 @@ CLASS ZDBGL_STORE_GLOBALS IMPLEMENTATION.
 
     READ TABLE field_desc ASSIGNING FIELD-SYMBOL(<field>)
       INDEX 1.
-    len = <field>-leng.
+    length = <field>-leng.
 
   endmethod.
 
@@ -160,7 +146,7 @@ CLASS ZDBGL_STORE_GLOBALS IMPLEMENTATION.
 
         parser->log_storage( program = program
           key_testcase = key_testcase ).
-        parser->concat_json_fragments( IMPORTING db_fragments
+        parser->concat_json_fragments_sstrings( IMPORTING db_fragments
           = db_fragments ).
 
         LOOP AT db_fragments ASSIGNING <db_frag>.

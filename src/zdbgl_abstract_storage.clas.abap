@@ -7,17 +7,19 @@ public section.
 protected section.
 
   constants:
-    quote(1) value '"' ##NO_TEXT.
+    QUOTE(1) value '"' ##NO_TEXT.
   constants:
-    colon(1) value ':' ##NO_TEXT.
+    COLON(1) value ':' ##NO_TEXT.
   constants:
-    comma(1) value ',' ##NO_TEXT.
+    COMMA(1) value ',' ##NO_TEXT.
+  data:
+    JSON_FRAGMENTS type standard table of STRING.
 
   methods HANDLE_TAB
     importing
-      !IS_OBJECT type ABAP_BOOL
-      !NAME type STRING
-      !DESCR type ref to CL_TPDA_SCRIPT_DATA_DESCR
+      !IS_OBJECT      type ABAP_BOOL
+      !NAME           type STRING
+      !DESCR          type ref to CL_TPDA_SCRIPT_DATA_DESCR
     returning
       value(FRAGMENT) type STRING
     raising
@@ -25,7 +27,7 @@ protected section.
       ZCX_DBGL_TYPE_NOT_SUPPORTED .
   methods HANDLE_OBJECT
     importing
-      !NAME type STRING
+      !NAME  type STRING
       !DESCR type ref to CL_TPDA_SCRIPT_DATA_DESCR
     raising
       CX_TPDA
@@ -38,54 +40,75 @@ protected section.
       ZCX_DBGL_TYPE_NOT_SUPPORTED .
   methods HANDLE_STRING
     importing
-      !IS_OBJECT type ABAP_BOOL
-      !NAME type STRING
-      !DESCR type ref to CL_TPDA_SCRIPT_DATA_DESCR
+      !IS_OBJECT      type ABAP_BOOL
+      !NAME           type STRING
+      !DESCR          type ref to CL_TPDA_SCRIPT_DATA_DESCR
     returning
       value(FRAGMENT) type STRING
     raising
       CX_TPDA .
   methods HANDLE_SIMPLE
     importing
-      !IS_OBJECT type ABAP_BOOL
-      !NAME type STRING
-      !DESCR type ref to CL_TPDA_SCRIPT_DATA_DESCR
+      !IS_OBJECT      type ABAP_BOOL
+      !NAME           type STRING
+      !DESCR          type ref to CL_TPDA_SCRIPT_DATA_DESCR
     returning
       value(FRAGMENT) type STRING
     raising
       CX_TPDA .
   methods HANDLE_STRUCT
     importing
-      !IS_OBJECT type ABAP_BOOL
-      !NAME type STRING
-      !DESCR type ref to CL_TPDA_SCRIPT_DATA_DESCR
+      !IS_OBJECT      type ABAP_BOOL
+      !NAME           type STRING
+      !DESCR          type ref to CL_TPDA_SCRIPT_DATA_DESCR
     returning
       value(FRAGMENT) type STRING
     raising
       CX_TPDA
-      zcx_dbgl_type_not_supported.
+      ZCX_DBGL_TYPE_NOT_SUPPORTED .
   methods HANDLE_DATAREF
     importing
-      !NAME type STRING
+      !NAME  type STRING
       !DESCR type ref to CL_TPDA_SCRIPT_DATA_DESCR
     raising
       CX_TPDA
       ZCX_DBGL_TYPE_NOT_SUPPORTED .
   methods _HANDLE
     importing
-      !NAME type STRING
-      !IS_OBJECT type ABAP_BOOL
+      !NAME           type STRING
+      !IS_OBJECT      type ABAP_BOOL
     returning
       value(FRAGMENT) type STRING
     raising
       CX_TPDA
       ZCX_DBGL_TYPE_NOT_SUPPORTED .
+  methods CONCAT_JSON_FRAGMENTS_STRING
+    returning
+      value(JSON_AS_STRING) type STRING .
 private section.
 ENDCLASS.
 
 
 
 CLASS ZDBGL_ABSTRACT_STORAGE IMPLEMENTATION.
+
+
+  METHOD concat_json_fragments_string.
+
+    json_as_string = '{'.
+    LOOP AT json_fragments ASSIGNING FIELD-SYMBOL(<frag>).
+
+      IF sy-tabix = 1.
+        json_as_string = json_as_string && <frag>.
+      ELSE.
+        json_as_string = json_as_string && comma
+          && <frag>.
+      ENDIF.
+
+    ENDLOOP.
+    json_as_string = json_as_string && '}'.
+
+  ENDMETHOD.
 
 
   method HANDLE_DATAREF.
