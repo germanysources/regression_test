@@ -4,14 +4,27 @@ class ZDBGL_ABSTRACT_STORAGE definition
   create public .
 
 public section.
+
+  methods CONCAT_JSON_FRAGMENTS_STRING
+    returning
+      value(JSON_AS_STRING) type STRING .
+  methods HANDLE
+  abstract
+    raising
+      CX_TPDA .
+  methods LOG_RECORD
+    importing
+      program type progname.
 protected section.
 
   constants:
-    quote(1) value '"' ##NO_TEXT.
+    QUOTE(1) value '"' ##NO_TEXT.
   constants:
-    colon(1) value ':' ##NO_TEXT.
+    COLON(1) value ':' ##NO_TEXT.
   constants:
-    comma(1) value ',' ##NO_TEXT.
+    COMMA(1) value ',' ##NO_TEXT.
+  data:
+    JSON_FRAGMENTS type standard table of STRING .
 
   methods HANDLE_TAB
     importing
@@ -63,7 +76,7 @@ protected section.
       value(FRAGMENT) type STRING
     raising
       CX_TPDA
-      zcx_dbgl_type_not_supported.
+      ZCX_DBGL_TYPE_NOT_SUPPORTED .
   methods HANDLE_DATAREF
     importing
       !NAME type STRING
@@ -86,6 +99,24 @@ ENDCLASS.
 
 
 CLASS ZDBGL_ABSTRACT_STORAGE IMPLEMENTATION.
+
+
+  METHOD concat_json_fragments_string.
+
+    json_as_string = '{'.
+    LOOP AT json_fragments ASSIGNING FIELD-SYMBOL(<frag>).
+
+      IF sy-tabix = 1.
+        json_as_string = json_as_string && <frag>.
+      ELSE.
+        json_as_string = json_as_string && comma
+          && <frag>.
+      ENDIF.
+
+    ENDLOOP.
+    json_as_string = json_as_string && '}'.
+
+  ENDMETHOD.
 
 
   method HANDLE_DATAREF.
@@ -179,6 +210,14 @@ CLASS ZDBGL_ABSTRACT_STORAGE IMPLEMENTATION.
     IF is_object = abap_true.
       fragment = quote && name && quote && colon && fragment.
     ENDIF.
+
+  endmethod.
+
+
+  method LOG_RECORD.
+
+    LOG-POINT ID zdbgl_store_globals SUBKEY program
+      FIELDS json_fragments.
 
   endmethod.
 

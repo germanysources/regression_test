@@ -16,6 +16,7 @@ public section.
       force TYPE abap_bool
     RAISING
       cx_static_check.
+  methods handle redefinition.
 protected section.
 private section.
 
@@ -23,27 +24,22 @@ private section.
     _db_fragments TYPE STANDARD TABLE OF zdbgl_locals .
 
   data LOCALS type TPDA_SCR_LOCALS_IT .
-  data:
-    json_fragments TYPE STANDARD TABLE OF string .
 
-  methods HANDLE
-    raising
-      CX_TPDA .
-  methods CONCAT_JSON_FRAGMENTS
+  methods GET_LENGTH_DB_FRAGMENT
+    returning
+      value(LENGTH) type I .
+  methods LOG_STORAGE
+    importing
+      !SOURCE_POSITION type TPDA_CURR_SOURCE_POS
+      !KEY_TESTCASE type ZDBGL_KEY_TESTCASES .
+  class-methods MOVE_SP_TO_DB_FRAGMENT
+    importing
+      !SOURCE_POSITION type TPDA_CURR_SOURCE_POS
+    changing
+      !FRAGMENT type ZDBGL_LOCALS .
+  methods CONCAT_JSON_FRAGMENTS_SSTRINGS
     exporting
       !DB_FRAGMENTS type _DB_FRAGMENTS .
-  methods GET_LEN_DB_FRAGMENT
-    returning
-      value(LEN) type I .
-  METHODS log_storage
-    IMPORTING
-      source_position TYPE tpda_curr_source_pos
-      key_testcase TYPE zdbgl_key_testcases.
-  CLASS-METHODS move_sp_to_db_fragment
-    IMPORTING
-      source_position TYPE tpda_curr_source_pos
-    CHANGING
-      fragment TYPE zdbgl_locals.
 ENDCLASS.
 
 
@@ -51,25 +47,14 @@ ENDCLASS.
 CLASS ZDBGL_STORE_LOCALS IMPLEMENTATION.
 
 
-  method CONCAT_JSON_FRAGMENTS.
-    DATA: len            TYPE i VALUE 1200,
+  METHOD concat_json_fragments_sstrings.
+    DATA: len            TYPE i,
           offset         TYPE i,
           json_as_string TYPE string.
     FIELD-SYMBOLS: <db_frag> TYPE zdbgl_locals.
 
-    len = get_len_db_fragment( ).
-    json_as_string = '{'.
-    LOOP AT json_fragments ASSIGNING FIELD-SYMBOL(<frag>).
-
-      IF sy-tabix = 1.
-        json_as_string = json_as_string && <frag>.
-      ELSE.
-        json_as_string = json_as_string && comma
-          && <frag>.
-      ENDIF.
-
-    ENDLOOP.
-    json_as_string = json_as_string && '}'.
+    len = get_length_db_fragment( ).
+    json_as_string  = concat_json_fragments_string( ).
 
     WHILE offset < strlen( json_as_string ).
       APPEND INITIAL LINE TO db_fragments ASSIGNING <db_frag>.
@@ -84,7 +69,7 @@ CLASS ZDBGL_STORE_LOCALS IMPLEMENTATION.
       ENDTRY.
     ENDWHILE.
 
-  endmethod.
+  ENDMETHOD.
 
 
   method CONSTRUCTOR.
@@ -97,7 +82,7 @@ CLASS ZDBGL_STORE_LOCALS IMPLEMENTATION.
   endmethod.
 
 
-  method GET_LEN_DB_FRAGMENT.
+  method GET_LENGTH_DB_FRAGMENT.
     DATA: field_desc TYPE STANDARD TABLE OF dfies.
 
     CALL FUNCTION 'DDIF_FIELDINFO_GET'
@@ -109,7 +94,7 @@ CLASS ZDBGL_STORE_LOCALS IMPLEMENTATION.
 
     READ TABLE field_desc ASSIGNING FIELD-SYMBOL(<field>)
       INDEX 1.
-    len = <field>-leng.
+    length = <field>-leng.
 
   endmethod.
 
@@ -169,7 +154,7 @@ CLASS ZDBGL_STORE_LOCALS IMPLEMENTATION.
 
         parser->log_storage( source_position = source_position
           key_testcase = key_testcase ).
-        parser->concat_json_fragments( IMPORTING db_fragments
+        parser->concat_json_fragments_sstrings( IMPORTING db_fragments
             = db_fragments ).
 
         LOOP AT db_fragments ASSIGNING <db_frag>.

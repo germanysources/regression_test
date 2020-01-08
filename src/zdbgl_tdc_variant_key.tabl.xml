@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_TABL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD02V>
+    <TABNAME>ZDBGL_TDC_VARIANT_KEY</TABNAME>
+    <TABCLASS>INTTAB</TABCLASS>
+    <LANGDEP>X</LANGDEP>
+    <EXCLASS>3</EXCLASS>
+   </DD02V>
+   <DD03P_TABLE>
+    <DD03P>
+     <TABNAME>ZDBGL_TDC_VARIANT_KEY</TABNAME>
+     <FIELDNAME>.INCLUDE</FIELDNAME>
+     <DDLANGUAGE>D</DDLANGUAGE>
+     <POSITION>0001</POSITION>
+     <ADMINFIELD>0</ADMINFIELD>
+     <PRECFIELD>ETOBJ_KEY2</PRECFIELD>
+     <MASK>      S</MASK>
+     <DDTEXT>eCATT Alle Keyfelder zu den eCATT-Objekten</DDTEXT>
+     <COMPTYPE>S</COMPTYPE>
+    </DD03P>
+    <DD03P>
+     <TABNAME>ZDBGL_TDC_VARIANT_KEY</TABNAME>
+     <FIELDNAME>VARIANT_NAME</FIELDNAME>
+     <POSITION>0005</POSITION>
+     <ROLLNAME>ETVAR_ID</ROLLNAME>
+     <ADMINFIELD>0</ADMINFIELD>
+     <COMPTYPE>E</COMPTYPE>
+    </DD03P>
+   </DD03P_TABLE>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -411,6 +411,79 @@
         </item>
        </PAR_VALUES>
       </item>
+      <item>
+       <VAR_NAME>SCRIPT_STORE_IN_TDC</VAR_NAME>
+       <VINDEX>0003</VINDEX>
+       <SORTLNR>000003</SORTLNR>
+       <PAR_VALUES>
+        <item>
+         <PNAME>VAR_STRING</PNAME>
+         <PTYP>V</PTYP>
+         <PINDEX>0004</PINDEX>
+         <VALUE>a sample string</VALUE>
+        </item>
+        <item>
+         <PNAME>VAR_CHARACTER</PNAME>
+         <PTYP>V</PTYP>
+         <PINDEX>0003</PINDEX>
+         <VALUE>CHARACT</VALUE>
+        </item>
+        <item>
+         <PNAME>TABLE_STRUC_TYPE</PNAME>
+         <PTYP>V</PTYP>
+         <PINDEX>0002</PINDEX>
+         <VALUE>&lt;VALUE&gt;</VALUE>
+         <VAL_TYPE>X</VAL_TYPE>
+         <DEEP_DATA>
+          <_SFLIGHT>
+           <item>
+            <CARRID>LH</CARRID>
+            <CONNID>0300</CONNID>
+            <FLDATE>0000-00-00</FLDATE>
+            <PRICE>0.00</PRICE>
+            <SEATSMAX>0</SEATSMAX>
+            <SEATSOCC>0</SEATSOCC>
+            <PAYMENTSUM>0.00</PAYMENTSUM>
+            <SEATSMAX_B>0</SEATSMAX_B>
+            <SEATSOCC_B>0</SEATSOCC_B>
+            <SEATSMAX_F>0</SEATSMAX_F>
+            <SEATSOCC_F>0</SEATSOCC_F>
+           </item>
+           <item>
+            <CARRID>LH</CARRID>
+            <CONNID>0350</CONNID>
+            <FLDATE>0000-00-00</FLDATE>
+            <PRICE>0.00</PRICE>
+            <SEATSMAX>0</SEATSMAX>
+            <SEATSOCC>0</SEATSOCC>
+            <PAYMENTSUM>0.00</PAYMENTSUM>
+            <SEATSMAX_B>0</SEATSMAX_B>
+            <SEATSOCC_B>0</SEATSOCC_B>
+            <SEATSMAX_F>0</SEATSMAX_F>
+            <SEATSOCC_F>0</SEATSOCC_F>
+           </item>
+          </_SFLIGHT>
+         </DEEP_DATA>
+        </item>
+        <item>
+         <PNAME>TABLE_SIMPLE_TYPE</PNAME>
+         <PTYP>V</PTYP>
+         <PINDEX>0001</PINDEX>
+         <VALUE>&lt;VALUE&gt;</VALUE>
+         <VAL_TYPE>X</VAL_TYPE>
+         <DEEP_DATA>
+          <_INT4>
+           <item>
+            <TABLE_LINE>1</TABLE_LINE>
+           </item>
+           <item>
+            <TABLE_LINE>2</TABLE_LINE>
+           </item>
+          </_INT4>
+         </DEEP_DATA>
+        </item>
+       </PAR_VALUES>
+      </item>
      </ETPAR_VARI>
     </PARAMETERS>
     <VARIANT_MODE>

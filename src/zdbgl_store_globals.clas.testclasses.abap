@@ -16,10 +16,12 @@ CLASS zdbgl_store_globals DEFINITION LOCAL FRIENDS test_store_globals.
 CLASS test_store_globals IMPLEMENTATION.
 
   METHOD setup.
+
     CREATE OBJECT cut
       EXPORTING
         program = space
         in_unit_test = abap_true.
+
   ENDMETHOD.
 
   METHOD concat.
@@ -57,7 +59,7 @@ CLASS test_store_globals IMPLEMENTATION.
     ENDDO.
     <frag>-globals = <frag>-globals && '}'.
 
-    cut->concat_json_fragments( IMPORTING db_fragments = act_db_fragments ).
+    cut->concat_json_fragments_sstrings( IMPORTING db_fragments = act_db_fragments ).
 
     cl_abap_unit_assert=>assert_equals( exp = exp_db_fragments
       act = act_db_fragments msg = 'Splitted Table' ).

@@ -16,38 +16,53 @@ public section.
       !VARIANT type ETVAR_ID
       !RECORDED_VARIABLES type ref to ZDBGL_GETTER
     raising
-      ZCX_DBGL_COPY_ERROR .
+      ZCX_DBGL_COPY_ERROR
+      ZCX_DBGL_TYPE_NOT_SUPPORTED .
   methods SAVE
     importing
-      !TRANSPORT_ORDER type E070-TRKORR OPTIONAL
-      execute_commit TYPE abap_bool DEFAULT abap_true
+      !TRANSPORT_ORDER type E070-TRKORR optional
+      !EXECUTE_COMMIT type ABAP_BOOL default ABAP_TRUE
     raising
       ZCX_DBGL_COPY_ERROR .
+  class-methods COPY_FROM_DEBUGGER
+    importing
+      !TDC_VARIANT_KEY type ZDBGL_TDC_VARIANT_KEY
+      !PROGRAM type PROGNAME
+      !DEBUGGER_PARSER type ref to ZDBGL_ABSTRACT_STORAGE
+    raising
+      CX_STATIC_CHECK .
 protected section.
 private section.
 
-  CONSTANTS: table_pattern TYPE string VALUE 'STANDARD TABLE OF *'.
+  constants TABLE_PATTERN type STRING value 'STANDARD TABLE OF *' ##NO_TEXT.
   data TDC type ref to CL_APL_ECATT_TDC_API .
 
+  methods COPY_ALL_PARAMETER_SKIP_UN
+    importing
+      !VARIANT type ETVAR_ID
+      !RECORDED_VARIABLES type ref to ZDBGL_GETTER
+    raising
+      ZCX_DBGL_COPY_ERROR
+      ZCX_DBGL_TYPE_NOT_SUPPORTED .
   methods CREATE_PARAMETER_INSTANCE
     importing
       !NAME type ETP_NAME
     returning
       value(RESULT) type ref to DATA
-    RAISING
-      cx_ecatt_tdc_access.
+    raising
+      CX_ECATT_TDC_ACCESS .
   methods TYPEOF_PARAMETER
     importing
       !PARAM_VALUE type ref to DATA
     returning
-      value(category) type ABAP_TYPECATEGORY
-    RAISING
-      cx_ecatt_tdc_access.
-  METHODS create_variant_if_not_exists
-    IMPORTING
-      variant TYPE etvar_id
-    RAISING
-      cx_ecatt_tdc_access.
+      value(CATEGORY) type ABAP_TYPECATEGORY
+    raising
+      CX_ECATT_TDC_ACCESS .
+  methods CREATE_VARIANT_IF_NOT_EXISTS
+    importing
+      !VARIANT type ETVAR_ID
+    raising
+      CX_ECATT_TDC_ACCESS .
 ENDCLASS.
 
 
@@ -102,6 +117,94 @@ CLASS ZDBGL_COPY_TO_TDC IMPLEMENTATION.
         zcx_dbgl_copy_error=>wrap_failure( ecatt_failure ).
       CATCH zcx_dbgl_testcase INTO DATA(recording_failure).
         zcx_dbgl_copy_error=>wrap_failure( recording_failure ).
+    ENDTRY.
+
+  endmethod.
+
+
+  METHOD copy_all_parameter_skip_un.
+    DATA: param_value TYPE REF TO data.
+    FIELD-SYMBOLS: <param_value> TYPE any.
+
+    TRY.
+        create_variant_if_not_exists( variant ).
+
+        LOOP AT tdc->get_param_list( ) REFERENCE INTO DATA(parameter).
+
+          TRY.
+              param_value = create_parameter_instance( parameter->* ).
+              ASSIGN param_value->* TO <param_value>.
+
+              CASE typeof_parameter( param_value ).
+                WHEN cl_abap_datadescr=>kind_elem.
+                  recorded_variables->get_simple(
+                    EXPORTING name = CONV string( parameter->* )
+                    IMPORTING value = <param_value> ).
+                WHEN cl_abap_datadescr=>kind_struct.
+                  recorded_variables->get_structur(
+                    EXPORTING name = CONV string( parameter->* )
+                    IMPORTING value = <param_value> ).
+                WHEN cl_abap_datadescr=>kind_table.
+                  recorded_variables->get_table(
+                    EXPORTING name = CONV string( parameter->* )
+                    IMPORTING value = <param_value> ).
+              ENDCASE.
+
+              tdc->set_value_ref( EXPORTING i_param_name = parameter->*
+                i_variant_name = variant i_param_ref = param_value ).
+
+            CATCH zcx_dbgl_testcase INTO DATA(recording_failure).
+              IF recording_failure->textid = zcx_dbgl_testcase=>variable_not_found.
+                CONTINUE.
+              ENDIF.
+              zcx_dbgl_copy_error=>wrap_failure( recording_failure ).
+          ENDTRY.
+
+        ENDLOOP.
+
+      CATCH cx_ecatt_tdc_access INTO DATA(ecatt_failure).
+        zcx_dbgl_copy_error=>wrap_failure( ecatt_failure ).
+    ENDTRY.
+
+  ENDMETHOD.
+
+
+  method COPY_FROM_DEBUGGER.
+    DATA: json_parser     TYPE REF TO zdbgl_getter,
+          tdc_copier      TYPE REF TO zdbgl_copy_to_tdc,
+          exception       TYPE REF TO cx_root,
+          exc_program     TYPE syrepid,
+          exc_include     TYPE syrepid,
+          exc_source_line TYPE i.
+
+    TRY.
+
+        CREATE OBJECT tdc_copier
+          EXPORTING
+            tdc         = tdc_variant_key-name
+            tdc_version = tdc_variant_key-version.
+
+        debugger_parser->handle( ).
+        debugger_parser->log_record( program ).
+
+        CREATE OBJECT json_parser
+          EXPORTING
+            values  = debugger_parser->concat_json_fragments_string( )
+            program = program.
+        tdc_copier->copy_all_parameter_skip_un( variant = tdc_variant_key-variant_name
+          recorded_variables = json_parser ).
+        " todo transport-order
+        tdc_copier->save( execute_commit = abap_false ).
+
+        ##CATCH_ALL
+      CATCH cx_root INTO exception.
+        " log exception and raise again
+        exception->get_source_position(
+          IMPORTING program_name = exc_program include_name = exc_include
+            source_line = exc_source_line ).
+        LOG-POINT ID zdbgl_store_globals FIELDS program
+          exception->get_text( ) exc_program exc_include exc_source_line.
+        RAISE EXCEPTION exception.
     ENDTRY.
 
   endmethod.
