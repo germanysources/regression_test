@@ -32,6 +32,21 @@ CLASS lcl_debugger_script DEFINITION INHERITING FROM  cl_tpda_script_class_super
     METHODS: get_key_tdc_variant
       RETURNING VALUE(result) TYPE zdbgl_tdc_variant_key.
 
+    METHODS ask_for_transport_request
+      IMPORTING
+        key_tdc_variant TYPE zdbgl_tdc_variant_key
+      RETURNING VALUE(transport_request) TYPE trkorr.
+
+    METHODS transport_request_is_mandatory
+      IMPORTING
+        key_tdc_variant TYPE zdbgl_tdc_variant_key
+      RETURNING VALUE(is_mandatory) TYPE abap_bool.
+
+    METHODS tdc_is_part_of_open_task
+      IMPORTING
+        key_tdc_variant TYPE zdbgl_tdc_variant_key
+      RETURNING VALUE(result) TYPE abap_bool.
+
 ENDCLASS.                    "lcl_debugger_script DEFINITION
 *---------------------------------------------------------------------*
 *       CLASS lcl_debugger_script IMPLEMENTATION
@@ -65,6 +80,7 @@ CLASS lcl_debugger_script IMPLEMENTATION.
         IF key_tdc_variant IS INITIAL.
           RETURN.
         ENDIF.
+        key_tdc_variant-transport_request = ask_for_transport_request( key_tdc_variant ).
 
         CREATE OBJECT globals_parser
           EXPORTING
@@ -131,6 +147,48 @@ CLASS lcl_debugger_script IMPLEMENTATION.
     result-version = <field>-value.
     READ TABLE fields ASSIGNING <field> INDEX 3.
     result-variant_name = <field>-value.
+
+  ENDMETHOD.
+
+  METHOD transport_request_is_mandatory.
+    DATA: package TYPE devclass,
+          task_contains_tdc TYPE e070-trkorr,
+          package_type TYPE char_lg_01.
+
+    SELECT SINGLE devclass FROM tadir INTO package
+      WHERE pgmid = 'R3TR' AND object = cl_apl_ecatt_const=>obj_type_test_data
+      AND obj_name = key_tdc_variant-name.
+
+    cl_package_helper=>check_package_name(
+     EXPORTING i_package_name = package
+     IMPORTING e_package_type = package_type ).
+    IF package_type <> '$'.
+      is_mandatory = abap_true.
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD tdc_is_part_of_open_task.
+
+    SELECT COUNT(*) FROM e071
+      WHERE pgmid = 'R3TR' AND object = cl_apl_ecatt_const=>obj_type_test_data
+      AND obj_name = key_tdc_variant-name AND lockflag = abap_true.
+    IF sy-subrc = 0.
+      result = abap_true.
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD ask_for_transport_request.
+
+    IF transport_request_is_mandatory( key_tdc_variant ) = abap_true
+      AND tdc_is_part_of_open_task( key_tdc_variant ) = abap_false.
+
+      CALL FUNCTION 'TR_POPUP_INPUT_REQUEST'
+        IMPORTING
+          ev_trkorr = transport_request.
+
+    ENDIF.
 
   ENDMETHOD.
 
