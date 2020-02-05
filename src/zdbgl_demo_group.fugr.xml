@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <INCLUDES>
+    <SOBJ_NAME>LZDBGL_DEMO_GROUPTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZDBGL_DEMO_GROUP</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZDBGL_DEMO_MODULE</FUNCNAME>
+     <SHORT_TEXT>Demo function module for unit testing</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_ABAP_BUILT_IN</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>INT4</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_DICTIONARY_TYPE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>SCARR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <CHANGING>
+      <RSCHA>
+       <PARAMETER>C_PARAMETER</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>SFLIGHT</TYP>
+      </RSCHA>
+     </CHANGING>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_MESSAGE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>STRING</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>TABLE</PARAMETER>
+       <DBSTRUCT>SFLIGHT</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>EXCEPTION</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_ABAP_BUILT_IN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Natural Number</STEXT>
+       <INDEX> 001</INDEX>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_DICTIONARY_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Airline</STEXT>
+       <INDEX> 002</INDEX>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <INDEX> 003</INDEX>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Flight</STEXT>
+       <INDEX> 004</INDEX>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>C_PARAMETER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Flight</STEXT>
+       <INDEX> 005</INDEX>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EXCEPTION</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Exception</STEXT>
+       <INDEX> 006</INDEX>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
