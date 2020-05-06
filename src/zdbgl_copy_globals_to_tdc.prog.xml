@@ -14,8 +14,8 @@
    <TPOOL>
     <item>
      <ID>R</ID>
-     <ENTRY>Kopie Globale Variablen in Testdatencontainer</ENTRY>
-     <LENGTH>45</LENGTH>
+     <ENTRY>Copy globals to test data container</ENTRY>
+     <LENGTH>70</LENGTH>
     </item>
     <item>
      <ID>S</ID>
@@ -34,13 +34,13 @@
     <item>
      <ID>S</ID>
      <KEY>TDC</KEY>
-     <ENTRY>Testdatencontainer (TDC)</ENTRY>
-     <LENGTH>32</LENGTH>
+     <ENTRY>Test data container (TDC)</ENTRY>
+     <LENGTH>33</LENGTH>
     </item>
     <item>
      <ID>S</ID>
      <KEY>VARIANT</KEY>
-     <ENTRY>Variante (TDC)</ENTRY>
+     <ENTRY>Variant (TDC)</ENTRY>
      <LENGTH>22</LENGTH>
     </item>
     <item>
@@ -52,12 +52,12 @@
    </TPOOL>
    <I18N_TPOOL>
     <item>
-     <LANGUAGE>E</LANGUAGE>
+     <LANGUAGE>D</LANGUAGE>
      <TEXTPOOL>
       <item>
        <ID>R</ID>
-       <ENTRY>Copy globals to test data container</ENTRY>
-       <LENGTH>70</LENGTH>
+       <ENTRY>Kopie Globale Variablen in Testdatencontainer</ENTRY>
+       <LENGTH>45</LENGTH>
       </item>
       <item>
        <ID>S</ID>
@@ -76,13 +76,13 @@
       <item>
        <ID>S</ID>
        <KEY>TDC</KEY>
-       <ENTRY>Test data container (TDC)</ENTRY>
-       <LENGTH>33</LENGTH>
+       <ENTRY>Testdatencontainer (TDC)</ENTRY>
+       <LENGTH>32</LENGTH>
       </item>
       <item>
        <ID>S</ID>
        <KEY>VARIANT</KEY>
-       <ENTRY>Variant (TDC)</ENTRY>
+       <ENTRY>Variante (TDC)</ENTRY>
        <LENGTH>22</LENGTH>
       </item>
       <item>

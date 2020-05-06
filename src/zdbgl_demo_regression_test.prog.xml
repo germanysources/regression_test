@@ -14,18 +14,18 @@
    <TPOOL>
     <item>
      <ID>R</ID>
-     <ENTRY>Demo Regressionstest</ENTRY>
-     <LENGTH>20</LENGTH>
+     <ENTRY>Demo regression test</ENTRY>
+     <LENGTH>70</LENGTH>
     </item>
    </TPOOL>
    <I18N_TPOOL>
     <item>
-     <LANGUAGE>E</LANGUAGE>
+     <LANGUAGE>D</LANGUAGE>
      <TEXTPOOL>
       <item>
        <ID>R</ID>
-       <ENTRY>Demo regression test</ENTRY>
-       <LENGTH>70</LENGTH>
+       <ENTRY>Demo Regressionstest</ENTRY>
+       <LENGTH>20</LENGTH>
       </item>
      </TEXTPOOL>
     </item>

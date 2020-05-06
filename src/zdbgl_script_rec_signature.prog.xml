@@ -3,19 +3,31 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <PROGDIR>
-    <NAME>ZDBGL_UNIT_TEST</NAME>
+    <NAME>ZDBGL_SCRIPT_REC_SIGNATURE</NAME>
     <STATE>A</STATE>
     <VARCL>X</VARCL>
-    <SUBC>1</SUBC>
+    <SUBC>S</SUBC>
     <RLOAD>E</RLOAD>
     <FIXPT>X</FIXPT>
     <UCCHECK>X</UCCHECK>
    </PROGDIR>
    <TPOOL>
     <item>
+     <ID>I</ID>
+     <KEY>DIR</KEY>
+     <ENTRY>Directory</ENTRY>
+     <LENGTH>19</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>FIL</KEY>
+     <ENTRY>Filename</ENTRY>
+     <LENGTH>18</LENGTH>
+    </item>
+    <item>
      <ID>R</ID>
-     <ENTRY>Test debugging globals variables</ENTRY>
-     <LENGTH>70</LENGTH>
+     <ENTRY>Record function module signatures</ENTRY>
+     <LENGTH>33</LENGTH>
     </item>
    </TPOOL>
    <I18N_TPOOL>
@@ -23,9 +35,15 @@
      <LANGUAGE>D</LANGUAGE>
      <TEXTPOOL>
       <item>
+       <ID>I</ID>
+       <KEY>TCA</KEY>
+       <ENTRY>Schlüssel Testfall</ENTRY>
+       <LENGTH>28</LENGTH>
+      </item>
+      <item>
        <ID>R</ID>
-       <ENTRY>Test Debugging globale Variablen</ENTRY>
-       <LENGTH>32</LENGTH>
+       <ENTRY>Debugger Skript: Default Template</ENTRY>
+       <LENGTH>33</LENGTH>
       </item>
      </TEXTPOOL>
     </item>

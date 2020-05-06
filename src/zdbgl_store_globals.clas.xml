@@ -5,60 +5,14 @@
    <VSEOCLASS>
     <CLSNAME>ZDBGL_STORE_GLOBALS</CLSNAME>
     <VERSION>1</VERSION>
-    <LANGU>D</LANGU>
-    <DESCRIPT>Speichert die globalen Daten auf der Datenbank</DESCRIPT>
+    <LANGU>E</LANGU>
+    <DESCRIPT>store global variables in database</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>
     <UNICODE>X</UNICODE>
     <WITH_UNIT_TESTS>X</WITH_UNIT_TESTS>
    </VSEOCLASS>
-   <LINES>
-    <TLINE>
-     <TDFORMAT>U1</TDFORMAT>
-     <TDLINE>&amp;FUNCTIONALITY&amp;</TDLINE>
-    </TLINE>
-    <TLINE>
-     <TDFORMAT>AS</TDFORMAT>
-     <TDLINE>Liest Werte der globalen Variablen im Debugger aus und legt diese in der</TDLINE>
-    </TLINE>
-    <TLINE>
-     <TDFORMAT>=</TDFORMAT>
-     <TDLINE> Datenbank ab. Anschliessen können die Werte wieder ausgelesen werden un</TDLINE>
-    </TLINE>
-    <TLINE>
-     <TDFORMAT>=</TDFORMAT>
-     <TDLINE> d in ein ABAP Objekt konvertiert werden (mit Klasse cl_abap_conv_in_ce)</TDLINE>
-    </TLINE>
-    <TLINE>
-     <TDFORMAT>U1</TDFORMAT>
-     <TDLINE>&amp;RELATIONS&amp;</TDLINE>
-    </TLINE>
-    <TLINE>
-     <TDFORMAT>AS</TDFORMAT>
-    </TLINE>
-    <TLINE>
-     <TDFORMAT>U1</TDFORMAT>
-     <TDLINE>&amp;EXAMPLE&amp;</TDLINE>
-    </TLINE>
-    <TLINE>
-     <TDFORMAT>AS</TDFORMAT>
-    </TLINE>
-    <TLINE>
-     <TDFORMAT>U1</TDFORMAT>
-     <TDLINE>&amp;HINTS&amp;</TDLINE>
-    </TLINE>
-    <TLINE>
-     <TDFORMAT>AS</TDFORMAT>
-    </TLINE>
-    <TLINE>
-     <TDFORMAT>U1</TDFORMAT>
-     <TDLINE>&amp;FURTHER_SOURCES_OF_INF&amp;</TDLINE>
-    </TLINE>
-    <TLINE>
-     <TDFORMAT>AS</TDFORMAT>
-    </TLINE>
-   </LINES>
    <DESCRIPTIONS>
     <SEOCOMPOTX>
      <CLSNAME>ZDBGL_STORE_GLOBALS</CLSNAME>

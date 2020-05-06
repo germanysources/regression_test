@@ -2,6 +2,7 @@
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
+   <AREAT>Demo function grop for testing</AREAT>
    <INCLUDES>
     <SOBJ_NAME>LZDBGL_DEMO_GROUPTOP</SOBJ_NAME>
     <SOBJ_NAME>SAPLZDBGL_DEMO_GROUP</SOBJ_NAME>

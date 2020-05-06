@@ -17,7 +17,8 @@ public section.
   methods GET_PARAMETER_VALUES
     exporting
       values_as_json type ref to cl_sxml_string_writer
-      declaration_as_json type ref to cl_sxml_string_writer.
+      declaration_as_json type ref to cl_sxml_string_writer
+      signature type string.
 protected section.
 private section.
 
@@ -104,6 +105,12 @@ CLASS ZDBGL_SIGNATURE_RECORD IMPLEMENTATION.
 
 
   method GET_PARAMETER_VALUES.
+    DATA: values_decoded TYPE string,
+          declaration_decoded TYPE string,
+          decoder TYPE REF TO cl_abap_conv_in_ce,
+          signature_decoded TYPE string.
+
+    decoder = cl_abap_conv_in_ce=>create( encoding = 'UTF-8' ).
 
     values_as_json = cl_sxml_string_writer=>create( type = if_sxml=>co_xt_json ).
     declaration_as_json = cl_sxml_string_writer=>create( type = if_sxml=>co_xt_json ).
@@ -115,6 +122,13 @@ CLASS ZDBGL_SIGNATURE_RECORD IMPLEMENTATION.
     CALL TRANSFORMATION id
       SOURCE (parameter_declaration)
       RESULT XML declaration_as_json.
+
+    decoder->convert( EXPORTING input = values_as_json->get_output( )
+      IMPORTING data = values_decoded ).
+    decoder->convert( EXPORTING input = declaration_as_json->get_output( )
+      IMPORTING data = declaration_decoded ).
+
+    signature = |\{"declaration":{ declaration_decoded },"values":{ values_decoded }\}|.
 
   endmethod.
 

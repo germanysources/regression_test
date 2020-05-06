@@ -17,47 +17,47 @@
    <TPOOL>
     <item>
      <ID>I</ID>
-     <KEY>TCA</KEY>
-     <ENTRY>Schlüssel Testfall</ENTRY>
-     <LENGTH>28</LENGTH>
+     <KEY>NAM</KEY>
+     <ENTRY>Name</ENTRY>
+     <LENGTH>14</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>TDC</KEY>
+     <ENTRY>ECATT test-data-container</ENTRY>
+     <LENGTH>50</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>VAR</KEY>
+     <ENTRY>Variant name</ENTRY>
+     <LENGTH>22</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>VER</KEY>
+     <ENTRY>Version no.</ENTRY>
+     <LENGTH>21</LENGTH>
     </item>
     <item>
      <ID>R</ID>
-     <ENTRY>Debugger Skript: Default Template</ENTRY>
+     <ENTRY>Debugger Script: default template</ENTRY>
      <LENGTH>33</LENGTH>
     </item>
    </TPOOL>
    <I18N_TPOOL>
     <item>
-     <LANGUAGE>E</LANGUAGE>
+     <LANGUAGE>D</LANGUAGE>
      <TEXTPOOL>
       <item>
        <ID>I</ID>
-       <KEY>NAM</KEY>
-       <ENTRY>Name</ENTRY>
-       <LENGTH>14</LENGTH>
-      </item>
-      <item>
-       <ID>I</ID>
-       <KEY>TDC</KEY>
-       <ENTRY>ECATT test-data-container</ENTRY>
-       <LENGTH>50</LENGTH>
-      </item>
-      <item>
-       <ID>I</ID>
-       <KEY>VAR</KEY>
-       <ENTRY>Variant name</ENTRY>
-       <LENGTH>22</LENGTH>
-      </item>
-      <item>
-       <ID>I</ID>
-       <KEY>VER</KEY>
-       <ENTRY>Version no.</ENTRY>
-       <LENGTH>21</LENGTH>
+       <KEY>TCA</KEY>
+       <ENTRY>Schlüssel Testfall</ENTRY>
+       <LENGTH>28</LENGTH>
       </item>
       <item>
        <ID>R</ID>
-       <ENTRY>Debugger Script: default template</ENTRY>
+       <ENTRY>Debugger Skript: Default Template</ENTRY>
        <LENGTH>33</LENGTH>
       </item>
      </TEXTPOOL>

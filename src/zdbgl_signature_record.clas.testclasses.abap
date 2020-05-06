@@ -13,6 +13,8 @@ CLASS test_signature_record IMPLEMENTATION.
   METHOD record_sample_function_mod.
     DATA: exp_declaration TYPE string,
           act_declaration TYPE string,
+          exp_signature TYPE string,
+          act_signature TYPE string,
           exp_values TYPE string,
           act_values TYPE string.
 
@@ -40,7 +42,7 @@ CLASS test_signature_record IMPLEMENTATION.
       recorded_locals = recorder
       source_position = VALUE #( eventtype = 'FUNCTION' eventname = 'ZDBGL_DEMO_MODULE' ) ).
     cut->get_parameter_values( IMPORTING values_as_json = DATA(act_binary_values)
-      declaration_as_json = DATA(act_binary_declaration) ).
+      declaration_as_json = DATA(act_binary_declaration) signature = act_signature ).
 
     " then
     exp_declaration = `{"C_PARAMETER":{"IS_OPTIONAL":false,"IS_IMPORT":false,"IS_EXPORT":false,"IS_CHANGING":true,"IS_TABLE":false,"DICTIONARY_TYPE":"SFLIGHT","KIND":"S"},` &&
@@ -51,6 +53,7 @@ CLASS test_signature_record IMPLEMENTATION.
     exp_values = `{"C_PARAMETER":{"MANDT":"","CARRID":"LG","CONNID":"0500","FLDATE":"2020-02-05","PRICE":0.0,"CURRENCY":"","PLANETYPE":"","SEATSMAX":0,"SEATSOCC":0,"PAYMENTSUM":0.0,"SEATSMAX_B":0,"SEATSOCC_B":0,"SEATSMAX_F":0,"SEATSOCC_F":0},` &&
       `"E_MESSAGE":"","I_ABAP_BUILT_IN":2,"I_DICTIONARY_TYPE":{"MANDT":"","CARRID":"LH","CARRNAME":"LUFTHANSA","CURRCODE":"","URL":""},` &&
       `"TABLE":[{"MANDT":"","CARRID":"LH","CONNID":"5000","FLDATE":"2020-02-06","PRICE":0.0,"CURRENCY":"","PLANETYPE":"","SEATSMAX":0,"SEATSOCC":0,"PAYMENTSUM":0.0,"SEATSMAX_B":0,"SEATSOCC_B":0,"SEATSMAX_F":0,"SEATSOCC_F":0}]}`.
+    exp_signature = |\{"declaration":{ exp_declaration },"values":{ exp_values }\}|.
 
     DATA(converter) = cl_abap_conv_in_ce=>create( encoding = 'UTF-8' ).
     converter->convert( EXPORTING input = act_binary_values->get_output( )
@@ -59,6 +62,7 @@ CLASS test_signature_record IMPLEMENTATION.
       IMPORTING data = act_declaration ).
     cl_abap_unit_assert=>assert_equals( exp = exp_values act = act_values ).
     cl_abap_unit_assert=>assert_equals( exp = exp_declaration act = act_declaration ).
+    cl_abap_unit_assert=>assert_equals( exp = exp_signature act = act_signature ).
 
   ENDMETHOD.
 

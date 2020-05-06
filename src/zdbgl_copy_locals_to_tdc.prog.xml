@@ -15,13 +15,13 @@
     <item>
      <ID>I</ID>
      <KEY>SAV</KEY>
-     <ENTRY>Kopie durchgeführt</ENTRY>
+     <ENTRY>copy sucessfull executed</ENTRY>
      <LENGTH>28</LENGTH>
     </item>
     <item>
      <ID>R</ID>
-     <ENTRY>Kopie aufgezeichnete Variablen in Testdatencontainer</ENTRY>
-     <LENGTH>52</LENGTH>
+     <ENTRY>Copy locals to test data container</ENTRY>
+     <LENGTH>34</LENGTH>
     </item>
     <item>
      <ID>S</ID>
@@ -41,50 +41,49 @@
      <ID>S</ID>
      <KEY>LINE</KEY>
      <ENTRY>.</ENTRY>
-     <LENGTH>20</LENGTH>
+     <LENGTH>19</LENGTH>
      <SPLIT>D</SPLIT>
     </item>
     <item>
      <ID>S</ID>
      <KEY>PROGRAM</KEY>
      <ENTRY>.</ENTRY>
-     <LENGTH>16</LENGTH>
+     <LENGTH>15</LENGTH>
      <SPLIT>D</SPLIT>
     </item>
     <item>
      <ID>S</ID>
      <KEY>TDC</KEY>
-     <ENTRY>Testdatencontainer (TDC)</ENTRY>
-     <LENGTH>32</LENGTH>
+     <ENTRY>Test data container (TDC)</ENTRY>
+     <LENGTH>33</LENGTH>
     </item>
     <item>
      <ID>S</ID>
      <KEY>VARIANT</KEY>
-     <ENTRY>.</ENTRY>
-     <LENGTH>16</LENGTH>
-     <SPLIT>D</SPLIT>
+     <ENTRY>Variant (TDC)</ENTRY>
+     <LENGTH>21</LENGTH>
     </item>
     <item>
      <ID>S</ID>
      <KEY>VERSION</KEY>
-     <ENTRY>Version TDC</ENTRY>
-     <LENGTH>19</LENGTH>
+     <ENTRY>Version (TDC)</ENTRY>
+     <LENGTH>21</LENGTH>
     </item>
    </TPOOL>
    <I18N_TPOOL>
     <item>
-     <LANGUAGE>E</LANGUAGE>
+     <LANGUAGE>D</LANGUAGE>
      <TEXTPOOL>
       <item>
        <ID>I</ID>
        <KEY>SAV</KEY>
-       <ENTRY>copy sucessfull executed</ENTRY>
+       <ENTRY>Kopie durchgeführt</ENTRY>
        <LENGTH>28</LENGTH>
       </item>
       <item>
        <ID>R</ID>
-       <ENTRY>Copy locals to test data container</ENTRY>
-       <LENGTH>34</LENGTH>
+       <ENTRY>Kopie aufgezeichnete Variablen in Testdatencontainer</ENTRY>
+       <LENGTH>52</LENGTH>
       </item>
       <item>
        <ID>S</ID>
@@ -104,33 +103,34 @@
        <ID>S</ID>
        <KEY>LINE</KEY>
        <ENTRY>.</ENTRY>
-       <LENGTH>19</LENGTH>
+       <LENGTH>20</LENGTH>
        <SPLIT>D</SPLIT>
       </item>
       <item>
        <ID>S</ID>
        <KEY>PROGRAM</KEY>
        <ENTRY>.</ENTRY>
-       <LENGTH>15</LENGTH>
+       <LENGTH>16</LENGTH>
        <SPLIT>D</SPLIT>
       </item>
       <item>
        <ID>S</ID>
        <KEY>TDC</KEY>
-       <ENTRY>Test data container (TDC)</ENTRY>
-       <LENGTH>33</LENGTH>
+       <ENTRY>Testdatencontainer (TDC)</ENTRY>
+       <LENGTH>32</LENGTH>
       </item>
       <item>
        <ID>S</ID>
        <KEY>VARIANT</KEY>
-       <ENTRY>Variant (TDC)</ENTRY>
-       <LENGTH>21</LENGTH>
+       <ENTRY>.</ENTRY>
+       <LENGTH>16</LENGTH>
+       <SPLIT>D</SPLIT>
       </item>
       <item>
        <ID>S</ID>
        <KEY>VERSION</KEY>
-       <ENTRY>Version (TDC)</ENTRY>
-       <LENGTH>21</LENGTH>
+       <ENTRY>Version TDC</ENTRY>
+       <LENGTH>19</LENGTH>
       </item>
      </TEXTPOOL>
     </item>
