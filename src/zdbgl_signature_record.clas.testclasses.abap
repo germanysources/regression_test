@@ -53,7 +53,7 @@ CLASS test_signature_record IMPLEMENTATION.
     exp_values = `{"C_PARAMETER":{"MANDT":"","CARRID":"LG","CONNID":"0500","FLDATE":"2020-02-05","PRICE":0.0,"CURRENCY":"","PLANETYPE":"","SEATSMAX":0,"SEATSOCC":0,"PAYMENTSUM":0.0,"SEATSMAX_B":0,"SEATSOCC_B":0,"SEATSMAX_F":0,"SEATSOCC_F":0},` &&
       `"E_MESSAGE":"","I_ABAP_BUILT_IN":2,"I_DICTIONARY_TYPE":{"MANDT":"","CARRID":"LH","CARRNAME":"LUFTHANSA","CURRCODE":"","URL":""},` &&
       `"TABLE":[{"MANDT":"","CARRID":"LH","CONNID":"5000","FLDATE":"2020-02-06","PRICE":0.0,"CURRENCY":"","PLANETYPE":"","SEATSMAX":0,"SEATSOCC":0,"PAYMENTSUM":0.0,"SEATSMAX_B":0,"SEATSOCC_B":0,"SEATSMAX_F":0,"SEATSOCC_F":0}]}`.
-    exp_signature = |\{"declaration":{ exp_declaration },"values":{ exp_values }\}|.
+    exp_signature = |\{"function_module":"ZDBGL_DEMO_MODULE","declaration":{ exp_declaration },"values":{ exp_values }\}|.
 
     DATA(converter) = cl_abap_conv_in_ce=>create( encoding = 'UTF-8' ).
     converter->convert( EXPORTING input = act_binary_values->get_output( )

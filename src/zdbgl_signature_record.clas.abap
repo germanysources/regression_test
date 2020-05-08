@@ -42,6 +42,8 @@ private section.
   data PARAMETER_VALUES type ABAP_TRANS_SRCBIND_TAB .
   DATA parameter_declaration TYPE ABAP_TRANS_SRCBIND_TAB .
   DATA signature TYPE STANDARD TABLE OF _parameter_declaration.
+  DATA function_module TYPE rs38l_fnam.
+  DATA end_reached TYPE abap_bool.
 
   methods GET_FUNCTION_MOD_SIGNATURE
     importing
@@ -108,7 +110,8 @@ CLASS ZDBGL_SIGNATURE_RECORD IMPLEMENTATION.
     DATA: values_decoded TYPE string,
           declaration_decoded TYPE string,
           decoder TYPE REF TO cl_abap_conv_in_ce,
-          signature_decoded TYPE string.
+          signature_decoded TYPE string,
+          header TYPE string.
 
     decoder = cl_abap_conv_in_ce=>create( encoding = 'UTF-8' ).
 
@@ -128,7 +131,12 @@ CLASS ZDBGL_SIGNATURE_RECORD IMPLEMENTATION.
     decoder->convert( EXPORTING input = declaration_as_json->get_output( )
       IMPORTING data = declaration_decoded ).
 
-    signature = |\{"declaration":{ declaration_decoded },"values":{ values_decoded }\}|.
+    IF end_reached = abap_true.
+      header = |"function_module":"{ function_module }","end_reached":true|.
+    ELSE.
+      header = |"function_module":"{ function_module }"|.
+    ENDIF.
+    signature = |\{{ header },"declaration":{ declaration_decoded },"values":{ values_decoded }\}|.
 
   endmethod.
 
@@ -142,7 +150,9 @@ CLASS ZDBGL_SIGNATURE_RECORD IMPLEMENTATION.
           textid = zcx_dbgl_testcase=>no_function_module.
     ENDIF.
 
-    get_function_mod_signature( EXPORTING name = CONV rs38l_fnam( source_position-eventname ) ).
+    function_module = source_position-eventname.
+    end_reached = source_position-flag_eoev.
+    get_function_mod_signature( EXPORTING name = function_module ).
     LOOP AT signature ASSIGNING FIELD-SYMBOL(<parameter>).
 
       ASSIGN <parameter>-value_ref->* TO FIELD-SYMBOL(<value>).
