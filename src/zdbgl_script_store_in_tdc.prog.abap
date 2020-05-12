@@ -35,12 +35,14 @@ CLASS lcl_debugger_script DEFINITION INHERITING FROM  cl_tpda_script_class_super
     METHODS ask_for_transport_request
       IMPORTING
         key_tdc_variant TYPE zdbgl_tdc_variant_key
-      RETURNING VALUE(transport_request) TYPE trkorr.
+      RETURNING VALUE(transport_request) TYPE trkorr
+      RAISING cx_ecatt_tdc_access.
 
     METHODS transport_request_is_mandatory
       IMPORTING
         key_tdc_variant TYPE zdbgl_tdc_variant_key
-      RETURNING VALUE(is_mandatory) TYPE abap_bool.
+      RETURNING VALUE(is_mandatory) TYPE abap_bool
+      RAISING cx_ecatt_tdc_access.
 
     METHODS tdc_is_part_of_open_task
       IMPORTING
@@ -158,6 +160,14 @@ CLASS lcl_debugger_script IMPLEMENTATION.
     SELECT SINGLE devclass FROM tadir INTO package
       WHERE pgmid = 'R3TR' AND object = cl_apl_ecatt_const=>obj_type_test_data
       AND obj_name = key_tdc_variant-name.
+    IF sy-subrc <> 0.
+      RAISE EXCEPTION TYPE cx_ecatt_tdc_access
+        EXPORTING
+          textid = cx_ecatt_tdc_access=>object_not_found
+          last_obj_name = key_tdc_variant-name
+          last_obj_type = CONV string( cl_apl_ecatt_const=>obj_type_test_data )
+          last_obj_ver = CONV string( key_tdc_variant-version ).
+    ENDIF.
 
     cl_package_helper=>check_package_name(
      EXPORTING i_package_name = package
