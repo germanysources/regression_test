@@ -97,6 +97,12 @@ CLASS lcl_debugger_script IMPLEMENTATION.
           debugger_parser = locals_parser ).
         COMMIT WORK.
       CATCH cx_static_check INTO exception.
+        DO 2 TIMES.
+          CALL FUNCTION 'DEQUEUE_E_ECATT_TD'
+            EXPORTING
+              name = key_tdc_variant-name
+              _scope = 1.
+        ENDDO.
         MESSAGE exception TYPE 'S' DISPLAY LIKE 'E'.
     ENDTRY.
 
