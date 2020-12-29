@@ -54,7 +54,7 @@ The standard implementation uses the method ```cl_abap_unit_assert=>assert_equal
 Override the method ```zdbgl_snapshots_tdc=>compare``` to specify another comparison method.
 
 ### Restrictions ###
-* Structures must be defined in the ABAP dictionary. Structures defined outside of the ABAP dictionary can be stored in test data containers.
+* Structures must be defined in the ABAP dictionary. Structures defined outside of the ABAP dictionary can't be stored in test data containers.
 * Any kind of references (pointing to classes, interfaces or data objects) are not supported
 
 ## Debugger ##
@@ -69,8 +69,8 @@ Last but not least give the test data container API access as shown in the pictu
 
 #### Before the modification ####
 Set an appropriate breakpoint and create the snapshot with the debugger-script ```zdbgl_script_store_in_tdc```.
-![Load script](img/load_script.png)
-This script ask you for the name, the version and the variant of the test data container as shown in the picture below.
+![Load script](img/load_script1.png)
+This script asks you for the name, the version and the variant of the test data container as shown in the picture below.
 ![Prompt tdc key](img/script_prompt_tdc.png)
 
 ### Writing unit-tests ###
