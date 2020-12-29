@@ -87,7 +87,8 @@ CLASS test_debugger_scripts DEFINITION FOR TESTING DURATION SHORT
     CLASS-METHODS get_tdc_accessor
       IMPORTING
         write_access TYPE abap_bool
-      RETURNING VALUE(result) TYPE REF TO cl_apl_ecatt_tdc_api.
+      RETURNING VALUE(result) TYPE REF TO cl_apl_ecatt_tdc_api
+      RAISING cx_ecatt_tdc_access.
 
     METHODS act_global_variables FOR TESTING
       RAISING cx_static_check.
@@ -207,6 +208,7 @@ CLASS test_debugger_scripts IMPLEMENTATION.
           act_var_string TYPE string,
           act_table_struc_type LIKE table_struc_type,
           act_table_simple_type LIKE table_simple_type,
+          act_hashed_table LIKE hashed_table,
           tdc_accessor TYPE REF TO cl_apl_ecatt_tdc_api.
 
     tdc_accessor = get_tdc_accessor( abap_false ).
@@ -223,6 +225,9 @@ CLASS test_debugger_scripts IMPLEMENTATION.
     tdc_accessor->get_value( EXPORTING i_param_name = 'TABLE_SIMPLE_TYPE'
       i_variant_name = 'SCRIPT_STORE_IN_TDC'
       CHANGING e_param_value = act_table_simple_type ).
+    tdc_accessor->get_value( EXPORTING i_param_name = 'HASHED_TABLE'
+      i_variant_name = 'SCRIPT_STORE_IN_TDC'
+      CHANGING e_param_value = act_hashed_table ).
 
     assert_equals( exp = var_character act = act_var_character
       msg = 'Variable var_charachter of type char' ).
@@ -232,6 +237,8 @@ CLASS test_debugger_scripts IMPLEMENTATION.
       msg = 'Internal table table_struc_type with line-type sflight' ).
     assert_equals( exp = table_simple_type act = act_table_simple_type
       msg = 'Internal table table_simple_type with line-type integer' ).
+    assert_equals( exp = hashed_table act = act_hashed_table
+      msg = 'Internal hashed table' ).
 
   ENDMETHOD.
 

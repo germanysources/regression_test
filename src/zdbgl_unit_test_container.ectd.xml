@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_ECTD" serializer_version="v1.0.0">
  <VERSIONS>
   <VERSION>
@@ -289,7 +289,6 @@
       <item>
        <PNAME>TABLE_SIMPLE_TYPE</PNAME>
        <PTYP>V</PTYP>
-       <PDESC>Natürliche Zahl</PDESC>
        <PINDEX>0001</PINDEX>
        <XMLREF_TYP>D</XMLREF_TYP>
        <PSTRUC_TYP>T</PSTRUC_TYP>

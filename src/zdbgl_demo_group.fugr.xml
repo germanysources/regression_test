@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
@@ -53,36 +53,30 @@
        <PARAMETER>I_ABAP_BUILT_IN</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Natural Number</STEXT>
-       <INDEX> 001</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>I_DICTIONARY_TYPE</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Airline</STEXT>
-       <INDEX> 002</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>E_MESSAGE</PARAMETER>
        <KIND>P</KIND>
-       <INDEX> 003</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>TABLE</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Flight</STEXT>
-       <INDEX> 004</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>C_PARAMETER</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Flight</STEXT>
-       <INDEX> 005</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>EXCEPTION</PARAMETER>
        <KIND>X</KIND>
        <STEXT>Exception</STEXT>
-       <INDEX> 006</INDEX>
       </RSFDO>
      </DOCUMENTATION>
     </item>

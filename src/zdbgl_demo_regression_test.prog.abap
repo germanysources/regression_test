@@ -15,14 +15,13 @@ START-OF-SELECTION.
   <line>-carrid = 'LH'.
   <line>-connid = '3445'.
   <line>-price = 500.
+  " create a snapshot with debugger script "ZDBGL_SCRIPT_STORE_IN_TDC"
   BREAK-POINT.
   PERFORM to_verify.
+  " create a snapshot with debugger script "ZDBGL_SCRIPT_STORE_IN_TDC"
   BREAK-POINT.
 
 
-  " subprogram should be verified.
-  " It changes the global variable demo_itab.
-  " Imagine this would be legacy code and you must changed this.
 FORM to_verify.
   FIELD-SYMBOLS: <line> TYPE sflight.
 
@@ -59,14 +58,14 @@ CLASS regression_test IMPLEMENTATION.
   METHOD verify_changed_itab.
     DATA: exp_demo_itab LIKE demo_itab.
 
-    " given: use the recorded values before the procedure under test was executed
+    " given: use the snapshot before the procedure under test was executed
     tdc_accessor->get_value( EXPORTING i_param_name = 'DEMO_ITAB' i_variant_name = 'BEFORE'
       CHANGING e_param_value = demo_itab ).
 
     " when: execute procedure under test
     PERFORM to_verify.
 
-    " then: use the recorded values after the procedure under test was executed
+    " then: use the snapshot after the procedure under test was executed
     tdc_accessor->get_value( EXPORTING i_param_name = 'DEMO_ITAB' i_variant_name = 'AFTER'
       CHANGING e_param_value = exp_demo_itab ).
     cl_abap_unit_assert=>assert_equals( exp = exp_demo_itab

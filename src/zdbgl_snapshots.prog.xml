@@ -3,8 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <PROGDIR>
-    <NAME>ZDBGL_UNIT_TEST</NAME>
+    <NAME>ZDBGL_SNAPSHOTS</NAME>
     <SUBC>1</SUBC>
+    <RSTAT>T</RSTAT>
     <RLOAD>E</RLOAD>
     <FIXPT>X</FIXPT>
     <UCCHECK>X</UCCHECK>
@@ -12,22 +13,10 @@
    <TPOOL>
     <item>
      <ID>R</ID>
-     <ENTRY>Test debugging globals variables</ENTRY>
-     <LENGTH>70</LENGTH>
+     <ENTRY>Create and use snapshots in unit-tests</ENTRY>
+     <LENGTH>38</LENGTH>
     </item>
    </TPOOL>
-   <I18N_TPOOL>
-    <item>
-     <LANGUAGE>D</LANGUAGE>
-     <TEXTPOOL>
-      <item>
-       <ID>R</ID>
-       <ENTRY>Test Debugging globale Variablen</ENTRY>
-       <LENGTH>32</LENGTH>
-      </item>
-     </TEXTPOOL>
-    </item>
-   </I18N_TPOOL>
   </asx:values>
  </asx:abap>
 </abapGit>

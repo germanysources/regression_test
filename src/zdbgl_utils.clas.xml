@@ -3,22 +3,14 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <VSEOCLASS>
-    <CLSNAME>ZDBGL_GET_LOCALS</CLSNAME>
-    <LANGU>E</LANGU>
-    <DESCRIPT>Get local variables</DESCRIPT>
+    <CLSNAME>ZDBGL_UTILS</CLSNAME>
+    <LANGU>D</LANGU>
+    <DESCRIPT>Utils</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>
     <UNICODE>X</UNICODE>
    </VSEOCLASS>
-   <DESCRIPTIONS>
-    <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_GET_LOCALS</CLSNAME>
-     <CMPNAME>FACTORY</CMPNAME>
-     <LANGU>E</LANGU>
-     <DESCRIPT>read variables from the testcase</DESCRIPT>
-    </SEOCOMPOTX>
-   </DESCRIPTIONS>
   </asx:values>
  </asx:abap>
 </abapGit>
