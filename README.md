@@ -7,7 +7,7 @@ Snapshots are stored in ECATT test data containers (TDC).
 ## Unit-Test ##
 Snapshots can be created with class ```zdbgl_snapshots_tdc```.
 The following listing shows a sample unit-test using snapshots.
-```
+```ABAP
 CLASS test_snapshot DEFINITION FOR TESTING
   DURATION SHORT RISK LEVEL HARMLESS.
 
@@ -22,10 +22,8 @@ CLASS test_snapshot IMPLEMENTATION.
 
   METHOD flight_test.
 
-    DATA(snapshot_manager) = CAST zif_dbgl_snapshots(
-      NEW zdbgl_snapshots_tdc( key_tdc_variant =
-        VALUE #( name = 'ZDBGL_TEST_SNAPSHOT' version = 1 variant_name = 'ECATTDEFAULT' )
-      )
+    DATA(snapshot_manager) = zdbgl_snapshots_tdc=>create_default(
+      tdc_name = 'ZDBGL_SNAPSHOT_SAMPLE'
     ).
 
     DATA(carrier) = VALUE scarr_tab(
@@ -37,7 +35,7 @@ CLASS test_snapshot IMPLEMENTATION.
     snapshot_manager->compare_or_record( name = 'CARRIER' actual = carrier ).
     snapshot_manager->compare_or_record( name = 'FLIGHT' actual = flight ).
 
-    " can be omitted, when autosave = abap_true in constructor
+    " can be omitted, when autosave = abap_true in factory method or constructor
     snapshot_manager->commit_changes( ).
 
   ENDMETHOD.
