@@ -12,6 +12,14 @@ CLASS zdbgl_snapshots_tdc DEFINITION
         !autosave        TYPE sap_bool OPTIONAL
       RAISING
         zcx_dbgl_snapshot .
+    CLASS-METHODS create_default
+      IMPORTING
+        tdc_name        TYPE etobj_name
+        !autosave       TYPE sap_bool OPTIONAL
+      RETURNING
+        VALUE(instance) TYPE REF TO zif_dbgl_snapshots
+      RAISING
+        zcx_dbgl_snapshot.
 protected section.
 
   methods COMPARE
@@ -106,6 +114,15 @@ CLASS ZDBGL_SNAPSHOTS_TDC IMPLEMENTATION.
     me->variant = key_tdc_variant-variant_name.
     get_or_create_tdc( key_tdc_variant ).
     me->autosave = autosave.
+
+  ENDMETHOD.
+
+
+  METHOD create_default.
+
+    instance ?= NEW zdbgl_snapshots_tdc( key_tdc_variant =
+      VALUE #( name = tdc_name version = 1 variant_name = 'ECATTDEFAULT' )
+      autosave = autosave ).
 
   ENDMETHOD.
 
@@ -230,6 +247,8 @@ CLASS ZDBGL_SNAPSHOTS_TDC IMPLEMENTATION.
 
     IF in_record_mode = abap_true.
       record( name = name value = actual ).
+      cl_abap_unit_assert=>fail( msg = text-001 level = if_aunit_constants=>tolerable
+        quit = if_aunit_constants=>no ).
     ELSE.
       unequal = retrieve_and_compare( name = name actual = actual ).
     ENDIF.

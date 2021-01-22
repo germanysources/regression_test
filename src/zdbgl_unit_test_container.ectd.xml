@@ -33,7 +33,7 @@
       <DEVCLASS></DEVCLASS>
       <MASTERLANG>E</MASTERLANG>
       <TADIR_RESP></TADIR_RESP>
-      <FRANGE>--</FRANGE>
+      <FRANGE/>
       <BCSET_MODE/>
       <API_MODE>X</API_MODE>
       <COL_TSTOBJDATA/>
@@ -130,7 +130,7 @@
        <PDECIMALS>000000</PDECIMALS>
        <SORT_LNR>0003</SORT_LNR>
        <PREF_NAME2>SFLIGHT[]</PREF_NAME2>
-       <VALUE>&lt;INITIAL&gt;</VALUE>
+       <VALUE>&lt;VALUE&gt;</VALUE>
        <VAL_TYPE>T</VAL_TYPE>
        <TAB_INDEX>0</TAB_INDEX>
        <DEEP_STRU>
@@ -283,6 +283,8 @@
           <SEATSMAX_F/>
           <SEATSOCC_F/>
          </item>
+         
+        
         </ddic:_SFLIGHT>
        </DEEP_DATA>
       </item>
@@ -298,7 +300,7 @@
        <PDECIMALS>000000</PDECIMALS>
        <SORT_LNR>0004</SORT_LNR>
        <PREF_NAME2>INT4[]</PREF_NAME2>
-       <VALUE>&lt;INITIAL&gt;</VALUE>
+       <VALUE>&lt;VALUE&gt;</VALUE>
        <VAL_TYPE>T</VAL_TYPE>
        <TAB_INDEX>0</TAB_INDEX>
        <DEEP_STRU>
@@ -333,6 +335,8 @@
          <item>
           <TABLE_LINE/>
          </item>
+         
+        
         </ddic:_INT4>
        </DEEP_DATA>
       </item>
@@ -341,79 +345,6 @@
       <item>
        <VAR_NAME>COPY_TO_TDC</VAR_NAME>
        <VINDEX>0001</VINDEX>
-       <SORTLNR>000002</SORTLNR>
-       <PAR_VALUES>
-        <item>
-         <PNAME>VAR_STRING</PNAME>
-         <PTYP>V</PTYP>
-         <PINDEX>0004</PINDEX>
-         <VALUE>a sample string</VALUE>
-        </item>
-        <item>
-         <PNAME>VAR_CHARACTER</PNAME>
-         <PTYP>V</PTYP>
-         <PINDEX>0003</PINDEX>
-         <VALUE>CHARACT</VALUE>
-        </item>
-        <item>
-         <PNAME>TABLE_STRUC_TYPE</PNAME>
-         <PTYP>V</PTYP>
-         <PINDEX>0002</PINDEX>
-         <VALUE>&lt;VALUE&gt;</VALUE>
-         <VAL_TYPE>X</VAL_TYPE>
-         <DEEP_DATA>
-          <_SFLIGHT>
-           <item>
-            <CARRID>LH</CARRID>
-            <CONNID>0300</CONNID>
-            <FLDATE>0000-00-00</FLDATE>
-            <PRICE>0.00</PRICE>
-            <SEATSMAX>0</SEATSMAX>
-            <SEATSOCC>0</SEATSOCC>
-            <PAYMENTSUM>0.00</PAYMENTSUM>
-            <SEATSMAX_B>0</SEATSMAX_B>
-            <SEATSOCC_B>0</SEATSOCC_B>
-            <SEATSMAX_F>0</SEATSMAX_F>
-            <SEATSOCC_F>0</SEATSOCC_F>
-           </item>
-           <item>
-            <CARRID>LH</CARRID>
-            <CONNID>0350</CONNID>
-            <FLDATE>0000-00-00</FLDATE>
-            <PRICE>0.00</PRICE>
-            <SEATSMAX>0</SEATSMAX>
-            <SEATSOCC>0</SEATSOCC>
-            <PAYMENTSUM>0.00</PAYMENTSUM>
-            <SEATSMAX_B>0</SEATSMAX_B>
-            <SEATSOCC_B>0</SEATSOCC_B>
-            <SEATSMAX_F>0</SEATSMAX_F>
-            <SEATSOCC_F>0</SEATSOCC_F>
-           </item>
-          </_SFLIGHT>
-         </DEEP_DATA>
-        </item>
-        <item>
-         <PNAME>TABLE_SIMPLE_TYPE</PNAME>
-         <PTYP>V</PTYP>
-         <PINDEX>0001</PINDEX>
-         <VALUE>&lt;VALUE&gt;</VALUE>
-         <VAL_TYPE>X</VAL_TYPE>
-         <DEEP_DATA>
-          <_INT4>
-           <item>
-            <TABLE_LINE>1</TABLE_LINE>
-           </item>
-           <item>
-            <TABLE_LINE>2</TABLE_LINE>
-           </item>
-          </_INT4>
-         </DEEP_DATA>
-        </item>
-       </PAR_VALUES>
-      </item>
-      <item>
-       <VAR_NAME>SCRIPT_STORE_IN_TDC</VAR_NAME>
-       <VINDEX>0003</VINDEX>
        <SORTLNR>000003</SORTLNR>
        <PAR_VALUES>
         <item>
@@ -435,7 +366,7 @@
          <VALUE>&lt;VALUE&gt;</VALUE>
          <VAL_TYPE>X</VAL_TYPE>
          <DEEP_DATA>
-          <_SFLIGHT>
+          <ddic:_SFLIGHT xmlns:ddic="http://xml.sap.com/2003/05/eCATT/ddic">
            <item>
             <CARRID>LH</CARRID>
             <CONNID>0300</CONNID>
@@ -462,7 +393,7 @@
             <SEATSMAX_F>0</SEATSMAX_F>
             <SEATSOCC_F>0</SEATSOCC_F>
            </item>
-          </_SFLIGHT>
+          </ddic:_SFLIGHT>
          </DEEP_DATA>
         </item>
         <item>
@@ -472,14 +403,87 @@
          <VALUE>&lt;VALUE&gt;</VALUE>
          <VAL_TYPE>X</VAL_TYPE>
          <DEEP_DATA>
-          <_INT4>
+          <ddic:_INT4 xmlns:ddic="http://xml.sap.com/2003/05/eCATT/ddic">
            <item>
             <TABLE_LINE>1</TABLE_LINE>
            </item>
            <item>
             <TABLE_LINE>2</TABLE_LINE>
            </item>
-          </_INT4>
+          </ddic:_INT4>
+         </DEEP_DATA>
+        </item>
+       </PAR_VALUES>
+      </item>
+      <item>
+       <VAR_NAME>SCRIPT_STORE_IN_TDC</VAR_NAME>
+       <VINDEX>0003</VINDEX>
+       <SORTLNR>000004</SORTLNR>
+       <PAR_VALUES>
+        <item>
+         <PNAME>VAR_STRING</PNAME>
+         <PTYP>V</PTYP>
+         <PINDEX>0004</PINDEX>
+         <VALUE>a sample string</VALUE>
+        </item>
+        <item>
+         <PNAME>VAR_CHARACTER</PNAME>
+         <PTYP>V</PTYP>
+         <PINDEX>0003</PINDEX>
+         <VALUE>CHARACT</VALUE>
+        </item>
+        <item>
+         <PNAME>TABLE_STRUC_TYPE</PNAME>
+         <PTYP>V</PTYP>
+         <PINDEX>0002</PINDEX>
+         <VALUE>&lt;VALUE&gt;</VALUE>
+         <VAL_TYPE>X</VAL_TYPE>
+         <DEEP_DATA>
+          <ddic:_SFLIGHT xmlns:ddic="http://xml.sap.com/2003/05/eCATT/ddic">
+           <item>
+            <CARRID>LH</CARRID>
+            <CONNID>0300</CONNID>
+            <FLDATE>0000-00-00</FLDATE>
+            <PRICE>0.00</PRICE>
+            <SEATSMAX>0</SEATSMAX>
+            <SEATSOCC>0</SEATSOCC>
+            <PAYMENTSUM>0.00</PAYMENTSUM>
+            <SEATSMAX_B>0</SEATSMAX_B>
+            <SEATSOCC_B>0</SEATSOCC_B>
+            <SEATSMAX_F>0</SEATSMAX_F>
+            <SEATSOCC_F>0</SEATSOCC_F>
+           </item>
+           <item>
+            <CARRID>LH</CARRID>
+            <CONNID>0350</CONNID>
+            <FLDATE>0000-00-00</FLDATE>
+            <PRICE>0.00</PRICE>
+            <SEATSMAX>0</SEATSMAX>
+            <SEATSOCC>0</SEATSOCC>
+            <PAYMENTSUM>0.00</PAYMENTSUM>
+            <SEATSMAX_B>0</SEATSMAX_B>
+            <SEATSOCC_B>0</SEATSOCC_B>
+            <SEATSMAX_F>0</SEATSMAX_F>
+            <SEATSOCC_F>0</SEATSOCC_F>
+           </item>
+          </ddic:_SFLIGHT>
+         </DEEP_DATA>
+        </item>
+        <item>
+         <PNAME>TABLE_SIMPLE_TYPE</PNAME>
+         <PTYP>V</PTYP>
+         <PINDEX>0001</PINDEX>
+         <VALUE>&lt;VALUE&gt;</VALUE>
+         <VAL_TYPE>X</VAL_TYPE>
+         <DEEP_DATA>
+          <ddic:_INT4 xmlns:ddic="http://xml.sap.com/2003/05/eCATT/ddic">
+           <item>
+            <TABLE_LINE>1</TABLE_LINE>
+           </item>
+           <item>
+            <TABLE_LINE>2</TABLE_LINE>
+           </item>
+          </ddic:_INT4>
          </DEEP_DATA>
         </item>
        </PAR_VALUES>

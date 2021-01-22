@@ -33,7 +33,7 @@
       <DEVCLASS></DEVCLASS>
       <MASTERLANG>E</MASTERLANG>
       <TADIR_RESP></TADIR_RESP>
-      <FRANGE>--</FRANGE>
+      <FRANGE/>
       <BCSET_MODE/>
       <API_MODE>X</API_MODE>
       <COL_TSTOBJDATA/>
@@ -100,7 +100,7 @@
        <PDECIMALS>000000</PDECIMALS>
        <SORT_LNR>0001</SORT_LNR>
        <PREF_NAME2>SFLIGHT[]</PREF_NAME2>
-       <VALUE>&lt;INITIAL&gt;</VALUE>
+       <VALUE>&lt;VALUE&gt;</VALUE>
        <VAL_TYPE>T</VAL_TYPE>
        <TAB_INDEX>0</TAB_INDEX>
        <DEEP_STRU>
@@ -253,42 +253,13 @@
           <SEATSMAX_F/>
           <SEATSOCC_F/>
          </item>
+         
+        
         </ddic:_SFLIGHT>
        </DEEP_DATA>
       </item>
      </ETPAR_GUIX>
      <ETPAR_VARI>
-      <item>
-       <VAR_NAME>BEFORE</VAR_NAME>
-       <VINDEX>0002</VINDEX>
-       <SORTLNR>000002</SORTLNR>
-       <PAR_VALUES>
-        <item>
-         <PNAME>DEMO_ITAB</PNAME>
-         <PTYP>V</PTYP>
-         <PINDEX>0001</PINDEX>
-         <VALUE>&lt;VALUE&gt;</VALUE>
-         <VAL_TYPE>X</VAL_TYPE>
-         <DEEP_DATA>
-          <_SFLIGHT>
-           <item>
-            <CARRID>LH</CARRID>
-            <CONNID>3445</CONNID>
-            <FLDATE>0000-00-00</FLDATE>
-            <PRICE>500.00</PRICE>
-            <SEATSMAX>0</SEATSMAX>
-            <SEATSOCC>0</SEATSOCC>
-            <PAYMENTSUM>0.00</PAYMENTSUM>
-            <SEATSMAX_B>0</SEATSMAX_B>
-            <SEATSOCC_B>0</SEATSOCC_B>
-            <SEATSMAX_F>0</SEATSMAX_F>
-            <SEATSOCC_F>0</SEATSOCC_F>
-           </item>
-          </_SFLIGHT>
-         </DEEP_DATA>
-        </item>
-       </PAR_VALUES>
-      </item>
       <item>
        <VAR_NAME>AFTER</VAR_NAME>
        <VINDEX>0001</VINDEX>
@@ -301,7 +272,7 @@
          <VALUE>&lt;VALUE&gt;</VALUE>
          <VAL_TYPE>X</VAL_TYPE>
          <DEEP_DATA>
-          <_SFLIGHT>
+          <ddic:_SFLIGHT xmlns:ddic="http://xml.sap.com/2003/05/eCATT/ddic">
            <item>
             <CARRID>LH</CARRID>
             <CONNID>3445</CONNID>
@@ -328,7 +299,38 @@
             <SEATSMAX_F>0</SEATSMAX_F>
             <SEATSOCC_F>0</SEATSOCC_F>
            </item>
-          </_SFLIGHT>
+          </ddic:_SFLIGHT>
+         </DEEP_DATA>
+        </item>
+       </PAR_VALUES>
+      </item>
+      <item>
+       <VAR_NAME>BEFORE</VAR_NAME>
+       <VINDEX>0002</VINDEX>
+       <SORTLNR>000003</SORTLNR>
+       <PAR_VALUES>
+        <item>
+         <PNAME>DEMO_ITAB</PNAME>
+         <PTYP>V</PTYP>
+         <PINDEX>0001</PINDEX>
+         <VALUE>&lt;VALUE&gt;</VALUE>
+         <VAL_TYPE>X</VAL_TYPE>
+         <DEEP_DATA>
+          <ddic:_SFLIGHT xmlns:ddic="http://xml.sap.com/2003/05/eCATT/ddic">
+           <item>
+            <CARRID>LH</CARRID>
+            <CONNID>3445</CONNID>
+            <FLDATE>0000-00-00</FLDATE>
+            <PRICE>500.00</PRICE>
+            <SEATSMAX>0</SEATSMAX>
+            <SEATSOCC>0</SEATSOCC>
+            <PAYMENTSUM>0.00</PAYMENTSUM>
+            <SEATSMAX_B>0</SEATSMAX_B>
+            <SEATSOCC_B>0</SEATSOCC_B>
+            <SEATSMAX_F>0</SEATSMAX_F>
+            <SEATSOCC_F>0</SEATSOCC_F>
+           </item>
+          </ddic:_SFLIGHT>
          </DEEP_DATA>
         </item>
        </PAR_VALUES>
