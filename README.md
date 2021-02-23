@@ -54,6 +54,7 @@ Override the method ```zdbgl_snapshots_tdc=>compare``` to specify another compar
 ### Restrictions ###
 * Structures must be defined in the ABAP dictionary. Structures defined outside of the ABAP dictionary can't be stored in test data containers.
 * Any kind of references (pointing to classes, interfaces or data objects) are not supported
+* Updating a snapshot closes the SAP-LUW with ```COMMIT WORK```. To avoid this, use debugger snapshots as described in the next section.
 
 ## Debugger ##
 ### Create snapshots ###
