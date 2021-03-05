@@ -98,6 +98,7 @@
        <PDECIMALS>000000</PDECIMALS>
        <SORT_LNR>0001</SORT_LNR>
        <PREF_NAME2>STRING</PREF_NAME2>
+       <VALUE>a sample string</VALUE>
        <TAB_INDEX>0</TAB_INDEX>
       </item>
       <item>
@@ -115,6 +116,7 @@
        <PDECIMALS>000000</PDECIMALS>
        <SORT_LNR>0002</SORT_LNR>
        <PREF_NAME2>CHAR10</PREF_NAME2>
+       <VALUE>CHARACT</VALUE>
        <TAB_INDEX>0</TAB_INDEX>
       </item>
       <item>
@@ -266,26 +268,40 @@
         </xsd:schema>
        </DEEP_STRU>
        <DEEP_DATA>
-        <ddic:_SFLIGHT xmlns:ddic="http://xml.sap.com/2003/05/eCATT/ddic" empty="true">
+        <_SFLIGHT>
          <item>
           <MANDT/>
-          <CARRID/>
-          <CONNID/>
-          <FLDATE/>
-          <PRICE/>
+          <CARRID>LH</CARRID>
+          <CONNID>0300</CONNID>
+          <FLDATE>0000-00-00</FLDATE>
+          <PRICE>0.00</PRICE>
           <CURRENCY/>
           <PLANETYPE/>
-          <SEATSMAX/>
-          <SEATSOCC/>
-          <PAYMENTSUM/>
-          <SEATSMAX_B/>
-          <SEATSOCC_B/>
-          <SEATSMAX_F/>
-          <SEATSOCC_F/>
+          <SEATSMAX>0</SEATSMAX>
+          <SEATSOCC>0</SEATSOCC>
+          <PAYMENTSUM>0.00</PAYMENTSUM>
+          <SEATSMAX_B>0</SEATSMAX_B>
+          <SEATSOCC_B>0</SEATSOCC_B>
+          <SEATSMAX_F>0</SEATSMAX_F>
+          <SEATSOCC_F>0</SEATSOCC_F>
          </item>
-         
-        
-        </ddic:_SFLIGHT>
+         <item>
+          <MANDT/>
+          <CARRID>LH</CARRID>
+          <CONNID>0350</CONNID>
+          <FLDATE>0000-00-00</FLDATE>
+          <PRICE>0.00</PRICE>
+          <CURRENCY/>
+          <PLANETYPE/>
+          <SEATSMAX>0</SEATSMAX>
+          <SEATSOCC>0</SEATSOCC>
+          <PAYMENTSUM>0.00</PAYMENTSUM>
+          <SEATSMAX_B>0</SEATSMAX_B>
+          <SEATSOCC_B>0</SEATSOCC_B>
+          <SEATSMAX_F>0</SEATSMAX_F>
+          <SEATSOCC_F>0</SEATSOCC_F>
+         </item>
+        </_SFLIGHT>
        </DEEP_DATA>
       </item>
       <item>
@@ -331,21 +347,22 @@
         </xsd:schema>
        </DEEP_STRU>
        <DEEP_DATA>
-        <ddic:_INT4 xmlns:ddic="http://xml.sap.com/2003/05/eCATT/ddic" empty="true">
+        <_INT4>
          <item>
-          <TABLE_LINE/>
+          <TABLE_LINE>1</TABLE_LINE>
          </item>
-         
-        
-        </ddic:_INT4>
+         <item>
+          <TABLE_LINE>2</TABLE_LINE>
+         </item>
+        </_INT4>
        </DEEP_DATA>
       </item>
      </ETPAR_GUIX>
      <ETPAR_VARI>
       <item>
-       <VAR_NAME>COPY_TO_TDC</VAR_NAME>
-       <VINDEX>0001</VINDEX>
-       <SORTLNR>000003</SORTLNR>
+       <VAR_NAME>SCRIPT_STORE_IN_TDC</VAR_NAME>
+       <VINDEX>0003</VINDEX>
+       <SORTLNR>000002</SORTLNR>
        <PAR_VALUES>
         <item>
          <PNAME>VAR_STRING</PNAME>
@@ -416,9 +433,9 @@
        </PAR_VALUES>
       </item>
       <item>
-       <VAR_NAME>SCRIPT_STORE_IN_TDC</VAR_NAME>
-       <VINDEX>0003</VINDEX>
-       <SORTLNR>000004</SORTLNR>
+       <VAR_NAME>COPY_TO_TDC</VAR_NAME>
+       <VINDEX>0001</VINDEX>
+       <SORTLNR>000003</SORTLNR>
        <PAR_VALUES>
         <item>
          <PNAME>VAR_STRING</PNAME>
@@ -439,7 +456,7 @@
          <VALUE>&lt;VALUE&gt;</VALUE>
          <VAL_TYPE>X</VAL_TYPE>
          <DEEP_DATA>
-          <ddic:_SFLIGHT xmlns:ddic="http://xml.sap.com/2003/05/eCATT/ddic">
+          <_SFLIGHT>
            <item>
             <CARRID>LH</CARRID>
             <CONNID>0300</CONNID>
@@ -466,7 +483,7 @@
             <SEATSMAX_F>0</SEATSMAX_F>
             <SEATSOCC_F>0</SEATSOCC_F>
            </item>
-          </ddic:_SFLIGHT>
+          </_SFLIGHT>
          </DEEP_DATA>
         </item>
         <item>
@@ -476,14 +493,14 @@
          <VALUE>&lt;VALUE&gt;</VALUE>
          <VAL_TYPE>X</VAL_TYPE>
          <DEEP_DATA>
-          <ddic:_INT4 xmlns:ddic="http://xml.sap.com/2003/05/eCATT/ddic">
+          <_INT4>
            <item>
             <TABLE_LINE>1</TABLE_LINE>
            </item>
            <item>
             <TABLE_LINE>2</TABLE_LINE>
            </item>
-          </ddic:_INT4>
+          </_INT4>
          </DEEP_DATA>
         </item>
        </PAR_VALUES>

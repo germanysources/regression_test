@@ -15,6 +15,12 @@
    <TPOOL>
     <item>
      <ID>I</ID>
+     <KEY>DIS</KEY>
+     <ENTRY>Display application log</ENTRY>
+     <LENGTH>46</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
      <KEY>NAM</KEY>
      <ENTRY>Name</ENTRY>
      <LENGTH>14</LENGTH>

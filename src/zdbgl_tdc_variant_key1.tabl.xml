@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_TABL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD02V>
+    <TABNAME>ZDBGL_TDC_VARIANT_KEY1</TABNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <TABCLASS>INTTAB</TABCLASS>
+    <LANGDEP>X</LANGDEP>
+    <DDTEXT>Testdatacontainer key</DDTEXT>
+    <EXCLASS>3</EXCLASS>
+   </DD02V>
+   <DD03P_TABLE>
+    <DD03P>
+     <TABNAME>ZDBGL_TDC_VARIANT_KEY1</TABNAME>
+     <FIELDNAME>.INCLUDE</FIELDNAME>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <POSITION>0001</POSITION>
+     <ADMINFIELD>0</ADMINFIELD>
+     <PRECFIELD>ZDBGL_TDC_VARIANT_KEY</PRECFIELD>
+     <MASK>      S</MASK>
+     <DDTEXT>Variant key test-data-container</DDTEXT>
+     <COMPTYPE>S</COMPTYPE>
+     <GROUPNAME>A</GROUPNAME>
+    </DD03P>
+    <DD03P>
+     <TABNAME>ZDBGL_TDC_VARIANT_KEY1</TABNAME>
+     <FIELDNAME>DISPLAY_APP_LOG</FIELDNAME>
+     <POSITION>0008</POSITION>
+     <ROLLNAME>ZDBGL_DISPLAY_APP_LOG</ROLLNAME>
+     <ADMINFIELD>0</ADMINFIELD>
+     <VALEXI>X</VALEXI>
+     <SHLPORIGIN>F</SHLPORIGIN>
+     <COMPTYPE>E</COMPTYPE>
+    </DD03P>
+   </DD03P_TABLE>
+  </asx:values>
+ </asx:abap>
+</abapGit>

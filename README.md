@@ -187,3 +187,6 @@ All ABAP-objects have the prefix ```zdbgl```.
 ## Logs ##
 Exceptions are logged in the checkpoint-groups "zdbgl_store_globals" and "zdbgl_store_locals" (see transaction ```saab```).
 Logging is only active, if the checkpoint-groups is activated.
+
+## Dependencies ##
+- [ABAP-Logger](https://github.com/ABAP-Logger/ABAP-Logger) is used for display interactive messages

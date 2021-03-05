@@ -29,6 +29,7 @@ public section.
       !TDC_VARIANT_KEY type ZDBGL_TDC_VARIANT_KEY
       !PROGRAM type PROGNAME
       !DEBUGGER_PARSER type ref to ZDBGL_ABSTRACT_STORAGE
+      appl_log TYPE REF TO zif_logger
     raising
       CX_STATIC_CHECK .
 protected section.
@@ -41,6 +42,7 @@ private section.
     importing
       !VARIANT type ETVAR_ID
       !RECORDED_VARIABLES type ref to ZDBGL_GETTER
+      appl_log TYPE REF TO zif_logger
     raising
       ZCX_DBGL_COPY_ERROR
       ZCX_DBGL_TYPE_NOT_SUPPORTED .
@@ -152,6 +154,7 @@ CLASS ZDBGL_COPY_TO_TDC IMPLEMENTATION.
 
               tdc->set_value_ref( EXPORTING i_param_name = parameter->*
                 i_variant_name = variant i_param_ref = param_value ).
+              appl_log->s( |{ parameter->* }| ).
 
             CATCH zcx_dbgl_testcase INTO DATA(recording_failure).
               IF recording_failure->textid = zcx_dbgl_testcase=>variable_not_found.
@@ -192,7 +195,7 @@ CLASS ZDBGL_COPY_TO_TDC IMPLEMENTATION.
             values  = debugger_parser->concat_json_fragments_string( )
             program = program.
         tdc_copier->copy_all_parameter_skip_un( variant = tdc_variant_key-variant_name
-          recorded_variables = json_parser ).
+          recorded_variables = json_parser appl_log = appl_log ).
         tdc_copier->save( transport_order = tdc_variant_key-transport_request
           execute_commit = abap_false ).
 
