@@ -77,7 +77,7 @@ CLASS ZDBGL_SNAPSHOTS_TDC IMPLEMENTATION.
   METHOD compare.
 
     unequal = cl_abap_unit_assert=>assert_equals( exp = recorded
-      act = actual ).
+      act = actual quit = if_aunit_constants=>no ).
 
   ENDMETHOD.
 
