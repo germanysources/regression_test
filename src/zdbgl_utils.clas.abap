@@ -11,6 +11,13 @@ CLASS zdbgl_utils DEFINITION
       CHANGING  key_tdc_variant     TYPE zdbgl_tdc_variant_key
       RAISING   cx_ecatt_tdc_access.
 
+    CLASS-METHODS must_add_to_transport_request
+      IMPORTING
+                VALUE(package_name) TYPE devclass OPTIONAL
+                key_tdc_variant     TYPE zdbgl_tdc_variant_key
+      RETURNING VALUE(result)       TYPE sap_bool
+      RAISING   cx_ecatt_tdc_access.
+
     CLASS-METHODS create_tadir_entry
       IMPORTING
                 tdc_name            TYPE etobj_name
@@ -73,6 +80,18 @@ CLASS ZDBGL_UTILS IMPLEMENTATION.
       IMPORTING
         es_tdevc         = package.
     package_name = package-devclass.
+
+  ENDMETHOD.
+
+
+  METHOD must_add_to_transport_request.
+
+    IF package_name IS NOT SUPPLIED.
+      package_name = read_package_name( key_tdc_variant ).
+    ENDIF.
+
+    result = xsdbool( transport_request_is_mandatory( package_name ) = abap_true AND
+      tdc_is_part_of_open_task( key_tdc_variant ) = abap_false ).
 
   ENDMETHOD.
 
