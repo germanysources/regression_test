@@ -14,25 +14,41 @@
    </VSEOCLASS>
    <DESCRIPTIONS>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_COPY_TO_TDC</CLSNAME>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>read the testdatacontainer in the constructor</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>CONSTRUCTOR</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>read the testdatacontainer in the constructor</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_COPY_TO_TDC</CLSNAME>
+     <CMPNAME>COPY_ALL_PARAMETER</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>copy the values for all parameters of the testdatacontainer</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>COPY_ALL_PARAMETER</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>copy the values for all parameters of the testdatacontainer</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_COPY_TO_TDC</CLSNAME>
+     <CMPNAME>COPY_ALL_PARAMETER_SKIP_UN</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>copy the values for all parameters of the tdc (skip unknown)</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>COPY_ALL_PARAMETER_SKIP_UN</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>copy the values for all parameters of the tdc (skip unknown)</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_COPY_TO_TDC</CLSNAME>
+     <CMPNAME>COPY_FROM_DEBUGGER</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>copy values directly from abap debugger</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>COPY_FROM_DEBUGGER</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>copy values directly from abap debugger</DESCRIPT>

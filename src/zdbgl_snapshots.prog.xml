@@ -17,6 +17,18 @@
      <LENGTH>38</LENGTH>
     </item>
    </TPOOL>
+   <I18N_TPOOL>
+    <item>
+     <LANGUAGE>C</LANGUAGE>
+     <TEXTPOOL>
+      <item>
+       <ID>R</ID>
+       <ENTRY>Create and use snapshots in unit-tests</ENTRY>
+       <LENGTH>38</LENGTH>
+      </item>
+     </TEXTPOOL>
+    </item>
+   </I18N_TPOOL>
   </asx:values>
  </asx:abap>
 </abapGit>

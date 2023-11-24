@@ -12,7 +12,15 @@ CLASS test_snapshot_tdc DEFINITION FOR TESTING
     METHODS snapshot
       RAISING cx_static_check.
 
-    METHODS compare FOR TESTING
+    METHODS compare
+      IMPORTING
+        key_tdc_variant TYPE zdbgl_tdc_variant_key
+      RAISING cx_static_check.
+
+    METHODS compare_version_1 FOR TESTING
+      RAISING cx_static_check.
+
+    METHODS compare_latest_version FOR TESTING
       RAISING cx_static_check.
 
 ENDCLASS.
@@ -48,8 +56,7 @@ CLASS test_snapshot_tdc IMPLEMENTATION.
     SET PARAMETER ID 'ZDBGL_SNAP_RECORD' FIELD abap_true.
 
     DATA(snapshot_manager) = CAST zif_dbgl_snapshots( NEW zdbgl_snapshots_tdc(
-      key_tdc_variant = VALUE #( name = tdc_name version = 1 variant_name = 'ECATTDEFAULT' )
-    ) ).
+      key_tdc_variant = VALUE #( name = tdc_name version = 1 variant_name = 'ECATTDEFAULT' ) ) ).
 
     snapshot_manager->compare_or_record( name = 'CARRIER' actual = carrier ).
     snapshot_manager->compare_or_record( name = 'FLIGHT' actual = flight ).
@@ -71,11 +78,22 @@ CLASS test_snapshot_tdc IMPLEMENTATION.
     SET PARAMETER ID 'ZDBGL_SNAP_RECORD' FIELD abap_false.
 
     DATA(snapshot_manager) = CAST zif_dbgl_snapshots( NEW zdbgl_snapshots_tdc(
-      key_tdc_variant = VALUE #( name = tdc_name version = 1 variant_name = 'ECATTDEFAULT' )
-     ) ).
+      key_tdc_variant = key_tdc_variant ) ).
 
     snapshot_manager->compare_or_record( name = 'CARRIER' actual = carrier ).
     snapshot_manager->compare_or_record( name = 'FLIGHT' actual = flight ).
+
+  ENDMETHOD.
+
+  METHOD compare_version_1.
+
+    compare( VALUE #( name = tdc_name version = 1 variant_name = 'ECATTDEFAULT' ) ).
+
+  ENDMETHOD.
+
+  METHOD compare_latest_version.
+
+    compare( VALUE #( name = tdc_name variant_name = 'ECATTDEFAULT' use_latest_version = abap_true ) ).
 
   ENDMETHOD.
 

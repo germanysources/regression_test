@@ -21,6 +21,28 @@
      <TEXT>Testdatacontainer doesn&apos;t contains any variable used in this program.</TEXT>
     </T100>
    </T100>
+   <I18N_LANGS>
+    <LANGU>C</LANGU>
+   </I18N_LANGS>
+   <T100T>
+    <T100T>
+     <SPRSL>C</SPRSL>
+     <ARBGB>ZDBGL</ARBGB>
+     <STEXT>Regression tests</STEXT>
+    </T100T>
+   </T100T>
+   <T100_TEXTS>
+    <item>
+     <SPRSL>C</SPRSL>
+     <MSGNR>000</MSGNR>
+     <TEXT>Recorded variables:</TEXT>
+    </item>
+    <item>
+     <SPRSL>C</SPRSL>
+     <MSGNR>001</MSGNR>
+     <TEXT>Testdatacontainer doesn&apos;t contains any variable used in this program.</TEXT>
+    </item>
+   </T100_TEXTS>
   </asx:values>
  </asx:abap>
 </abapGit>

@@ -14,31 +14,51 @@
    </VSEOCLASS>
    <DESCRIPTIONS>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_STORE_GLOBALS</CLSNAME>
+     <CMPNAME>CONCAT_JSON_FRAGMENTS_SSTRINGS</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>concatenate json fragments to short strings</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>CONCAT_JSON_FRAGMENTS_SSTRINGS</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>concatenate json fragments to short strings</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_STORE_GLOBALS</CLSNAME>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>read global variable in the constructor</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>CONSTRUCTOR</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>read global variable in the constructor</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_STORE_GLOBALS</CLSNAME>
+     <CMPNAME>GET_LENGTH_DB_FRAGMENT</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>length fragment globals in table zdbgl_variables</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>GET_LENGTH_DB_FRAGMENT</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>length fragment globals in table zdbgl_variables</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_STORE_GLOBALS</CLSNAME>
+     <CMPNAME>LOG_STORAGE</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>log saved values</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>LOG_STORAGE</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>log saved values</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_STORE_GLOBALS</CLSNAME>
+     <CMPNAME>STORE</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>save new testcase in table zdbgl_variables</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>STORE</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>save new testcase in table zdbgl_variables</DESCRIPT>

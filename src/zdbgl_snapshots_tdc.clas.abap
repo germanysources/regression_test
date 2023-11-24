@@ -8,8 +8,8 @@ CLASS zdbgl_snapshots_tdc DEFINITION
 
     METHODS constructor
       IMPORTING
-        !key_tdc_variant TYPE zdbgl_tdc_variant_key
-        !autosave        TYPE sap_bool OPTIONAL
+        VALUE(key_tdc_variant) TYPE zdbgl_tdc_variant_key
+        !autosave              TYPE sap_bool OPTIONAL
       RAISING
         zcx_dbgl_snapshot .
     CLASS-METHODS create_default
@@ -20,16 +20,17 @@ CLASS zdbgl_snapshots_tdc DEFINITION
         VALUE(instance) TYPE REF TO zif_dbgl_snapshots
       RAISING
         zcx_dbgl_snapshot.
-protected section.
+  PROTECTED SECTION.
 
-  methods COMPARE
-    importing
-      !ACTUAL type ANY
-      !RECORDED type ANY
-    returning
-      value(UNEQUAL) type SAP_BOOL .
+    METHODS compare
+      IMPORTING
+        !actual        TYPE any
+        !recorded      TYPE any
+      RETURNING
+        VALUE(unequal) TYPE sap_bool .
   PRIVATE SECTION.
     DATA: tdc_accessor      TYPE REF TO cl_apl_ecatt_tdc_api,
+          tdc_key           TYPE etobj_key2,
           in_record_mode    TYPE sap_bool,
           variant           TYPE etvar_id,
           transport_request TYPE trkorr,
@@ -67,6 +68,14 @@ protected section.
                 actual         TYPE any
       RETURNING VALUE(unequal) TYPE sap_bool
       RAISING   zcx_dbgl_snapshot.
+
+    METHODS increment_version_no
+      CHANGING
+        key_tdc_variant TYPE zdbgl_tdc_variant_key.
+
+    METHODS get_latest_version
+      CHANGING
+        key_tdc_variant TYPE zdbgl_tdc_variant_key.
 ENDCLASS.
 
 
@@ -77,7 +86,7 @@ CLASS ZDBGL_SNAPSHOTS_TDC IMPLEMENTATION.
   METHOD compare.
 
     unequal = cl_abap_unit_assert=>assert_equals( exp = recorded
-      act = actual ).
+      act = actual quit = if_aunit_constants=>no ).
 
   ENDMETHOD.
 
@@ -110,10 +119,22 @@ CLASS ZDBGL_SNAPSHOTS_TDC IMPLEMENTATION.
 
   METHOD constructor.
 
-    GET PARAMETER ID 'ZDBGL_SNAP_RECORD' FIELD in_record_mode.
-    me->variant = key_tdc_variant-variant_name.
-    get_or_create_tdc( key_tdc_variant ).
-    me->autosave = autosave.
+    TRY.
+        GET PARAMETER ID 'ZDBGL_SNAP_RECORD' FIELD in_record_mode.
+        me->variant = key_tdc_variant-variant_name.
+        IF in_record_mode = abap_true AND key_tdc_variant-increment_version_no = abap_true
+            AND zdbgl_utils=>must_add_to_transport_request( key_tdc_variant ) = abap_true.
+          increment_version_no( CHANGING key_tdc_variant = key_tdc_variant ).
+        ELSEIF key_tdc_variant-use_latest_version = abap_true.
+          get_latest_version( CHANGING key_tdc_variant = key_tdc_variant ).
+        ENDIF.
+        tdc_key = VALUE #( type = 'ECTD' name = key_tdc_variant-name
+          version = key_tdc_variant-version ).
+        get_or_create_tdc( key_tdc_variant ).
+        me->autosave = autosave.
+      CATCH cx_ecatt_tdc_access INTO DATA(failure).
+        zcx_dbgl_snapshot_tdc=>wrap( failure ).
+    ENDTRY.
 
   ENDMETHOD.
 
@@ -121,8 +142,20 @@ CLASS ZDBGL_SNAPSHOTS_TDC IMPLEMENTATION.
   METHOD create_default.
 
     instance ?= NEW zdbgl_snapshots_tdc( key_tdc_variant =
-      VALUE #( name = tdc_name version = 1 variant_name = 'ECATTDEFAULT' )
+      VALUE #( name = tdc_name variant_name = 'ECATTDEFAULT' use_latest_version = abap_true )
       autosave = autosave ).
+
+  ENDMETHOD.
+
+
+  METHOD get_latest_version.
+
+    SELECT version FROM ectd_ver
+      WHERE name = @key_tdc_variant-name
+      ORDER BY version DESCENDING
+      INTO @key_tdc_variant-version
+      UP TO 1 ROWS.
+    ENDSELECT.
 
   ENDMETHOD.
 
@@ -193,6 +226,20 @@ CLASS ZDBGL_SNAPSHOTS_TDC IMPLEMENTATION.
   ENDMETHOD.
 
 
+  METHOD increment_version_no.
+
+    SELECT version FROM ectd_ver
+      WHERE name = @key_tdc_variant-name
+      ORDER BY version DESCENDING
+      INTO @DATA(max_version)
+      UP TO 1 ROWS.
+    ENDSELECT.
+
+    key_tdc_variant-version = max_version + 1.
+
+  ENDMETHOD.
+
+
   METHOD record.
 
     cond_create_parameter( name = name value = value ).
@@ -210,15 +257,31 @@ CLASS ZDBGL_SNAPSHOTS_TDC IMPLEMENTATION.
 
 
   METHOD retrieve_and_compare.
-    DATA: recorded TYPE REF TO data.
-    FIELD-SYMBOLS: <recorded> TYPE any.
+    DATA:
+      recorded           TYPE REF TO data,
+      initial_parameters TYPE etp_name_tabtype.
+    FIELD-SYMBOLS:
+      <recorded> TYPE any.
 
     CREATE DATA recorded LIKE actual.
     ASSIGN recorded->* TO <recorded>.
+
+    " Workaround for initial parameters in non "ECATTDEFAULT" variants
+    " tdc_accessor->get_value_ref reads the value for "ECATTDEFAULT" variant
+    " when value is initial in another variant.
+    IF zdbgl_utils=>is_tdc_parameter_initial(
+        tdc_key = tdc_key param_name = name variant_name = variant ) = abap_true.
+      unequal = xsdbool( actual IS NOT INITIAL ).
+      RETURN.
+    ENDIF.
+
     TRY.
-        tdc_accessor->get_value_ref( EXPORTING i_param_name = name
-          i_variant_name = variant
-          CHANGING e_param_ref = recorded ).
+        tdc_accessor->get_value_ref(
+          EXPORTING
+            i_param_name = name
+            i_variant_name = variant
+          CHANGING
+            e_param_ref = recorded ).
         unequal = compare( recorded = <recorded> actual = actual ).
       CATCH cx_ecatt_tdc_access INTO DATA(failure).
         zcx_dbgl_snapshot_tdc=>wrap( failure ).

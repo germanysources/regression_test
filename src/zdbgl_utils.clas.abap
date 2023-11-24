@@ -11,10 +11,25 @@ CLASS zdbgl_utils DEFINITION
       CHANGING  key_tdc_variant     TYPE zdbgl_tdc_variant_key
       RAISING   cx_ecatt_tdc_access.
 
+    CLASS-METHODS must_add_to_transport_request
+      IMPORTING
+                VALUE(package_name) TYPE devclass OPTIONAL
+                key_tdc_variant     TYPE zdbgl_tdc_variant_key
+      RETURNING VALUE(result)       TYPE sap_bool
+      RAISING   cx_ecatt_tdc_access.
+
     CLASS-METHODS create_tadir_entry
       IMPORTING
                 tdc_name            TYPE etobj_name
       RETURNING VALUE(package_name) TYPE devclass.
+
+    CLASS-METHODS is_tdc_parameter_initial
+      IMPORTING
+        tdc_key           TYPE etobj_key2
+        param_name        TYPE etp_name
+        variant_name      TYPE etvar_id
+      RETURNING
+        VALUE(is_initial) TYPE sap_bool.
 
   PROTECTED SECTION.
 
@@ -73,6 +88,53 @@ CLASS ZDBGL_UTILS IMPLEMENTATION.
       IMPORTING
         es_tdevc         = package.
     package_name = package-devclass.
+
+  ENDMETHOD.
+
+
+  METHOD is_tdc_parameter_initial.
+    DATA:
+      object_key     TYPE etapi_obj,
+      messages       TYPE bapirettab,
+      variant_values TYPE etpar_vari_streams_tabtype.
+
+    DATA(logger) = zcl_logger_factory=>create_log( ).
+    CALL FUNCTION 'ECATT_OBJ_LOAD'
+      EXPORTING
+        is_key        = tdc_key
+      IMPORTING
+        es_object_key = object_key
+      TABLES
+        return        = messages.
+    logger->add( messages ).
+
+    CALL FUNCTION 'ECATT_OBJ_PAR_VALS_GET'
+      EXPORTING
+        is_key            = object_key
+        i_var_id          = variant_name
+        i_par_name        = param_name
+      IMPORTING
+        et_variant_values = variant_values
+      TABLES
+        return            = messages.
+    logger->add( messages ).
+
+    LOOP AT variant_values REFERENCE INTO DATA(variant_value)
+        WHERE var_name = variant_name.
+      is_initial = xsdbool( line_exists( variant_value->*-par_values_streams[ pname = param_name value = '<INITIAL>' ] ) ).
+    ENDLOOP.
+
+  ENDMETHOD.
+
+
+  METHOD must_add_to_transport_request.
+
+    IF package_name IS NOT SUPPLIED.
+      package_name = read_package_name( key_tdc_variant ).
+    ENDIF.
+
+    result = xsdbool( transport_request_is_mandatory( package_name ) = abap_true AND
+      tdc_is_part_of_open_task( key_tdc_variant ) = abap_false ).
 
   ENDMETHOD.
 

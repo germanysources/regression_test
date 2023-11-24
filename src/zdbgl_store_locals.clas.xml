@@ -13,25 +13,41 @@
    </VSEOCLASS>
    <DESCRIPTIONS>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_STORE_LOCALS</CLSNAME>
+     <CMPNAME>CONCAT_JSON_FRAGMENTS_SSTRINGS</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>concatenate json fragments to short strings</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>CONCAT_JSON_FRAGMENTS_SSTRINGS</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>concatenate json fragments to short strings</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_STORE_LOCALS</CLSNAME>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>get locals in constructor</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>CONSTRUCTOR</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>get locals in constructor</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_STORE_LOCALS</CLSNAME>
+     <CMPNAME>GET_LENGTH_DB_FRAGMENT</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>length fragment locals in table zdbgl_locals</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>GET_LENGTH_DB_FRAGMENT</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>length fragment locals in table zdbgl_locals</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_STORE_LOCALS</CLSNAME>
+     <CMPNAME>STORE</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>Store the globals</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>STORE</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>Store the globals</DESCRIPT>

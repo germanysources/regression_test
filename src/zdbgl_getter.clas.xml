@@ -14,37 +14,61 @@
    </VSEOCLASS>
    <DESCRIPTIONS>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_GETTER</CLSNAME>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>read variables from the testcase</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>CONSTRUCTOR</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>read variables from the testcase</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_GETTER</CLSNAME>
+     <CMPNAME>GET_HEX_VALUE</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>read hexadecimal value for scalar value</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>GET_HEX_VALUE</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>read hexadecimal value for scalar value</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_GETTER</CLSNAME>
+     <CMPNAME>GET_SIMPLE</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>read value for variable</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>GET_SIMPLE</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>read value for variable</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_GETTER</CLSNAME>
+     <CMPNAME>GET_STRUCTUR</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>read value for a structure</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>GET_STRUCTUR</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>read value for a structure</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_GETTER</CLSNAME>
+     <CMPNAME>GET_TABLE</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>read value for a table</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>GET_TABLE</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>read value for a table</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CLSNAME>ZDBGL_GETTER</CLSNAME>
+     <CMPNAME>LINE_HAS_SIMPLE_TYPE</CMPNAME>
+     <LANGU>C</LANGU>
+     <DESCRIPT>line has simple type</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>LINE_HAS_SIMPLE_TYPE</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>line has simple type</DESCRIPT>

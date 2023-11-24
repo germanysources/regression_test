@@ -13,41 +13,63 @@
     <item>
      <ID>R</ID>
      <ENTRY>Copy globals to test data container</ENTRY>
-     <LENGTH>70</LENGTH>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>KEY_TC</KEY>
-     <ENTRY>.</ENTRY>
-     <LENGTH>21</LENGTH>
-     <SPLIT>D</SPLIT>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>PROGRAM</KEY>
-     <ENTRY>.</ENTRY>
-     <LENGTH>20</LENGTH>
-     <SPLIT>D</SPLIT>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>TDC</KEY>
-     <ENTRY>Test data container (TDC)</ENTRY>
-     <LENGTH>33</LENGTH>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>VARIANT</KEY>
-     <ENTRY>Variant (TDC)</ENTRY>
-     <LENGTH>22</LENGTH>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>VERSION</KEY>
-     <ENTRY>Version (TDC)</ENTRY>
-     <LENGTH>21</LENGTH>
+     <LENGTH>35</LENGTH>
     </item>
    </TPOOL>
+   <I18N_TPOOL>
+    <item>
+     <LANGUAGE>C</LANGUAGE>
+     <TEXTPOOL>
+      <item>
+       <ID>R</ID>
+       <ENTRY>Copy globals to test data container</ENTRY>
+       <LENGTH>35</LENGTH>
+      </item>
+     </TEXTPOOL>
+    </item>
+    <item>
+     <LANGUAGE>D</LANGUAGE>
+     <TEXTPOOL>
+      <item>
+       <ID>R</ID>
+       <ENTRY>Kopie Globale Variablen in Testdatencontainer</ENTRY>
+       <LENGTH>45</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>KEY_TC</KEY>
+       <ENTRY>.</ENTRY>
+       <LENGTH>21</LENGTH>
+       <SPLIT>D</SPLIT>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>PROGRAM</KEY>
+       <ENTRY>.</ENTRY>
+       <LENGTH>20</LENGTH>
+       <SPLIT>D</SPLIT>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>TDC</KEY>
+       <ENTRY>Testdatencontainer (TDC)</ENTRY>
+       <LENGTH>32</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>VARIANT</KEY>
+       <ENTRY>Variante (TDC)</ENTRY>
+       <LENGTH>22</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>VERSION</KEY>
+       <ENTRY>Version (TDC)</ENTRY>
+       <LENGTH>21</LENGTH>
+      </item>
+     </TEXTPOOL>
+    </item>
+   </I18N_TPOOL>
   </asx:values>
  </asx:abap>
 </abapGit>
