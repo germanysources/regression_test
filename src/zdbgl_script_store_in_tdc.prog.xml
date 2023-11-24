@@ -21,6 +21,16 @@
    </TPOOL>
    <I18N_TPOOL>
     <item>
+     <LANGUAGE>C</LANGUAGE>
+     <TEXTPOOL>
+      <item>
+       <ID>R</ID>
+       <ENTRY>Debugger Script: default template</ENTRY>
+       <LENGTH>33</LENGTH>
+      </item>
+     </TEXTPOOL>
+    </item>
+    <item>
      <LANGUAGE>D</LANGUAGE>
      <TEXTPOOL>
       <item>

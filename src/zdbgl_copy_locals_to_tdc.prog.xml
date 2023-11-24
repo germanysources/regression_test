@@ -18,6 +18,16 @@
    </TPOOL>
    <I18N_TPOOL>
     <item>
+     <LANGUAGE>C</LANGUAGE>
+     <TEXTPOOL>
+      <item>
+       <ID>R</ID>
+       <ENTRY>Copy locals to test data container</ENTRY>
+       <LENGTH>34</LENGTH>
+      </item>
+     </TEXTPOOL>
+    </item>
+    <item>
      <LANGUAGE>D</LANGUAGE>
      <TEXTPOOL>
       <item>

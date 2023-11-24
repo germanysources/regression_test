@@ -18,6 +18,19 @@
     <DTELMASTER>E</DTELMASTER>
     <REFKIND>D</REFKIND>
    </DD04V>
+   <I18N_LANGS>
+    <LANGU>C</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>C</DDLANGUAGE>
+     <DDTEXT>Increment version no of snapshot</DDTEXT>
+     <REPTEXT>Increment version no</REPTEXT>
+     <SCRTEXT_S>Inc. vers</SCRTEXT_S>
+     <SCRTEXT_M>Inc. version-no</SCRTEXT_M>
+     <SCRTEXT_L>Increment version no</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
    <LONGTEXTS>
     <item>
      <DOKIL>

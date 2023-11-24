@@ -23,6 +23,14 @@ CLASS zdbgl_utils DEFINITION
                 tdc_name            TYPE etobj_name
       RETURNING VALUE(package_name) TYPE devclass.
 
+    CLASS-METHODS is_tdc_parameter_initial
+      IMPORTING
+        tdc_key           TYPE etobj_key2
+        param_name        TYPE etp_name
+        variant_name      TYPE etvar_id
+      RETURNING
+        VALUE(is_initial) TYPE sap_bool.
+
   PROTECTED SECTION.
 
   PRIVATE SECTION.
@@ -80,6 +88,41 @@ CLASS ZDBGL_UTILS IMPLEMENTATION.
       IMPORTING
         es_tdevc         = package.
     package_name = package-devclass.
+
+  ENDMETHOD.
+
+
+  METHOD is_tdc_parameter_initial.
+    DATA:
+      object_key     TYPE etapi_obj,
+      messages       TYPE bapirettab,
+      variant_values TYPE etpar_vari_streams_tabtype.
+
+    DATA(logger) = zcl_logger_factory=>create_log( ).
+    CALL FUNCTION 'ECATT_OBJ_LOAD'
+      EXPORTING
+        is_key        = tdc_key
+      IMPORTING
+        es_object_key = object_key
+      TABLES
+        return        = messages.
+    logger->add( messages ).
+
+    CALL FUNCTION 'ECATT_OBJ_PAR_VALS_GET'
+      EXPORTING
+        is_key            = object_key
+        i_var_id          = variant_name
+        i_par_name        = param_name
+      IMPORTING
+        et_variant_values = variant_values
+      TABLES
+        return            = messages.
+    logger->add( messages ).
+
+    LOOP AT variant_values REFERENCE INTO DATA(variant_value)
+        WHERE var_name = variant_name.
+      is_initial = xsdbool( line_exists( variant_value->*-par_values_streams[ pname = param_name value = '<INITIAL>' ] ) ).
+    ENDLOOP.
 
   ENDMETHOD.
 

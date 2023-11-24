@@ -20,9 +20,18 @@
     <OUTPUTLEN>000010</OUTPUTLEN>
    </DD04V>
    <I18N_LANGS>
+    <LANGU>C</LANGU>
     <LANGU>D</LANGU>
    </I18N_LANGS>
    <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>C</DDLANGUAGE>
+     <DDTEXT>Debugging Legacy Code name testcase</DDTEXT>
+     <REPTEXT>name testcase</REPTEXT>
+     <SCRTEXT_S>name</SCRTEXT_S>
+     <SCRTEXT_M>name testcase</SCRTEXT_M>
+     <SCRTEXT_L>name testcase</SCRTEXT_L>
+    </item>
     <item>
      <DDLANGUAGE>D</DDLANGUAGE>
      <DDTEXT>Debugging Legacy Code Name Testfall</DDTEXT>

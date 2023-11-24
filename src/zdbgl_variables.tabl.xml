@@ -67,9 +67,14 @@
     </DD03P>
    </DD03P_TABLE>
    <I18N_LANGS>
+    <LANGU>C</LANGU>
     <LANGU>D</LANGU>
    </I18N_LANGS>
    <DD02_TEXTS>
+    <item>
+     <DDLANGUAGE>C</DDLANGUAGE>
+     <DDTEXT>Debugging Legacy Code globals</DDTEXT>
+    </item>
     <item>
      <DDLANGUAGE>D</DDLANGUAGE>
      <DDTEXT>Debugging Legacy Code Variablen</DDTEXT>

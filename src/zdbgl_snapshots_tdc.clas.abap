@@ -30,6 +30,7 @@ CLASS zdbgl_snapshots_tdc DEFINITION
         VALUE(unequal) TYPE sap_bool .
   PRIVATE SECTION.
     DATA: tdc_accessor      TYPE REF TO cl_apl_ecatt_tdc_api,
+          tdc_key           TYPE etobj_key2,
           in_record_mode    TYPE sap_bool,
           variant           TYPE etvar_id,
           transport_request TYPE trkorr,
@@ -75,7 +76,6 @@ CLASS zdbgl_snapshots_tdc DEFINITION
     METHODS get_latest_version
       CHANGING
         key_tdc_variant TYPE zdbgl_tdc_variant_key.
-
 ENDCLASS.
 
 
@@ -128,6 +128,8 @@ CLASS ZDBGL_SNAPSHOTS_TDC IMPLEMENTATION.
         ELSEIF key_tdc_variant-use_latest_version = abap_true.
           get_latest_version( CHANGING key_tdc_variant = key_tdc_variant ).
         ENDIF.
+        tdc_key = VALUE #( type = 'ECTD' name = key_tdc_variant-name
+          version = key_tdc_variant-version ).
         get_or_create_tdc( key_tdc_variant ).
         me->autosave = autosave.
       CATCH cx_ecatt_tdc_access INTO DATA(failure).
@@ -255,15 +257,31 @@ CLASS ZDBGL_SNAPSHOTS_TDC IMPLEMENTATION.
 
 
   METHOD retrieve_and_compare.
-    DATA: recorded TYPE REF TO data.
-    FIELD-SYMBOLS: <recorded> TYPE any.
+    DATA:
+      recorded           TYPE REF TO data,
+      initial_parameters TYPE etp_name_tabtype.
+    FIELD-SYMBOLS:
+      <recorded> TYPE any.
 
     CREATE DATA recorded LIKE actual.
     ASSIGN recorded->* TO <recorded>.
+
+    " Workaround for initial parameters in non "ECATTDEFAULT" variants
+    " tdc_accessor->get_value_ref reads the value for "ECATTDEFAULT" variant
+    " when value is initial in another variant.
+    IF zdbgl_utils=>is_tdc_parameter_initial(
+        tdc_key = tdc_key param_name = name variant_name = variant ) = abap_true.
+      unequal = xsdbool( actual IS NOT INITIAL ).
+      RETURN.
+    ENDIF.
+
     TRY.
-        tdc_accessor->get_value_ref( EXPORTING i_param_name = name
-          i_variant_name = variant
-          CHANGING e_param_ref = recorded ).
+        tdc_accessor->get_value_ref(
+          EXPORTING
+            i_param_name = name
+            i_variant_name = variant
+          CHANGING
+            e_param_ref = recorded ).
         unequal = compare( recorded = <recorded> actual = actual ).
       CATCH cx_ecatt_tdc_access INTO DATA(failure).
         zcx_dbgl_snapshot_tdc=>wrap( failure ).
